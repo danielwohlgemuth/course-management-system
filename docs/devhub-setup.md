@@ -2,7 +2,7 @@
 
 ## 1. Get a free Developer Edition org
 
-Go to https://developer.salesforce.com/signup and sign up for a **Developer Edition** org (not a Trailhead Playground — Playgrounds can't be enabled as Dev Hubs).
+Go to https://developer.salesforce.com/signup and sign up for a **Developer Edition** org, or use an existing **Trailhead** org — both can be enabled as Dev Hubs.
 
 Use your work email and choose a unique username (e.g. `daniel.wohlgemuth@course-mgmt.dev`).
 
@@ -40,6 +40,17 @@ sf org create scratch \
   --alias course-mgmt-dev \
   --set-default \
   --duration-days 30
+```
+
+If you see `NoDefaultDevHubError`, add `--target-dev-hub` to specify the Dev Hub explicitly:
+
+```bash
+sf org create scratch \
+  --definition-file config/project-scratch-def.json \
+  --alias course-mgmt-dev \
+  --set-default \
+  --duration-days 30 \
+  --target-dev-hub course-mgmt-devhub
 ```
 
 Open it in a browser:
