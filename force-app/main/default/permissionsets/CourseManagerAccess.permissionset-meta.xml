@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <applicationVisibilities>
+        <application>CourseManager</application>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <tabSettings>
+        <tab>Course__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+    <description>Grants access to the Course Manager Lightning app and Courses tab</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Course Manager Access</label>
+</PermissionSet>
