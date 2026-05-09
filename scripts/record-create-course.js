@@ -34,6 +34,10 @@ await record('create-course', async (page) => {
   const courseNameField = page.locator('input[name="Course_Name__c"]');
   await courseNameField.waitFor({ state: 'visible', timeout: 15_000 });
   await courseNameField.fill('Introduction to Salesforce Development');
+
+  const instructorField = page.locator('input[name="Instructor__c"]');
+  await instructorField.waitFor({ state: 'visible', timeout: 10_000 });
+  await instructorField.fill('Jane Smith');
   await page.waitForTimeout(1000);
 
   // Save
