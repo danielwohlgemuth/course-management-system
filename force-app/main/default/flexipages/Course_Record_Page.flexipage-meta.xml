@@ -2,52 +2,209 @@
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
         <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Name</fieldItem>
+                <identifier>RecordNameField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-95a2c6a9-46d8-4b8e-8377-0b67d5aee19d</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Course_Name__c</fieldItem>
+                <identifier>RecordCourse_Name_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Instructor__c</fieldItem>
+                <identifier>RecordInstructor_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-33b44ac7-556c-4ef3-9e9a-6cedca4ebfb6</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
             <componentInstance>
-                <componentName>flexipage:recordHeader</componentName>
+                <componentInstanceProperties>
+                    <name>numVisibleActions</name>
+                    <value>3</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>primaryField</name>
+                    <value>Facet-95a2c6a9-46d8-4b8e-8377-0b67d5aee19d</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>secondaryFields</name>
+                    <value>Facet-33b44ac7-556c-4ef3-9e9a-6cedca4ebfb6</value>
+                </componentInstanceProperties>
+                <componentName>record_flexipage:dynamicHighlights</componentName>
+                <identifier>record_flexipage_dynamicHighlights</identifier>
             </componentInstance>
         </itemInstances>
-        <mode>Append</mode>
         <name>header</name>
         <type>Region</type>
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>layoutType</name>
-                    <value>Full</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>mode</name>
-                    <value>View</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>objectApiName</name>
-                    <value>Course__c</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:recordDetail</componentName>
-            </componentInstance>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Course_Name__c</fieldItem>
+                <identifier>RecordCourse_Name_cField2</identifier>
+            </fieldInstance>
         </itemInstances>
-        <mode>Append</mode>
-        <name>main</name>
-        <type>Region</type>
+        <name>Facet-4fff873f-d1d9-497d-a0c0-4bd5482d6783</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Instructor__c</fieldItem>
+                <identifier>RecordInstructor_cField2</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-7a811575-9886-4446-8dc7-9b40624a7252</name>
+        <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
-                    <name>objectApiName</name>
-                    <value>Course__c</value>
+                    <name>body</name>
+                    <value>Facet-4fff873f-d1d9-497d-a0c0-4bd5482d6783</value>
                 </componentInstanceProperties>
-                <componentName>flexipage:relatedListsQuickLinks</componentName>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column</identifier>
             </componentInstance>
         </itemInstances>
-        <mode>Append</mode>
-        <name>sidebar</name>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-7a811575-9886-4446-8dc7-9b40624a7252</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column2</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-eebcbcde-a363-458e-9973-de2a2110b625</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>Facet-eebcbcde-a363-458e-9973-de2a2110b625</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>@@@SFDCAssetTimeSheetLabelSFDC@@@</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>actionNames</name>
+                    <valueList>
+                        <valueListItems>
+                            <value>New</value>
+                        </valueListItems>
+                    </valueList>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>maxRecordsToDisplay</name>
+                    <value>10</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>parentFieldApiName</name>
+                    <value>Course__c.Id</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListApiName</name>
+                    <value>TimeSlots__r</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListDisplayType</name>
+                    <value>ADVGRID</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListFieldAliases</name>
+                    <valueList>
+                        <valueListItems>
+                            <value>NAME</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Day_of_Week__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>Start_Time__c</value>
+                        </valueListItems>
+                        <valueListItems>
+                            <value>End_Time__c</value>
+                        </valueListItems>
+                    </valueList>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>relatedListLabel</name>
+                    <value>Time Slots</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>showActionBar</name>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>sortFieldAlias</name>
+                    <value>__DEFAULT__</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>sortFieldOrder</name>
+                    <value>Default</value>
+                </componentInstanceProperties>
+                <componentName>lst:dynamicRelatedList</componentName>
+                <identifier>lst_dynamicRelatedList</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>main</name>
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Course Record Page</masterLabel>
-    <pageTemplate>flexipage:defaultRecordLayout</pageTemplate>
     <sobjectType>Course__c</sobjectType>
+    <template>
+        <name>flexipage:recordHomeSimpleViewTemplate</name>
+        <properties>
+            <name>enablePageActionConfig</name>
+            <value>false</value>
+        </properties>
+    </template>
     <type>RecordPage</type>
 </FlexiPage>
