@@ -31,8 +31,18 @@ export async function record(name, fn) {
     renameSync(tempPath, finalPath);
     console.log(`Saved: ${finalPath}`);
   } catch (err) {
-    await context.close().catch(() => {});
-    await browser.close().catch(() => {});
+    try {
+      const tempPath = await page.video().path();
+      await context.close().catch(() => {});
+      await browser.close().catch(() => {});
+      const datetime = new Date().toISOString().slice(0, 19).replace(/:/g, '-');
+      const finalPath = join(RECORDINGS_DIR, `${datetime}_${name}.webm`);
+      renameSync(tempPath, finalPath);
+      console.log(`Saved (failed run): ${finalPath}`);
+    } catch {
+      await context.close().catch(() => {});
+      await browser.close().catch(() => {});
+    }
     throw err;
   }
 }

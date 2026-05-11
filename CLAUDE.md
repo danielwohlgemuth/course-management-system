@@ -57,6 +57,10 @@ Each migration file must cover:
 3. **Data backfill** (if needed) — an Apex anonymous script or Data Loader instructions to populate existing records
 4. **Rollback** — how to reverse the change if it needs to be undone
 
+## Recordings
+
+Playwright recordings are saved to `playwright/recordings/` with a datetime-prefixed filename. The `record()` helper in `scripts/helpers/recorder.js` handles this automatically — always use it when creating new recording scripts rather than managing the browser and video file directly.
+
 ## Adding a New Feature
 
 1. Define the data model first (`sf sobject generate field` or create a new object via `sf sobject generate`).
