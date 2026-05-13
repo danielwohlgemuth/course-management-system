@@ -1,0 +1,103 @@
+.calendar-container {
+    font-family: var(--lwc-fontFamily, sans-serif);
+    overflow-x: auto;
+}
+
+.calendar-header {
+    display: grid;
+    grid-template-columns: 60px repeat(7, 1fr);
+    border-bottom: 2px solid #ddd;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+}
+
+.time-axis-spacer {
+    border-right: 1px solid #ddd;
+}
+
+.day-header {
+    text-align: center;
+    padding: 8px 4px;
+    font-weight: 700;
+    font-size: 0.875rem;
+    border-left: 1px solid #eee;
+}
+
+.calendar-body {
+    display: grid;
+    grid-template-columns: 60px repeat(7, 1fr);
+    height: 840px;
+    position: relative;
+}
+
+.time-axis {
+    position: relative;
+    border-right: 1px solid #ddd;
+}
+
+.time-tick {
+    position: absolute;
+    right: 4px;
+    transform: translateY(-50%);
+    font-size: 0.7rem;
+    color: #888;
+    white-space: nowrap;
+}
+
+.day-column {
+    position: relative;
+    border-left: 1px solid #eee;
+    overflow: hidden;
+}
+
+.hour-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #f0f0f0;
+}
+
+.slot-card {
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    border-radius: 4px;
+    padding: 4px 6px;
+    overflow: hidden;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    cursor: default;
+}
+
+.slot-course {
+    margin: 0;
+    font-weight: 600;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: white;
+}
+
+.slot-instructor {
+    margin: 2px 0 0;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.9);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.slot-time {
+    margin: 2px 0 0;
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.error-message {
+    color: red;
+    padding: 16px;
+}
