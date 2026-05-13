@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Default</label>
+    <protected>false</protected>
+    <values>
+        <field>Grid_Start_Hour__c</field>
+        <value xsi:type="xsd:double">7</value>
+    </values>
+    <values>
+        <field>Grid_End_Hour__c</field>
+        <value xsi:type="xsd:double">21</value>
+    </values>
+    <values>
+        <field>Palette__c</field>
+        <value xsi:type="xsd:string">#4C9BE8,#E8734C,#4CE87B,#E8D24C,#9B4CE8,#4CE8D2,#E84C9B,#88C0D0</value>
+    </values>
+</CustomMetadata>

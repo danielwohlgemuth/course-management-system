@@ -9,4 +9,14 @@ public with sharing class CourseCalendarController {
             ORDER BY Day_of_Week__c, Start_Time__c
         ];
     }
+
+    @AuraEnabled(cacheable=true)
+    public static CourseCalendarConfig__mdt getConfig() {
+        return [
+            SELECT Grid_Start_Hour__c, Grid_End_Hour__c, Palette__c
+            FROM CourseCalendarConfig__mdt
+            WHERE DeveloperName = 'Default'
+            LIMIT 1
+        ];
+    }
 }

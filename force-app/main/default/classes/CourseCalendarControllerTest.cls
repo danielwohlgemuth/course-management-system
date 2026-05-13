@@ -31,4 +31,16 @@ private class CourseCalendarControllerTest {
             Assert.isNotNull(s.Course__r.Course_Name__c, 'Course Name should be populated');
         }
     }
+
+    @IsTest
+    static void getConfig_returnsDefaultRecord() {
+        Test.startTest();
+        CourseCalendarConfig__mdt config = CourseCalendarController.getConfig();
+        Test.stopTest();
+
+        Assert.isNotNull(config, 'Expected config record');
+        Assert.isNotNull(config.Grid_Start_Hour__c, 'Expected Grid_Start_Hour__c');
+        Assert.isNotNull(config.Grid_End_Hour__c, 'Expected Grid_End_Hour__c');
+        Assert.isNotNull(config.Palette__c, 'Expected Palette__c');
+    }
 }

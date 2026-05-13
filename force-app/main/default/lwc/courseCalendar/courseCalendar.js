@@ -3,18 +3,14 @@ import { getObjectInfo, getPicklistValues } from 'lightning/uiObjectInfoApi';
 import TIMESLOT_OBJECT from '@salesforce/schema/TimeSlot__c';
 import DAY_OF_WEEK_FIELD from '@salesforce/schema/TimeSlot__c.Day_of_Week__c';
 import getTimeSlots from '@salesforce/apex/CourseCalendarController.getTimeSlots';
-
-const GRID_START_HOUR = 7;
-const GRID_END_HOUR = 21;
-const TOTAL_HOURS = GRID_END_HOUR - GRID_START_HOUR;
-const PALETTE = ['#4C9BE8', '#E8734C', '#4CE87B', '#E8D24C', '#9B4CE8', '#4CE8D2', '#E84C9B', '#88C0D0'];
+import getConfig from '@salesforce/apex/CourseCalendarController.getConfig';
 
 function msToHours(ms) {
     return ms / 3_600_000;
 }
 
-function hoursToPct(h) {
-    return ((h - GRID_START_HOUR) / TOTAL_HOURS) * 100;
+function hoursToPct(h, gridStart, totalHours) {
+    return ((h - gridStart) / totalHours) * 100;
 }
 
 function formatTime(ms) {
@@ -29,6 +25,7 @@ export default class CourseCalendar extends LightningElement {
     error = undefined;
     _slots = undefined;
     _days = undefined;
+    _config = undefined;
 
     @wire(getObjectInfo, { objectApiName: TIMESLOT_OBJECT })
     _objectInfo;
@@ -58,16 +55,33 @@ export default class CourseCalendar extends LightningElement {
         }
     }
 
+    @wire(getConfig)
+    wiredConfig({ data, error }) {
+        if (data) {
+            this._config = {
+                gridStartHour: data.Grid_Start_Hour__c,
+                gridEndHour: data.Grid_End_Hour__c,
+                palette: data.Palette__c.split(',').map(c => c.trim())
+            };
+            this._rebuildIfReady();
+        } else if (error) {
+            this.error = error;
+        }
+    }
+
     _rebuildIfReady() {
-        if (this._slots && this._days) {
+        if (this._slots && this._days && this._config) {
             this.calendarDays = this._buildCalendar(this._slots, this._days);
         }
     }
 
     get timeAxisLabels() {
+        if (!this._config) return [];
+        const { gridStartHour, gridEndHour } = this._config;
+        const totalHours = gridEndHour - gridStartHour;
         const labels = [];
-        for (let h = GRID_START_HOUR; h <= GRID_END_HOUR; h++) {
-            const pct = ((h - GRID_START_HOUR) / TOTAL_HOURS) * 100;
+        for (let h = gridStartHour; h <= gridEndHour; h++) {
+            const pct = hoursToPct(h, gridStartHour, totalHours);
             labels.push({
                 key: h,
                 label: `${h % 12 || 12} ${h < 12 ? 'AM' : 'PM'}`,
@@ -86,16 +100,18 @@ export default class CourseCalendar extends LightningElement {
     }
 
     _buildCalendar(slots, days) {
+        const { gridStartHour, gridEndHour, palette } = this._config;
+        const totalHours = gridEndHour - gridStartHour;
         const colourMap = new Map();
         const byDay = new Map(days.map(d => [d.value, []]));
         for (const slot of slots) {
             if (!byDay.has(slot.Day_of_Week__c)) continue;
             const startH = msToHours(slot.Start_Time__c);
             const endH = msToHours(slot.End_Time__c);
-            const top = hoursToPct(startH);
-            const height = hoursToPct(endH) - top;
+            const top = hoursToPct(startH, gridStartHour, totalHours);
+            const height = hoursToPct(endH, gridStartHour, totalHours) - top;
             if (!colourMap.has(slot.Course__c)) {
-                colourMap.set(slot.Course__c, PALETTE[colourMap.size % PALETTE.length]);
+                colourMap.set(slot.Course__c, palette[colourMap.size % palette.length]);
             }
             byDay.get(slot.Day_of_Week__c).push({
                 key: slot.Id,
