@@ -1,4 +1,5 @@
 import { LightningElement, wire } from 'lwc';
+import { NavigationMixin } from 'lightning/navigation';
 import { getObjectInfo, getPicklistValues } from 'lightning/uiObjectInfoApi';
 import TIMESLOT_OBJECT from '@salesforce/schema/TimeSlot__c';
 import DAY_OF_WEEK_FIELD from '@salesforce/schema/TimeSlot__c.Day_of_Week__c';
@@ -20,7 +21,7 @@ function formatTime(ms) {
     return `${h % 12 || 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`;
 }
 
-export default class CourseCalendar extends LightningElement {
+export default class CourseCalendar extends NavigationMixin(LightningElement) {
     calendarDays = [];
     error = undefined;
     _slots = undefined;
@@ -69,6 +70,14 @@ export default class CourseCalendar extends LightningElement {
         }
     }
 
+    handleSlotClick(event) {
+        const recordId = event.currentTarget.dataset.recordId;
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: { recordId, actionName: 'view' }
+        });
+    }
+
     _rebuildIfReady() {
         if (this._slots && this._days && this._config) {
             this.calendarDays = this._buildCalendar(this._slots, this._days);
@@ -115,6 +124,7 @@ export default class CourseCalendar extends LightningElement {
             }
             byDay.get(slot.Day_of_Week__c).push({
                 key: slot.Id,
+                recordId: slot.Course__c,
                 courseName: slot.Course__r.Course_Name__c,
                 instructor: slot.Course__r.Instructor__c,
                 timeLabel: `${formatTime(slot.Start_Time__c)} – ${formatTime(slot.End_Time__c)}`,

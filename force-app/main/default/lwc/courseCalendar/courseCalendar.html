@@ -18,7 +18,7 @@
                         <div key={tick.key} class="hour-line" style={tick.style}></div>
                     </template>
                     <template for:each={day.slots} for:item="slot">
-                        <div key={slot.key} class="slot-card" style={slot.style}>
+                        <div key={slot.key} class="slot-card" style={slot.style} data-record-id={slot.recordId} onclick={handleSlotClick}>
                             <p class="slot-course">{slot.courseName}</p>
                             <p class="slot-instructor">{slot.instructor}</p>
                             <p class="slot-time">{slot.timeLabel}</p>
