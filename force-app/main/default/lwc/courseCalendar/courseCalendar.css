@@ -1,6 +1,5 @@
 .calendar-container {
     font-family: var(--lwc-fontFamily, sans-serif);
-    overflow-x: auto;
 }
 
 .calendar-header {
@@ -40,7 +39,6 @@
 .time-tick {
     position: absolute;
     right: 4px;
-    transform: translateY(-50%);
     font-size: 0.7rem;
     color: #888;
     white-space: nowrap;

@@ -85,7 +85,7 @@ export default class CourseCalendar extends LightningElement {
             labels.push({
                 key: h,
                 label: `${h % 12 || 12} ${h < 12 ? 'AM' : 'PM'}`,
-                style: `top:${pct}%`
+                style: `top:${pct}%;transform:translateY(${pct === 0 ? '0' : '-50%'})`
             });
         }
         return labels;
