@@ -6,7 +6,7 @@
                 <div key={day.key} class="day-header">{day.label}</div>
             </template>
         </div>
-        <div class="calendar-body">
+        <div class="calendar-body" style={calendarBodyStyle}>
             <div class="time-axis">
                 <template for:each={timeAxisLabels} for:item="tick">
                     <span key={tick.key} class="time-tick" style={tick.style}>{tick.label}</span>

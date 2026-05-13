@@ -16,4 +16,8 @@
         <field>Palette__c</field>
         <value xsi:type="xsd:string">#4C9BE8,#E8734C,#4CE87B,#E8D24C,#9B4CE8,#4CE8D2,#E84C9B,#88C0D0</value>
     </values>
+    <values>
+        <field>Height_Pixels__c</field>
+        <value xsi:type="xsd:double">840</value>
+    </values>
 </CustomMetadata>

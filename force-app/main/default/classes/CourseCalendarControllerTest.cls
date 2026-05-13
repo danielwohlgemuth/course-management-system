@@ -42,5 +42,6 @@ private class CourseCalendarControllerTest {
         Assert.isNotNull(config.Grid_Start_Hour__c, 'Expected Grid_Start_Hour__c');
         Assert.isNotNull(config.Grid_End_Hour__c, 'Expected Grid_End_Hour__c');
         Assert.isNotNull(config.Palette__c, 'Expected Palette__c');
+        Assert.isNotNull(config.Height_Pixels__c, 'Expected Height_Pixels__c');
     }
 }

@@ -26,6 +26,10 @@
                 <behavior>Edit</behavior>
                 <field>Palette__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Height_Pixels__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

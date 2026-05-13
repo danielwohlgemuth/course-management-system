@@ -27,7 +27,6 @@
 .calendar-body {
     display: grid;
     grid-template-columns: 60px repeat(7, 1fr);
-    height: 840px;
     position: relative;
 }
 

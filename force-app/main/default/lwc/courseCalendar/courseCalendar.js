@@ -62,7 +62,8 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
             this._config = {
                 gridStartHour: data.Grid_Start_Hour__c,
                 gridEndHour: data.Grid_End_Hour__c,
-                palette: data.Palette__c.split(',').map(c => c.trim())
+                palette: data.Palette__c.split(',').map(c => c.trim()),
+                heightPixels: data.Height_Pixels__c
             };
             this._rebuildIfReady();
         } else if (error) {
@@ -82,6 +83,11 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
         if (this._slots && this._days && this._config) {
             this.calendarDays = this._buildCalendar(this._slots, this._days);
         }
+    }
+
+    get calendarBodyStyle() {
+        if (!this._config) return '';
+        return `height:${this._config.heightPixels}px`;
     }
 
     get timeAxisLabels() {
