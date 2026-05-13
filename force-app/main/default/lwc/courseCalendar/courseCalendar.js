@@ -1,7 +1,9 @@
 import { LightningElement, wire } from 'lwc';
+import { getObjectInfo, getPicklistValues } from 'lightning/uiObjectInfoApi';
+import TIMESLOT_OBJECT from '@salesforce/schema/TimeSlot__c';
+import DAY_OF_WEEK_FIELD from '@salesforce/schema/TimeSlot__c.Day_of_Week__c';
 import getTimeSlots from '@salesforce/apex/CourseCalendarController.getTimeSlots';
 
-const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 const GRID_START_HOUR = 7;
 const GRID_END_HOUR = 21;
 const TOTAL_HOURS = GRID_END_HOUR - GRID_START_HOUR;
@@ -25,15 +27,40 @@ function formatTime(ms) {
 export default class CourseCalendar extends LightningElement {
     calendarDays = [];
     error = undefined;
+    _slots = undefined;
+    _days = undefined;
+
+    @wire(getObjectInfo, { objectApiName: TIMESLOT_OBJECT })
+    _objectInfo;
+
+    @wire(getPicklistValues, {
+        recordTypeId: '$_objectInfo.data.defaultRecordTypeId',
+        fieldApiName: DAY_OF_WEEK_FIELD
+    })
+    wiredPicklistValues({ data, error }) {
+        if (data) {
+            this._days = data.values.map(v => ({ value: v.value, label: v.label }));
+            this._rebuildIfReady();
+        } else if (error) {
+            this.error = error;
+        }
+    }
 
     @wire(getTimeSlots)
     wiredSlots({ data, error }) {
         if (data) {
             this.error = undefined;
-            this.calendarDays = this._buildCalendar(data);
+            this._slots = data;
+            this._rebuildIfReady();
         } else if (error) {
             this.error = error;
             this.calendarDays = [];
+        }
+    }
+
+    _rebuildIfReady() {
+        if (this._slots && this._days) {
+            this.calendarDays = this._buildCalendar(this._slots, this._days);
         }
     }
 
@@ -58,9 +85,9 @@ export default class CourseCalendar extends LightningElement {
         return !this.calendarDays.length && !this.error;
     }
 
-    _buildCalendar(slots) {
+    _buildCalendar(slots, days) {
         const colourMap = new Map();
-        const byDay = new Map(DAYS.map(d => [d, []]));
+        const byDay = new Map(days.map(d => [d.value, []]));
         for (const slot of slots) {
             if (!byDay.has(slot.Day_of_Week__c)) continue;
             const startH = msToHours(slot.Start_Time__c);
@@ -78,6 +105,6 @@ export default class CourseCalendar extends LightningElement {
                 style: `top:${top}%;height:${height}%;background-color:${colourMap.get(slot.Course__c)};`
             });
         }
-        return DAYS.map(d => ({ key: d, label: d, slots: byDay.get(d) }));
+        return days.map(d => ({ key: d.value, label: d.label, slots: byDay.get(d.value) }));
     }
 }
