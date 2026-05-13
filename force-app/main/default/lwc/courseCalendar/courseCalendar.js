@@ -117,7 +117,7 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
     _buildCalendar(slots, days) {
         const { gridStartHour, gridEndHour, palette } = this._config;
         const totalHours = gridEndHour - gridStartHour;
-        const colourMap = new Map();
+        const colorMap = new Map();
         const byDay = new Map(days.map(d => [d.value, []]));
         for (const slot of slots) {
             if (!byDay.has(slot.Day_of_Week__c)) continue;
@@ -125,8 +125,8 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
             const endH = msToHours(slot.End_Time__c);
             const top = hoursToPct(startH, gridStartHour, totalHours);
             const height = hoursToPct(endH, gridStartHour, totalHours) - top;
-            if (!colourMap.has(slot.Course__c)) {
-                colourMap.set(slot.Course__c, palette[colourMap.size % palette.length]);
+            if (!colorMap.has(slot.Course__c)) {
+                colorMap.set(slot.Course__c, palette[colorMap.size % palette.length]);
             }
             byDay.get(slot.Day_of_Week__c).push({
                 key: slot.Id,
@@ -134,7 +134,7 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
                 courseName: slot.Course__r.Course_Name__c,
                 instructor: slot.Course__r.Instructor__c,
                 timeLabel: `${formatTime(slot.Start_Time__c)} – ${formatTime(slot.End_Time__c)}`,
-                style: `top:${top}%;height:${height}%;background-color:${colourMap.get(slot.Course__c)};`
+                style: `top:${top}%;height:${height}%;background-color:${colorMap.get(slot.Course__c)};`
             });
         }
         return days.map(d => ({ key: d.value, label: d.label, slots: byDay.get(d.value) }));
