@@ -25,8 +25,11 @@ sf apex generate class --name MyClass --output-dir force-app/main/default/classe
 sf sobject generate field --sobject Course__c          # interactive field creation
 sf lightning generate component --name MyCmp --type lwc --output-dir force-app/main/default/lwc
 
-# Deploy to a scratch org or sandbox
-sf project deploy start --source-dir force-app
+# Deploy — always target the specific file(s) changed, not the whole source tree
+sf project deploy start --source-dir force-app/main/default/customMetadata/MyRecord.md-meta.xml
+sf project deploy start --source-dir force-app/main/default/classes/MyClass.cls --source-dir force-app/main/default/classes/MyClass.cls-meta.xml
+# Add --ignore-conflicts when the org has diverged and local changes should win
+sf project deploy start --source-dir <path> --ignore-conflicts
 
 # Run all Apex tests
 sf apex run test --test-level RunLocalTests --synchronous
@@ -68,4 +71,4 @@ Playwright recordings are saved to `playwright/recordings/` with a datetime-pref
 3. Write an Apex test class alongside it (`sf apex generate class --name <FeatureName>Test`).
 4. Wire up any UI as an LWC (`sf lightning generate component --type lwc`).
 5. Add a migration file in `migrations/` if the schema changed.
-6. Deploy and verify: `sf project deploy start && sf apex run test --test-level RunLocalTests --synchronous`.
+6. Deploy and verify: `sf project deploy start --source-file <changed files> && sf apex run test --test-level RunLocalTests --synchronous`.
