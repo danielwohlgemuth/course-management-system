@@ -82,12 +82,11 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
         });
     }
 
-    handleBadgeClick(event) {
+    handleGroupClick(event) {
         event.stopPropagation();
-        const key = event.currentTarget.dataset.slotKey;
+        const key = event.currentTarget.dataset.groupKey;
         const group = this._overlapMap.get(key);
-        const rect = event.currentTarget.getBoundingClientRect();
-        this.popoverStyle = `position:fixed;top:${rect.bottom + 4}px;left:${rect.left}px;z-index:1000;`;
+        this.popoverStyle = `position:fixed;top:${event.clientY}px;left:${event.clientX + 8}px;z-index:1000;`;
         this.activeOverlapSlots = group;
     }
 
@@ -166,18 +165,17 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
                 color,
                 swatchStyle: `background-color:${color};`,
                 startMs: slot.Start_Time__c,
-                endMs: slot.End_Time__c,
-                overlapCount: 0,
-                style: ''
+                endMs: slot.End_Time__c
             });
         }
 
-        for (const daySlots of byDay.values()) {
+        const renderablesByDay = new Map();
+        for (const [day, daySlots] of byDay.entries()) {
             daySlots.sort((a, b) => a.startMs - b.startMs);
-            this._resolveOverlaps(daySlots, gridStartHour, totalHours);
+            renderablesByDay.set(day, this._resolveOverlaps(daySlots, gridStartHour, totalHours));
         }
 
-        return days.map(d => ({ key: d.value, label: d.label, slots: byDay.get(d.value) }));
+        return days.map(d => ({ key: d.value, label: d.label, slots: renderablesByDay.get(d.value) }));
     }
 
     _resolveOverlaps(daySlots, gridStartHour, totalHours) {
@@ -203,32 +201,57 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
             groups.get(root).push(i);
         }
 
+        const renderables = [];
+
         for (const indices of groups.values()) {
             if (indices.length === 1) {
                 const s = daySlots[indices[0]];
                 const top = hoursToPct(msToHours(s.startMs), gridStartHour, totalHours);
                 const height = hoursToPct(msToHours(s.endMs), gridStartHour, totalHours) - top;
-                s.style = `top:${top}%;height:${height}%;background-color:${s.color};`;
+                renderables.push({
+                    key: s.key,
+                    isCard: true,
+                    wrapperStyle: `top:${top}%;height:${height}%;`,
+                    cardStyle: `background-color:${s.color};`,
+                    recordId: s.recordId,
+                    courseName: s.courseName,
+                    instructor: s.instructor,
+                    timeLabel: s.timeLabel
+                });
             } else {
                 const groupStartMs = Math.min(...indices.map(i => daySlots[i].startMs));
                 const groupEndMs = Math.max(...indices.map(i => daySlots[i].endMs));
+                const groupDurationMs = groupEndMs - groupStartMs;
                 const top = hoursToPct(msToHours(groupStartMs), gridStartHour, totalHours);
                 const height = hoursToPct(msToHours(groupEndMs), gridStartHour, totalHours) - top;
 
-                const primaryIdx = indices.reduce((a, b) => daySlots[a].startMs <= daySlots[b].startMs ? a : b);
-                const primary = daySlots[primaryIdx];
-                const group = indices.map(i => daySlots[i]);
+                const n = indices.length;
+                const slotsSorted = indices.map(i => daySlots[i]).sort((a, b) => a.startMs - b.startMs);
 
-                primary.style = `top:${top}%;height:${height}%;background-color:${primary.color};`;
-                primary.overlapCount = group.length - 1;
-                this._overlapMap.set(primary.key, group);
+                const strips = slotsSorted.map((s, idx) => {
+                    const stripTop = ((s.startMs - groupStartMs) / groupDurationMs) * 100;
+                    const stripHeight = ((s.endMs - s.startMs) / groupDurationMs) * 100;
+                    const stripLeft = (idx / n) * 100;
+                    const stripWidth = (1 / n) * 100;
+                    return {
+                        key: s.key,
+                        style: `top:${stripTop}%;height:${stripHeight}%;left:${stripLeft}%;width:${stripWidth}%;background-color:${s.color};`
+                    };
+                });
 
-                for (const idx of indices) {
-                    if (idx !== primaryIdx) {
-                        daySlots[idx].style = 'display:none;';
-                    }
-                }
+                const groupKey = `group-${slotsSorted[0].key}`;
+                this._overlapMap.set(groupKey, slotsSorted);
+
+                renderables.push({
+                    key: groupKey,
+                    isGroup: true,
+                    count: n,
+                    wrapperStyle: `top:${top}%;height:${height}%;`,
+                    strips
+                });
             }
         }
+
+        return renderables;
     }
 }

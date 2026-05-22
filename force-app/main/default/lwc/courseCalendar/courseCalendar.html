@@ -18,12 +18,21 @@
                         <div key={tick.key} class="hour-line" style={tick.style}></div>
                     </template>
                     <template for:each={day.slots} for:item="slot">
-                        <div key={slot.key} class="slot-card" style={slot.style} data-record-id={slot.recordId} onclick={handleSlotClick}>
-                            <p class="slot-course">{slot.courseName}</p>
-                            <p class="slot-instructor">{slot.instructor}</p>
-                            <p class="slot-time">{slot.timeLabel}</p>
-                            <template if:true={slot.overlapCount}>
-                                <span class="overlap-badge" data-slot-key={slot.key} onclick={handleBadgeClick}>+{slot.overlapCount}</span>
+                        <div key={slot.key} class="slot-positioner" style={slot.wrapperStyle}>
+                            <template if:true={slot.isGroup}>
+                                <div class="overlap-group" data-group-key={slot.key} onclick={handleGroupClick}>
+                                    <template for:each={slot.strips} for:item="strip">
+                                        <div key={strip.key} class="overlap-strip" style={strip.style}></div>
+                                    </template>
+                                    <span class="overlap-count-badge">{slot.count}</span>
+                                </div>
+                            </template>
+                            <template if:true={slot.isCard}>
+                                <div class="slot-card" style={slot.cardStyle} data-record-id={slot.recordId} onclick={handleSlotClick}>
+                                    <p class="slot-course">{slot.courseName}</p>
+                                    <p class="slot-instructor">{slot.instructor}</p>
+                                    <p class="slot-time">{slot.timeLabel}</p>
+                                </div>
                             </template>
                         </div>
                     </template>

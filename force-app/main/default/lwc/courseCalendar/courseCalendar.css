@@ -57,16 +57,52 @@
     background: #f0f0f0;
 }
 
-.slot-card {
+.slot-positioner {
     position: absolute;
     left: 2px;
     right: 2px;
+}
+
+.slot-card {
+    width: 100%;
+    height: 100%;
     border-radius: 4px;
     padding: 4px 6px;
     overflow: hidden;
     box-sizing: border-box;
     border: 1px solid rgba(0, 0, 0, 0.12);
     cursor: pointer;
+}
+
+.overlap-group {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background: #e0e0e0;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+}
+
+.overlap-strip {
+    position: absolute;
+    border-radius: 2px;
+}
+
+.overlap-count-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    font-size: 0.6rem;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 1px 5px;
+    line-height: 1.4;
+    pointer-events: none;
 }
 
 .slot-course {
@@ -99,20 +135,6 @@
     padding: 16px;
 }
 
-.overlap-badge {
-    position: absolute;
-    top: 4px;
-    right: 4px;
-    background: rgba(0, 0, 0, 0.45);
-    color: #fff;
-    font-size: 0.6rem;
-    font-weight: 700;
-    border-radius: 8px;
-    padding: 1px 5px;
-    cursor: pointer;
-    line-height: 1.4;
-}
-
 .overlap-popover {
     background: #fff;
     border: 1px solid #ddd;
@@ -120,8 +142,9 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
     min-width: 220px;
     max-width: 300px;
+    max-height: 240px;
     padding: 6px 0;
-    overflow: hidden;
+    overflow-y: auto;
 }
 
 .popover-item {
