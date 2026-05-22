@@ -24,9 +24,12 @@ function formatTime(ms) {
 export default class CourseCalendar extends NavigationMixin(LightningElement) {
     calendarDays = [];
     error = undefined;
+    activeOverlapSlots = null;
+    popoverStyle = '';
     _slots = undefined;
     _days = undefined;
     _config = undefined;
+    _overlapMap = new Map();
 
     @wire(getObjectInfo, { objectApiName: TIMESLOT_OBJECT })
     _objectInfo;
@@ -79,6 +82,29 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
         });
     }
 
+    handleBadgeClick(event) {
+        event.stopPropagation();
+        const key = event.currentTarget.dataset.slotKey;
+        const group = this._overlapMap.get(key);
+        const rect = event.currentTarget.getBoundingClientRect();
+        this.popoverStyle = `position:fixed;top:${rect.bottom + 4}px;left:${rect.left}px;z-index:1000;`;
+        this.activeOverlapSlots = group;
+    }
+
+    handleContainerClick() {
+        this.activeOverlapSlots = null;
+    }
+
+    handlePopoverItemClick(event) {
+        event.stopPropagation();
+        const recordId = event.currentTarget.dataset.recordId;
+        this.activeOverlapSlots = null;
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: { recordId, actionName: 'view' }
+        });
+    }
+
     _rebuildIfReady() {
         if (this._slots && this._days && this._config) {
             this.calendarDays = this._buildCalendar(this._slots, this._days);
@@ -114,29 +140,95 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
         return !this.calendarDays.length && !this.error;
     }
 
+    get hasActivePopover() {
+        return Boolean(this.activeOverlapSlots);
+    }
+
     _buildCalendar(slots, days) {
         const { gridStartHour, gridEndHour, palette } = this._config;
         const totalHours = gridEndHour - gridStartHour;
         const colorMap = new Map();
         const byDay = new Map(days.map(d => [d.value, []]));
+        this._overlapMap = new Map();
+
         for (const slot of slots) {
             if (!byDay.has(slot.Day_of_Week__c)) continue;
-            const startH = msToHours(slot.Start_Time__c);
-            const endH = msToHours(slot.End_Time__c);
-            const top = hoursToPct(startH, gridStartHour, totalHours);
-            const height = hoursToPct(endH, gridStartHour, totalHours) - top;
             if (!colorMap.has(slot.Course__c)) {
                 colorMap.set(slot.Course__c, palette[colorMap.size % palette.length]);
             }
+            const color = colorMap.get(slot.Course__c);
             byDay.get(slot.Day_of_Week__c).push({
                 key: slot.Id,
                 recordId: slot.Course__c,
                 courseName: slot.Course__r.Course_Name__c,
                 instructor: slot.Course__r.Instructor__c,
                 timeLabel: `${formatTime(slot.Start_Time__c)} – ${formatTime(slot.End_Time__c)}`,
-                style: `top:${top}%;height:${height}%;background-color:${colorMap.get(slot.Course__c)};`
+                color,
+                swatchStyle: `background-color:${color};`,
+                startMs: slot.Start_Time__c,
+                endMs: slot.End_Time__c,
+                overlapCount: 0,
+                style: ''
             });
         }
+
+        for (const daySlots of byDay.values()) {
+            daySlots.sort((a, b) => a.startMs - b.startMs);
+            this._resolveOverlaps(daySlots, gridStartHour, totalHours);
+        }
+
         return days.map(d => ({ key: d.value, label: d.label, slots: byDay.get(d.value) }));
+    }
+
+    _resolveOverlaps(daySlots, gridStartHour, totalHours) {
+        const parent = daySlots.map((_, i) => i);
+        const find = i => {
+            while (parent[i] !== i) { parent[i] = parent[parent[i]]; i = parent[i]; }
+            return i;
+        };
+        const union = (i, j) => { parent[find(i)] = find(j); };
+
+        for (let i = 0; i < daySlots.length; i++) {
+            for (let j = i + 1; j < daySlots.length; j++) {
+                if (daySlots[i].startMs < daySlots[j].endMs && daySlots[i].endMs > daySlots[j].startMs) {
+                    union(i, j);
+                }
+            }
+        }
+
+        const groups = new Map();
+        for (let i = 0; i < daySlots.length; i++) {
+            const root = find(i);
+            if (!groups.has(root)) groups.set(root, []);
+            groups.get(root).push(i);
+        }
+
+        for (const indices of groups.values()) {
+            if (indices.length === 1) {
+                const s = daySlots[indices[0]];
+                const top = hoursToPct(msToHours(s.startMs), gridStartHour, totalHours);
+                const height = hoursToPct(msToHours(s.endMs), gridStartHour, totalHours) - top;
+                s.style = `top:${top}%;height:${height}%;background-color:${s.color};`;
+            } else {
+                const groupStartMs = Math.min(...indices.map(i => daySlots[i].startMs));
+                const groupEndMs = Math.max(...indices.map(i => daySlots[i].endMs));
+                const top = hoursToPct(msToHours(groupStartMs), gridStartHour, totalHours);
+                const height = hoursToPct(msToHours(groupEndMs), gridStartHour, totalHours) - top;
+
+                const primaryIdx = indices.reduce((a, b) => daySlots[a].startMs <= daySlots[b].startMs ? a : b);
+                const primary = daySlots[primaryIdx];
+                const group = indices.map(i => daySlots[i]);
+
+                primary.style = `top:${top}%;height:${height}%;background-color:${primary.color};`;
+                primary.overlapCount = group.length - 1;
+                this._overlapMap.set(primary.key, group);
+
+                for (const idx of indices) {
+                    if (idx !== primaryIdx) {
+                        daySlots[idx].style = 'display:none;';
+                    }
+                }
+            }
+        }
     }
 }

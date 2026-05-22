@@ -1,5 +1,5 @@
 <template>
-    <div class="calendar-container">
+    <div class="calendar-container" onclick={handleContainerClick}>
         <div class="calendar-header">
             <div class="time-axis-spacer"></div>
             <template for:each={calendarDays} for:item="day">
@@ -22,11 +22,27 @@
                             <p class="slot-course">{slot.courseName}</p>
                             <p class="slot-instructor">{slot.instructor}</p>
                             <p class="slot-time">{slot.timeLabel}</p>
+                            <template if:true={slot.overlapCount}>
+                                <span class="overlap-badge" data-slot-key={slot.key} onclick={handleBadgeClick}>+{slot.overlapCount}</span>
+                            </template>
                         </div>
                     </template>
                 </div>
             </template>
         </div>
+        <template if:true={hasActivePopover}>
+            <div class="overlap-popover" style={popoverStyle}>
+                <template for:each={activeOverlapSlots} for:item="item">
+                    <div key={item.key} class="popover-item" data-record-id={item.recordId} onclick={handlePopoverItemClick}>
+                        <span class="popover-swatch" style={item.swatchStyle}></span>
+                        <div class="popover-details">
+                            <span class="popover-course">{item.courseName}</span>
+                            <span class="popover-meta">{item.instructor} · {item.timeLabel}</span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
         <template if:true={isLoading}>
             <lightning-spinner alternative-text="Loading schedule"></lightning-spinner>
         </template>
