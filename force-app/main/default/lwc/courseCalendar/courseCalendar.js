@@ -183,7 +183,10 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
             renderablesByDay.set(day, this._resolveOverlaps(daySlots, gridStartHour, totalHours));
         }
 
-        return days.map(d => ({ key: d.value, label: d.label, slots: renderablesByDay.get(d.value) }));
+        return days.map(d => {
+            const slots = renderablesByDay.get(d.value);
+            return { key: d.value, label: d.label, slots, hasOverlap: slots.some(s => s.isGroup) };
+        });
     }
 
     _resolveOverlaps(daySlots, gridStartHour, totalHours) {

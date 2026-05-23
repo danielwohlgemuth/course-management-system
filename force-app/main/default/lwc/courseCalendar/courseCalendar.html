@@ -13,7 +13,7 @@
                 </template>
             </div>
             <template for:each={calendarDays} for:item="day">
-                <div key={day.key} class="day-column">
+                <div key={day.key} class="day-column" data-has-overlap={day.hasOverlap} data-day={day.label}>
                     <template for:each={timeAxisLabels} for:item="tick">
                         <div key={tick.key} class="hour-line" style={tick.style}></div>
                     </template>
