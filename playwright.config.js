@@ -32,5 +32,14 @@ export default defineConfig({
       testMatch: '**/screenshot.spec.js',
       use: { ...devices['Desktop Chrome'] },
     },
+    {
+      name: 'docs-screenshots',
+      testMatch: '**/capture-docs-screenshots.spec.js',
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: 'playwright/.auth/session.json',
+      },
+      dependencies: ['setup'],
+    },
   ],
 });
