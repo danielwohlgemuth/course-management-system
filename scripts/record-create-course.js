@@ -4,23 +4,9 @@ import { getFrontdoorUrl } from '../tests/helpers/salesforce.js';
 await record('create-course', async (page) => {
   // Land on Lightning home and open the App Launcher
   await page.goto(getFrontdoorUrl('/lightning/page/home'), { waitUntil: 'commit' });
-  await page.locator('one-app-nav-bar-item-root').first().waitFor({ state: 'visible', timeout: 45_000 });
-
-  const waffle = page.locator('one-app-launcher-header .slds-icon-waffle').first();
-  await waffle.click();
-
-  const search = page.locator('input[placeholder="Search apps and items..."]');
-  await search.waitFor({ state: 'visible', timeout: 10_000 });
-  await search.fill('Course Manager');
-  await page.waitForTimeout(1500);
-
-  const tile = page.locator('a', { hasText: 'Course Manager' }).first();
-  await tile.waitFor({ state: 'visible', timeout: 10_000 });
-  await tile.click();
-
   // Navigate to the Courses tab
   const coursesTab = page.locator('one-app-nav-bar-item-root', { hasText: 'Courses' }).first();
-  await coursesTab.waitFor({ state: 'visible', timeout: 30_000 });
+  await coursesTab.waitFor({ state: 'visible', timeout: 45_000 });
   await page.waitForTimeout(1000);
   await coursesTab.click();
 

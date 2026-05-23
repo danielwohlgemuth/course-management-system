@@ -4,25 +4,9 @@ import { getFrontdoorUrl } from '../tests/helpers/salesforce.js';
 await record('course-calendar', async (page) => {
   // Open the Course Manager home page (shows the calendar)
   await page.goto(getFrontdoorUrl('/lightning/page/home'), { waitUntil: 'commit' });
-  await page.locator('one-app-nav-bar-item-root').first().waitFor({ state: 'visible', timeout: 45_000 });
-
-  const waffle = page.locator('one-app-launcher-header .slds-icon-waffle, [data-id="AppLauncherButton"]').first();
-  await waffle.waitFor({ state: 'visible', timeout: 15_000 });
-  await waffle.click();
-  await page.waitForTimeout(1500);
-
-  const search = page.locator('input[placeholder="Search apps and items..."]');
-  await search.waitFor({ state: 'visible', timeout: 20_000 });
-  await search.fill('Course Manager');
-  await page.waitForTimeout(1500);
-
-  const tile = page.locator('a', { hasText: 'Course Manager' }).first();
-  await tile.waitFor({ state: 'visible', timeout: 10_000 });
-  await tile.click();
-
   // Wait for the home page with the calendar component
   await page.locator('one-app-nav-bar-item-root', { hasText: 'Courses' }).first()
-    .waitFor({ state: 'visible', timeout: 30_000 });
+    .waitFor({ state: 'visible', timeout: 45_000 });
   await page.waitForTimeout(2000);
 
   // Hold on the calendar (empty or with existing data)
@@ -98,25 +82,9 @@ await record('course-calendar', async (page) => {
 
   // Navigate back to the home page to see the calendar updated
   await page.goto(getFrontdoorUrl('/lightning/page/home'), { waitUntil: 'commit' });
-  await page.locator('one-app-nav-bar-item-root').first().waitFor({ state: 'visible', timeout: 45_000 });
-
-  const waffle2 = page.locator('one-app-launcher-header .slds-icon-waffle, [data-id="AppLauncherButton"]').first();
-  await waffle2.waitFor({ state: 'visible', timeout: 15_000 });
-  await waffle2.click();
-  await page.waitForTimeout(1500);
-
-  const search2 = page.locator('input[placeholder="Search apps and items..."]');
-  await search2.waitFor({ state: 'visible', timeout: 20_000 });
-  await search2.fill('Course Manager');
-  await page.waitForTimeout(1500);
-
-  const tile2 = page.locator('a', { hasText: 'Course Manager' }).first();
-  await tile2.waitFor({ state: 'visible', timeout: 10_000 });
-  await tile2.click();
-
   // Wait for the home page calendar to render with the new time slot
   await page.locator('one-app-nav-bar-item-root', { hasText: 'Courses' }).first()
-    .waitFor({ state: 'visible', timeout: 30_000 });
+    .waitFor({ state: 'visible', timeout: 45_000 });
   await page.waitForTimeout(3000);
 
   // Hold on the calendar showing the new slot
