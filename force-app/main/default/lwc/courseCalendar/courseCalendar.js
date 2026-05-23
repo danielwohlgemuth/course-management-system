@@ -86,7 +86,15 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
         event.stopPropagation();
         const key = event.currentTarget.dataset.groupKey;
         const group = this._overlapMap.get(key);
-        this.popoverStyle = `position:fixed;top:${event.clientY}px;left:${event.clientX + 8}px;z-index:1000;`;
+        const popoverWidth = 300;
+        const popoverHeight = 240;
+        const left = event.clientX + 8 + popoverWidth > window.innerWidth
+            ? event.clientX - 8 - popoverWidth
+            : event.clientX + 8;
+        const top = event.clientY + popoverHeight > window.innerHeight
+            ? Math.max(0, event.clientY - popoverHeight)
+            : event.clientY;
+        this.popoverStyle = `position:fixed;top:${top}px;left:${left}px;z-index:1000;`;
         this.activeOverlapSlots = group;
     }
 
