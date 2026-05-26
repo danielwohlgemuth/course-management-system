@@ -36,8 +36,7 @@ await allCoursesOption.waitFor({ state: 'visible', timeout: 10_000 });
 await allCoursesOption.click();
 await page.waitForTimeout(3000);
 
-await page.screenshot({ path: 'assets/courses-list.png', fullPage: false });
-console.log('Saved: assets/courses-list.png');
+await page.screenshot({ path: 'playwright/courses-list.png', fullPage: false });
 
 await context.close();
 await browser.close();

@@ -50,6 +50,7 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
     @wire(getTimeSlots)
     wiredSlots({ data, error }) {
         if (data) {
+            if (!Array.isArray(data)) return;
             this.error = undefined;
             this._slots = data;
             this._rebuildIfReady();
@@ -62,10 +63,11 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
     @wire(getConfig)
     wiredConfig({ data, error }) {
         if (data) {
+            if (Array.isArray(data) || !('Grid_Start_Hour__c' in data)) return;
             this._config = {
                 gridStartHour: data.Grid_Start_Hour__c,
                 gridEndHour: data.Grid_End_Hour__c,
-                palette: data.Palette__c.split(',').map(c => c.trim()),
+                palette: (data.Palette__c || '').split(',').map(c => c.trim()).filter(Boolean),
                 heightPixels: data.Height_Pixels__c
             };
             this._rebuildIfReady();

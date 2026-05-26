@@ -13,7 +13,7 @@ test('capture documentation screenshots', async ({ page }) => {
   await coursesTab.click();
   await page.locator('table tbody tr').first().waitFor({ state: 'visible', timeout: 30_000 });
   await page.waitForTimeout(1000);
-  await page.screenshot({ path: 'assets/courses-list.png', fullPage: false });
+  await page.screenshot({ path: 'playwright/courses-list.png', fullPage: false });
 
   // ── Course record ────────────────────────────────────────────────────────
   const firstCourseLink = page
@@ -22,7 +22,7 @@ test('capture documentation screenshots', async ({ page }) => {
   await firstCourseLink.click();
   await page.waitForURL(/\/r\/Course__c\/|\/[a-zA-Z0-9]{15,18}\/view/, { timeout: 30_000 });
   await page.waitForTimeout(2000);
-  await page.screenshot({ path: 'assets/course-record.png', fullPage: false });
+  await page.screenshot({ path: 'playwright/course-record.png', fullPage: false });
 
   // ── Create time slot (modal) ──────────────────────────────────────────────
   const timeSlotsSection = page
@@ -35,7 +35,7 @@ test('capture documentation screenshots', async ({ page }) => {
   await page.locator('.slds-modal').first().waitFor({ state: 'visible', timeout: 20_000 });
   await page.locator('button[name="SaveEdit"]').first().waitFor({ state: 'visible', timeout: 15_000 });
   await page.waitForTimeout(500);
-  await page.screenshot({ path: 'assets/create-time-slot.png', fullPage: false });
+  await page.screenshot({ path: 'playwright/create-time-slot.png', fullPage: false });
   await page.keyboard.press('Escape');
   await page.waitForTimeout(500);
 
@@ -44,18 +44,18 @@ test('capture documentation screenshots', async ({ page }) => {
   await page.locator('one-app-nav-bar-item-root', { hasText: 'Courses' }).first()
     .waitFor({ state: 'visible', timeout: 45_000 });
   await page.waitForTimeout(3000);
-  await page.screenshot({ path: 'assets/calendar-overview.png', fullPage: false });
+  await page.screenshot({ path: 'playwright/calendar-overview.png', fullPage: false });
 
   // ── Calendar with overlap badges visible ─────────────────────────────────
   const overlapGroup = page.locator('.overlap-group').first();
   await overlapGroup.waitFor({ state: 'visible', timeout: 15_000 });
-  await page.screenshot({ path: 'assets/calendar-overlap.png', fullPage: false });
+  await page.screenshot({ path: 'playwright/calendar-overlap.png', fullPage: false });
 
   // ── Overlap popover ──────────────────────────────────────────────────────
   await overlapGroup.click();
   await page.locator('.popover-item').first().waitFor({ state: 'visible', timeout: 10_000 });
   await page.waitForTimeout(500);
-  await page.screenshot({ path: 'assets/calendar-overlap-popover.png', fullPage: false });
+  await page.screenshot({ path: 'playwright/calendar-overlap-popover.png', fullPage: false });
   await page.keyboard.press('Escape');
 
   // ── Create course (modal) — still on the courses list from the nav above ──
@@ -67,5 +67,5 @@ test('capture documentation screenshots', async ({ page }) => {
   await page.locator('.slds-modal').first().waitFor({ state: 'visible', timeout: 20_000 });
   await page.locator('button[name="SaveEdit"]').first().waitFor({ state: 'visible', timeout: 15_000 });
   await page.waitForTimeout(500);
-  await page.screenshot({ path: 'assets/create-course.png', fullPage: false });
+  await page.screenshot({ path: 'playwright/create-course.png', fullPage: false });
 });
