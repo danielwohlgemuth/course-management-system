@@ -72,6 +72,11 @@
     box-sizing: border-box;
     border: 1px solid rgba(0, 0, 0, 0.12);
     cursor: pointer;
+    transition: filter 0.1s ease;
+}
+
+.slot-card:hover {
+    filter: brightness(0.88);
 }
 
 .overlap-group {
@@ -89,6 +94,11 @@
 .overlap-strip {
     position: absolute;
     border-radius: 2px;
+    transition: filter 0.1s ease;
+}
+
+.overlap-strip:hover {
+    filter: brightness(0.78);
 }
 
 .overlap-count-badge {
