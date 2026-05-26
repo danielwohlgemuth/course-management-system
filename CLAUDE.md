@@ -68,6 +68,16 @@ Each migration file must cover:
 
 Playwright recordings are saved to `playwright/recordings/` with a datetime-prefixed filename. The `record()` helper in `scripts/helpers/recorder.js` handles this automatically — always use it when creating new recording scripts rather than managing the browser and video file directly.
 
+## Task Tracking
+
+Pending and completed work is tracked in `tasks/`. The index is `TASKS.md` at the repo root.
+
+- Each task lives in `tasks/<id>_<slug>.md` (use `tasks/000_template.md` as the starting point).
+- IDs are zero-padded integers, assigned sequentially.
+- When a task is completed: set `Status: done` in its file **and** update the `TASKS.md` row.
+- When a new requirement is discovered: create a new task file and add a row to `TASKS.md`.
+- If a task requires a schema change, link the migration file under **Related migrations** once it is written.
+
 ## Adding a New Feature
 
 1. Define the data model first (`sf sobject generate field` or create a new object via `sf sobject generate`).
