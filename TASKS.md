@@ -5,7 +5,7 @@ Quick-scan index of all tasks. One row per task; details live in `tasks/<id>_<sl
 | ID  | Title | Status |
 |-----|-------|--------|
 | [001](tasks/001_course-sharing-private.md) | Change Course sharing model to Private | open |
-| [002](tasks/002_instructor-user-lookup.md) | Replace Instructor text field with User lookup | open |
+| [002](tasks/002_instructor-user-lookup.md) | Add Instructor User lookup field to Course | open |
 | [003](tasks/003_enrollment-junction-object.md) | Create Enrollment junction object (Course ↔ User) | open |
 | [004](tasks/004_admin-permission-set.md) | Create Course Admin permission set | open |
 | [005](tasks/005_instructor-permission-set.md) | Create Course Instructor permission set | open |
@@ -17,6 +17,7 @@ Quick-scan index of all tasks. One row per task; details live in `tasks/<id>_<sl
 | [011](tasks/011_join-course-screen-flow.md) | Build screen flow for joining a course | open |
 | [012](tasks/012_join-course-flow-page.md) | Add Join a Course page to Experience Site | open |
 | [013](tasks/013_my-courses-list-view-page.md) | Add My Courses list view page to Experience Site | open |
+| [014](tasks/014_instructor-field-cleanup.md) | Remove legacy Instructor text field and make lookup required | open |
 
 ## Statuses
 

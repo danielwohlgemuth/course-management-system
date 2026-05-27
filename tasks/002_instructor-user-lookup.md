@@ -1,23 +1,23 @@
-# 002 Replace Instructor text field with User lookup
+# 002 Add Instructor User lookup field to Course
 
 **Status:** open
 
 ## What
 
-Replace the existing `Instructor__c` Text field on `Course__c` with a User lookup field of the same API name. This allows instructors to be proper record owners and enables sharing and permission logic to reference a real Salesforce User. A migration script will attempt to match existing text values to User records by name or email before the old field is removed.
+Add a new `Instructor_User__c` Lookup(User) field to `Course__c` alongside the existing `Instructor__c` text field. The two fields coexist so a migration script can populate the lookup by matching the text value to User records before the old field is removed (task 014). The new field is not required at this stage.
 
 ## Acceptance criteria
 
-- [ ] Old `Instructor__c` Text field is removed from `Course__c`
-- [ ] New `Instructor__c` Lookup(User) field exists on `Course__c`
-- [ ] Migration script matches existing text values to User records and populates the new field
+- [ ] `Instructor_User__c` Lookup(User) field created on `Course__c` with label "Instructor"
+- [ ] Field is not required
+- [ ] Migration script matches `Instructor__c` text values to User records by name or email and populates `Instructor_User__c`
 - [ ] Unmatched values are logged for manual review
-- [ ] Field is not required (can be blank)
+- [ ] Original `Instructor__c` text field is left untouched
 - [ ] Change deployed and all existing tests pass
 
 ## Notes
 
-The field is not required initially. The migration script should run as an anonymous Apex execution after deploying the new field and before removing the old one, so both exist simultaneously during the transition.
+Both fields intentionally coexist after this task. Task 014 handles removing the old text field and making the lookup required once the migration is verified.
 
 ## Related migrations
 
