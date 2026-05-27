@@ -6,7 +6,7 @@ Quick-scan index of all tasks. One row per task; details live in `tasks/<id>_<sl
 |-----|-------|--------|
 | [001](tasks/001_course-sharing-private.md) | Change Course sharing model to Private | done |
 | [002](tasks/002_instructor-user-lookup.md) | Add Instructor User lookup field to Course | open |
-| [003](tasks/003_enrollment-junction-object.md) | Create Enrollment junction object (Course ↔ User) | open |
+| [003](tasks/003_enrollment-junction-object.md) | Create Enrollment junction object (Course ↔ User) | done |
 | [004](tasks/004_admin-permission-set.md) | Create Course Admin permission set | open |
 | [005](tasks/005_instructor-permission-set.md) | Create Course Instructor permission set | open |
 | [006](tasks/006_student-permission-set.md) | Create Course Student permission set | open |
