@@ -1,5 +1,5 @@
-import { record } from './helpers/recorder.js';
-import { getFrontdoorUrl } from '../tests/helpers/salesforce.js';
+import { record } from '../helpers/recorder.js';
+import { getFrontdoorUrl } from '../../tests/helpers/salesforce.js';
 
 await record('create-course', async (page) => {
   // Land on Lightning home and open the App Launcher

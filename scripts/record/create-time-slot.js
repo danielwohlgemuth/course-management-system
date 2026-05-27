@@ -1,5 +1,5 @@
-import { record } from './helpers/recorder.js';
-import { getFrontdoorUrl } from '../tests/helpers/salesforce.js';
+import { record } from '../helpers/recorder.js';
+import { getFrontdoorUrl } from '../../tests/helpers/salesforce.js';
 
 await record('create-time-slot', async (page) => {
   // Navigate directly to the Courses list view

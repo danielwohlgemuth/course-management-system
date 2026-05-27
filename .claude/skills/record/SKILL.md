@@ -10,11 +10,11 @@ Recordings are Playwright scripts that drive a real browser against the live Sal
 
 ### 1. Create the script
 
-Create `scripts/record-<feature-name>.js`. Use an existing script as a reference — `scripts/record-click-course-from-calendar.js` is a good template.
+Create `scripts/record/<feature-name>.js`. Use an existing script as a reference — `scripts/record/click-course-from-calendar.js` is a good template.
 
 Every script must:
-- Import `record` from `./helpers/recorder.js`
-- Import `getFrontdoorUrl` from `../tests/helpers/salesforce.js`
+- Import `record` from `../helpers/recorder.js`
+- Import `getFrontdoorUrl` from `../../tests/helpers/salesforce.js`
 - Call `record('<feature-name>', async (page) => { ... })`
 
 ### 2. Navigate to the app
@@ -22,8 +22,8 @@ Every script must:
 The org requires a one-time login URL. Always open the home page via `getFrontdoorUrl` and then navigate to the Course Manager app through the waffle menu:
 
 ```js
-import { record } from './helpers/recorder.js';
-import { getFrontdoorUrl } from '../tests/helpers/salesforce.js';
+import { record } from '../helpers/recorder.js';
+import { getFrontdoorUrl } from '../../tests/helpers/salesforce.js';
 
 await record('my-feature', async (page) => {
   // Boot the session
@@ -57,13 +57,13 @@ await record('my-feature', async (page) => {
 ### 3. Run it
 
 ```bash
-node scripts/record-<feature-name>.js
+node scripts/record/<feature-name>.js
 ```
 
 The script uses the default authorized org. To target a specific org, set `SF_ORG_ALIAS` first:
 
 ```bash
-SF_ORG_ALIAS=my-alias node scripts/record-<feature-name>.js
+SF_ORG_ALIAS=my-alias node scripts/record/<feature-name>.js
 ```
 
 ### 4. Find the output
@@ -75,4 +75,4 @@ The video is saved to `playwright/recordings/<datetime>_<feature-name>.webm`.
 - Add `await page.waitForTimeout(1500)` before and after key interactions so the video clearly shows before/after states.
 - For LWC components, wait for a specific locator (e.g. `.slot-card`) rather than a fixed timeout for the initial load.
 - `getFrontdoorUrl` calls `sf org open --url-only` — the org must already be authorized via `sf org login web`.
-- Existing scripts in `scripts/` cover: app setup, course creation, time slot creation, calendar display, and clicking a course from the calendar. Copy the closest one rather than starting from scratch.
+- Existing scripts in `scripts/record/` cover: app setup, course creation, time slot creation, calendar display, and clicking a course from the calendar. Copy the closest one rather than starting from scratch.

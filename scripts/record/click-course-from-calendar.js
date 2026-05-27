@@ -1,5 +1,5 @@
-import { record } from './helpers/recorder.js';
-import { getFrontdoorUrl } from '../tests/helpers/salesforce.js';
+import { record } from '../helpers/recorder.js';
+import { getFrontdoorUrl } from '../../tests/helpers/salesforce.js';
 
 await record('click-course-from-calendar', async (page) => {
   // Open the Course Manager home page (shows the calendar)

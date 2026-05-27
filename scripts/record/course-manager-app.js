@@ -1,5 +1,5 @@
-import { record } from './helpers/recorder.js';
-import { getFrontdoorUrl } from '../tests/helpers/salesforce.js';
+import { record } from '../helpers/recorder.js';
+import { getFrontdoorUrl } from '../../tests/helpers/salesforce.js';
 
 await record('course-manager-app', async (page) => {
   // Land on the Lightning home page to establish the session

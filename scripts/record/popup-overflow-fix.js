@@ -1,5 +1,5 @@
-import { record } from './helpers/recorder.js';
-import { getFrontdoorUrl } from '../tests/helpers/salesforce.js';
+import { record } from '../helpers/recorder.js';
+import { getFrontdoorUrl } from '../../tests/helpers/salesforce.js';
 
 await record('popup-overflow-fix', async (page) => {
   await page.goto(getFrontdoorUrl('/lightning/page/home'), { waitUntil: 'commit' });

@@ -1,5 +1,5 @@
-import { record } from './helpers/recorder.js';
-import { getFrontdoorUrl } from '../tests/helpers/salesforce.js';
+import { record } from '../helpers/recorder.js';
+import { getFrontdoorUrl } from '../../tests/helpers/salesforce.js';
 
 await record('setup-object-manager', async (page) => {
   await page.goto(getFrontdoorUrl('/lightning/setup/SetupOneHome/home'), { waitUntil: 'commit' });

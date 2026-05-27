@@ -1,5 +1,5 @@
 import { chromium } from '@playwright/test';
-import { getFrontdoorUrl } from '../tests/helpers/salesforce.js';
+import { getFrontdoorUrl } from '../../tests/helpers/salesforce.js';
 
 const browser = await chromium.launch({ headless: true });
 const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
@@ -27,7 +27,7 @@ await courseRow.waitFor({ state: 'visible', timeout: 20_000 });
 await courseRow.scrollIntoViewIfNeeded();
 await page.waitForTimeout(1000);
 
-await page.screenshot({ path: 'playwright/course-sharing-private.png', fullPage: false });
+await page.screenshot({ path: 'playwright/screenshots/course-sharing-private.png', fullPage: false });
 
 await context.close();
 await browser.close();
