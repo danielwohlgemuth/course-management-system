@@ -1,6 +1,6 @@
 # 015 Add Enrollment related list to Course record page
 
-**Status:** open  
+**Status:** done  
 
 ## What
 
@@ -8,10 +8,10 @@ Add the Enrollment__c related list to the Course__c Lightning record page so tha
 
 ## Acceptance criteria
 
-- [ ] The Course record page layout or Lightning App Builder page includes an Enrollment related list
-- [ ] The related list displays the student name
-- [ ] The related list is visible to users with the Course Admin and Course Instructor permission sets
-- [ ] No existing components or sections on the page are broken
+- [x] The Course record page layout or Lightning App Builder page includes an Enrollment related list
+- [x] The related list displays the student name
+- [x] The related list is visible to users with the Course Admin and Course Instructor permission sets
+- [x] No existing components or sections on the page are broken
 
 ## Notes
 
