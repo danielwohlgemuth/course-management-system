@@ -2,9 +2,21 @@
 
 Quick-scan index of all tasks. One row per task; details live in `tasks/<id>_<slug>.md`.
 
-| ID  | Title | Area | Status |
-|-----|-------|------|--------|
-| — | _no tasks yet_ | | |
+| ID  | Title | Status |
+|-----|-------|--------|
+| [001](tasks/001_course-sharing-private.md) | Change Course sharing model to Private | open |
+| [002](tasks/002_instructor-user-lookup.md) | Replace Instructor text field with User lookup | open |
+| [003](tasks/003_enrollment-junction-object.md) | Create Enrollment junction object (Course ↔ User) | open |
+| [004](tasks/004_admin-permission-set.md) | Create Course Admin permission set | open |
+| [005](tasks/005_instructor-permission-set.md) | Create Course Instructor permission set | open |
+| [006](tasks/006_student-permission-set.md) | Create Course Student permission set | open |
+| [007](tasks/007_course-public-group-trigger.md) | Apex trigger: create/delete public group with Course | open |
+| [008](tasks/008_enrollment-group-membership-trigger.md) | Apex trigger: manage group membership on Enrollment | open |
+| [009](tasks/009_experience-site.md) | Create Experience Site (Build Your Own) | open |
+| [010](tasks/010_calendar-experience-site-home.md) | Add course calendar to Experience Site home page | open |
+| [011](tasks/011_join-course-screen-flow.md) | Build screen flow for joining a course | open |
+| [012](tasks/012_join-course-flow-page.md) | Add Join a Course page to Experience Site | open |
+| [013](tasks/013_my-courses-list-view-page.md) | Add My Courses list view page to Experience Site | open |
 
 ## Statuses
 
