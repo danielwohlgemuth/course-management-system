@@ -18,6 +18,7 @@ Quick-scan index of all tasks. One row per task; details live in `tasks/<id>_<sl
 | [012](tasks/012_join-course-flow-page.md) | Add Join a Course page to Experience Site | open |
 | [013](tasks/013_my-courses-list-view-page.md) | Add My Courses list view page to Experience Site | open |
 | [014](tasks/014_instructor-field-cleanup.md) | Remove legacy Instructor text field and make lookup required | open |
+| [015](tasks/015_enrollment-related-list-course-page.md) | Add Enrollment related list to Course record page | open |
 
 ## Statuses
 
