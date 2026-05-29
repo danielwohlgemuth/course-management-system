@@ -9,6 +9,12 @@
         <field>Course__c.Instructor__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Enrollment__c.Student__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+
 
     <objectPermissions>
         <allowCreate>true</allowCreate>
@@ -26,6 +32,15 @@
         <allowRead>true</allowRead>
         <modifyAllRecords>false</modifyAllRecords>
         <object>TimeSlot__c</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Enrollment__c</object>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
     <tabSettings>

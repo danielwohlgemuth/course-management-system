@@ -76,3 +76,36 @@ The video is saved to `playwright/recordings/<datetime>_<feature-name>.webm`.
 - For LWC components, wait for a specific locator (e.g. `.slot-card`) rather than a fixed timeout for the initial load.
 - `getFrontdoorUrl` calls `sf org open --url-only` — the org must already be authorized via `sf org login web`.
 - Existing scripts in `scripts/record/` cover: app setup, course creation, time slot creation, calendar display, and clicking a course from the calendar. Copy the closest one rather than starting from scratch.
+
+## When stuck on selectors — use Playwright Codegen
+
+If a script keeps failing because a selector doesn't match, don't iterate blindly. Use `playwright codegen` to discover the right selectors by performing the flow manually in a headed browser:
+
+### Steps
+
+1. **Get an authenticated URL** for the starting page:
+   ```bash
+   sf org open --url-only --path /lightning/o/Course__c/list
+   ```
+
+2. **Launch codegen** with that URL:
+   ```bash
+   npx playwright codegen --output scripts/record/<feature-name>-codegen.js "<url from step 1>"
+   ```
+   A Chromium window opens already logged in. A code panel alongside it records every click and fill as Playwright selectors.
+
+3. **Perform the flow manually** in the browser window — navigate, click, fill fields, save. The code panel updates in real time.
+
+4. **Close the browser** when done. The generated code is saved to `scripts/record/<feature-name>-codegen.js`.
+
+5. **Transfer the working selectors** into the final `record()`-based script, replacing any selectors that were failing. Key differences to handle:
+   - `getByLabel` / `getByText` selectors from codegen sometimes only work in headed mode. For headless, prefer `article.filter({ hasText: /^SectionName/ }).getByRole('button', { name: 'New' })` for related-list buttons (see `create-time-slot.js`).
+   - Inline lookup dropdowns: `page.getByText('Option Text').click()` is usually all that's needed.
+
+6. **Delete any test data** created during the codegen session before running the final recording:
+   ```bash
+   sf data query --query "SELECT Id FROM MyObject__c ORDER BY CreatedDate DESC LIMIT 3"
+   sf data delete record --sobject MyObject__c --record-id <id>
+   ```
+
+7. **Run the clean recording** script to produce the final `.webm`.
