@@ -8,7 +8,7 @@ Quick-scan index of all tasks. One row per task; details live in `tasks/<id>_<sl
 | [002](tasks/002_instructor-user-lookup.md) | Add Instructor User lookup field to Course | open |
 | [003](tasks/003_enrollment-junction-object.md) | Create Enrollment junction object (Course ↔ User) | done |
 | [004](tasks/004_admin-permission-set.md) | Create Course Admin permission set | done |
-| [005](tasks/005_instructor-permission-set.md) | Create Course Instructor permission set | open |
+| [005](tasks/005_instructor-permission-set.md) | Create Course Instructor permission set | done |
 | [006](tasks/006_student-permission-set.md) | Create Course Student permission set | open |
 | [007](tasks/007_course-public-group-trigger.md) | Apex trigger: create/delete public group with Course | open |
 | [008](tasks/008_enrollment-group-membership-trigger.md) | Apex trigger: manage group membership on Enrollment | open |

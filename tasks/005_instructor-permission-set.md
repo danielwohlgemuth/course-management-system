@@ -1,6 +1,6 @@
 # 005 Create Course Instructor permission set
 
-**Status:** open
+**Status:** done
 
 ## What
 
@@ -8,13 +8,13 @@ Create a `CourseInstructor` permission set for users who teach courses. Instruct
 
 ## Acceptance criteria
 
-- [ ] `CourseInstructor` permission set created with:
-  - [ ] Create, Read, Edit, Delete on `Course__c` (no View All / Modify All)
-  - [ ] Create, Read, Edit, Delete on `TimeSlot__c` (no View All / Modify All)
-  - [ ] Read on `Enrollment__c`
-  - [ ] Read/Edit on all relevant fields of the above objects
-  - [ ] `Course__c` tab visible
-- [ ] Permission set deployed to org without errors
+- [x] `CourseInstructor` permission set created with:
+  - [x] Create, Read, Edit, Delete on `Course__c` (no View All / Modify All)
+  - [x] Create, Read, Edit, Delete on `TimeSlot__c` (no View All / Modify All)
+  - [x] Read on `Enrollment__c`
+  - [x] Read/Edit on all relevant fields of the above objects
+  - [x] `Course__c` tab visible
+- [x] Permission set deployed to org without errors
 
 ## Notes
 
@@ -22,4 +22,4 @@ Instructors do not need explicit sharing rules on Course because they are record
 
 ## Related migrations
 
-- `migrations/YYYY-MM-DD_instructor-permission-set.md` (add once written)
+- `migrations/2026-06-01_instructor-permission-set.md`
