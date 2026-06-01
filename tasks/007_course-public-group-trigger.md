@@ -1,6 +1,6 @@
 # 007 Apex trigger: create/delete public group with Course
 
-**Status:** open
+**Status:** done
 
 ## What
 
@@ -8,13 +8,13 @@ Create an Apex trigger on `Course__c` that manages a dedicated public group for 
 
 ## Acceptance criteria
 
-- [ ] On Course insert: a `Group` record (type `Regular`) is created named after the course
-- [ ] On Course insert: a `CourseShare` record is created linking the course to the new group with `AccessLevel = Read`
-- [ ] The group Id is stored on the Course record (requires a `Public_Group_Id__c` field on `Course__c`)
-- [ ] On Course delete (before delete): the associated `Group` record is deleted
-- [ ] Trigger is bulkified (handles lists of courses)
-- [ ] Apex test class covers insert and delete scenarios with positive and negative assertions
-- [ ] All tests pass
+- [x] On Course insert: a `Group` record (type `Regular`) is created named after the course
+- [x] On Course insert: a `CourseShare` record is created linking the course to the new group with `AccessLevel = Read`
+- [x] The group Id is stored on the Course record (requires a `Public_Group_Id__c` field on `Course__c`)
+- [x] On Course delete (before delete): the associated `Group` record is deleted
+- [x] Trigger is bulkified (handles lists of courses)
+- [x] Apex test class covers insert and delete scenarios with positive and negative assertions
+- [x] All tests pass
 
 ## Notes
 
@@ -22,4 +22,4 @@ Storing `Public_Group_Id__c` on `Course__c` avoids a SOQL lookup on every delete
 
 ## Related migrations
 
-- `migrations/YYYY-MM-DD_course-public-group-trigger.md` (add once written)
+- [migrations/2026-06-01_course-public-group-trigger.md](../migrations/2026-06-01_course-public-group-trigger.md)
