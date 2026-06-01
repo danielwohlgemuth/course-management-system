@@ -9,10 +9,16 @@
             <stringValue>LightningFlowBuilder</stringValue>
         </value>
     </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
     <start>
         <locationX>176</locationX>
-        <locationY>0</locationY>
+        <locationY>50</locationY>
         <connector>
             <targetReference>Update_UniqueKey</targetReference>
         </connector>
@@ -30,7 +36,7 @@
         <name>Update_UniqueKey</name>
         <label>Update UniqueKey</label>
         <locationX>176</locationX>
-        <locationY>120</locationY>
+        <locationY>278</locationY>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
