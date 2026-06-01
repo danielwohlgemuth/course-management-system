@@ -1,6 +1,6 @@
 # 004 Create Course Admin permission set
 
-**Status:** open
+**Status:** done
 
 ## What
 
@@ -8,16 +8,16 @@ Create a `CourseAdmin` permission set that grants full access to all course-rela
 
 ## Acceptance criteria
 
-- [ ] `CourseAdmin` permission set created with:
-  - [ ] Full CRUD + View All + Modify All on `Course__c`
-  - [ ] Full CRUD + View All + Modify All on `TimeSlot__c`
-  - [ ] Full CRUD + View All + Modify All on `Enrollment__c`
-  - [ ] Read/Edit on all relevant fields of the above objects
-  - [ ] `CourseManager` app visibility
-  - [ ] `Course__c` tab visible
-- [ ] Migration script reassigns all users from `CourseManagerAccess` to `CourseAdmin`
-- [ ] `CourseManagerAccess` permission set removed from the project and undeployed from org
-- [ ] All existing tests pass after migration
+- [x] `CourseAdmin` permission set created with:
+  - [x] Full CRUD + View All + Modify All on `Course__c`
+  - [x] Full CRUD + View All + Modify All on `TimeSlot__c`
+  - [x] Full CRUD + View All + Modify All on `Enrollment__c`
+  - [x] Read/Edit on all relevant fields of the above objects
+  - [x] `CourseManager` app visibility
+  - [x] `Course__c` tab visible
+- [x] Migration script reassigns all users from `CourseManagerAccess` to `CourseAdmin`
+- [x] `CourseManagerAccess` permission set removed from the project and undeployed from org
+- [x] All existing tests pass after migration
 
 ## Notes
 
@@ -25,4 +25,4 @@ Run the migration script (anonymous Apex) before removing `CourseManagerAccess` 
 
 ## Related migrations
 
-- `migrations/YYYY-MM-DD_admin-permission-set.md` (add once written)
+- `migrations/2026-06-01_admin-permission-set.md`
