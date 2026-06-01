@@ -1,6 +1,6 @@
 # 006 Create Course Student permission set
 
-**Status:** open
+**Status:** done
 
 ## What
 
@@ -8,12 +8,12 @@ Create a `CourseStudent` permission set for experience site users who attend cou
 
 ## Acceptance criteria
 
-- [ ] `CourseStudent` permission set created with:
-  - [ ] Read on `Course__c`
-  - [ ] Read on `TimeSlot__c`
-  - [ ] Create, Read on `Enrollment__c` (no Edit, Delete, View All, Modify All)
-  - [ ] Read on all relevant fields of the above objects
-- [ ] Permission set deployed to org without errors
+- [x] `CourseStudent` permission set created with:
+  - [x] Read on `Course__c`
+  - [x] Read on `TimeSlot__c`
+  - [x] Create, Read on `Enrollment__c` (no Edit, Delete, View All, Modify All)
+  - [x] Read on all relevant fields of the above objects
+- [x] Permission set deployed to org without errors
 
 ## Notes
 
@@ -21,4 +21,4 @@ Students get Course/TimeSlot read access only for records shared with them via t
 
 ## Related migrations
 
-- `migrations/YYYY-MM-DD_student-permission-set.md` (add once written)
+- `migrations/2026-06-01_student-permission-set.md`
