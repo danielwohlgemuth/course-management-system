@@ -1,6 +1,6 @@
 # 008 Apex trigger: manage group membership on Enrollment
 
-**Status:** open
+**Status:** done
 
 ## What
 
@@ -8,11 +8,11 @@ Create an Apex trigger on `Enrollment__c` that keeps public group membership in 
 
 ## Acceptance criteria
 
-- [ ] On Enrollment insert: a `GroupMember` record is created adding `Student__c` to the course's `Public_Group_Id__c` group
-- [ ] On Enrollment delete (before delete): the corresponding `GroupMember` record is deleted
-- [ ] Trigger is bulkified
-- [ ] Apex test class covers insert and delete scenarios, asserting group membership is added and removed correctly
-- [ ] All tests pass
+- [x] On Enrollment insert: a `GroupMember` record is created adding `Student__c` to the course's `Public_Group_Id__c` group
+- [x] On Enrollment delete (before delete): the corresponding `GroupMember` record is deleted
+- [x] Trigger is bulkified
+- [x] Apex test class covers insert and delete scenarios, asserting group membership is added and removed correctly
+- [x] All tests pass
 
 ## Notes
 
