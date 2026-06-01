@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Student_Cannot_Change</fullName>
+    <active>true</active>
+    <description>Prevents Student__c from being changed after the Enrollment record is created.</description>
+    <errorConditionFormula>AND(NOT(ISNEW()), ISCHANGED(Student__c))</errorConditionFormula>
+    <errorDisplayField>Student__c</errorDisplayField>
+    <errorMessage>Student cannot be changed after enrollment is created.</errorMessage>
+</ValidationRule>

@@ -1,6 +1,6 @@
 # 016 Enrollment UniqueKey flow and validation rules
 
-**Status:** open  
+**Status:** done  
 
 ## What
 
@@ -8,11 +8,15 @@ Add an after-insert Flow on the Enrollment object that populates the `UniqueKey_
 
 ## Acceptance criteria
 
-- [ ] After-insert Flow sets `UniqueKey__c` on new Enrollment records (e.g. concatenation of Course Id and Student Id)
-- [ ] Validation rule blocks changes to `Student__c` on existing Enrollment records
-- [ ] Validation rule blocks changes to `Course__c` on existing Enrollment records
-- [ ] Existing Enrollment records are unaffected by the Flow (only triggers on insert)
-- [ ] All Apex tests continue to pass
+- [x] After-insert Flow sets `UniqueKey__c` on new Enrollment records (e.g. concatenation of Course Id and Student Id)
+- [x] Validation rule blocks changes to `Student__c` on existing Enrollment records
+- [x] Validation rule blocks changes to `Course__c` on existing Enrollment records
+- [x] Existing Enrollment records are unaffected by the Flow (only triggers on insert)
+- [x] All Apex tests continue to pass
+
+## Related migrations
+
+- `migrations/2026-06-01_enrollment-uniquekey-flow-and-validation.md`
 
 ## Notes
 

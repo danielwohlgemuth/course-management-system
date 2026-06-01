@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Course_Cannot_Change</fullName>
+    <active>true</active>
+    <description>Prevents Course__c from being changed after the Enrollment record is created.</description>
+    <errorConditionFormula>AND(NOT(ISNEW()), ISCHANGED(Course__c))</errorConditionFormula>
+    <errorDisplayField>Course__c</errorDisplayField>
+    <errorMessage>Course cannot be changed after enrollment is created.</errorMessage>
+</ValidationRule>

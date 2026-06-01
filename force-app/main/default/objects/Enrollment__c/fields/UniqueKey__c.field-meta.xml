@@ -3,10 +3,10 @@
     <fullName>UniqueKey__c</fullName>
     <label>Unique Key</label>
     <type>Text</type>
-    <length>36</length>
+    <length>40</length>
     <externalId>true</externalId>
     <unique>true</unique>
     <caseSensitive>false</caseSensitive>
     <required>false</required>
-    <description>Populated by trigger as CourseId_StudentId to enforce one enrollment per student per course.</description>
+    <description>Populated by the Enrollment Set UniqueKey flow as CourseId_StudentId to enforce one enrollment per student per course.</description>
 </CustomField>
