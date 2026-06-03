@@ -2,11 +2,12 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>Course__c</fullName>
     <label>Course</label>
-    <type>MasterDetail</type>
     <referenceTo>Course__c</referenceTo>
     <relationshipLabel>Enrollments</relationshipLabel>
     <relationshipName>Enrollments</relationshipName>
     <relationshipOrder>0</relationshipOrder>
     <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
     <writeRequiresMasterRead>false</writeRequiresMasterRead>
 </CustomField>

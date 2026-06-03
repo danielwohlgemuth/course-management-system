@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>UniqueKey__c</fullName>
-    <label>Unique Key</label>
-    <type>Text</type>
-    <length>40</length>
-    <externalId>true</externalId>
-    <unique>true</unique>
     <caseSensitive>false</caseSensitive>
-    <required>false</required>
     <description>Populated by the Enrollment Set UniqueKey flow as CourseId_StudentId to enforce one enrollment per student per course.</description>
+    <externalId>true</externalId>
+    <label>Unique Key</label>
+    <length>40</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>true</unique>
 </CustomField>

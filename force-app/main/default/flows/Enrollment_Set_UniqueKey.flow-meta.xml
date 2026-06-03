@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>66.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
     <description>Sets UniqueKey__c to CourseId_StudentId after an Enrollment record is inserted.</description>
+    <formulas>
+        <name>UniqueKeyFormula</name>
+        <dataType>String</dataType>
+        <expression>{!$Record.Course__c} &amp; &quot;_&quot; &amp; {!$Record.Student__c}</expression>
+    </formulas>
     <label>Enrollment Set UniqueKey</label>
     <processMetadataValues>
         <name>BuilderType</name>
@@ -16,27 +22,11 @@
         </value>
     </processMetadataValues>
     <processType>AutoLaunchedFlow</processType>
-    <start>
-        <locationX>176</locationX>
-        <locationY>50</locationY>
-        <connector>
-            <targetReference>Update_UniqueKey</targetReference>
-        </connector>
-        <object>Enrollment__c</object>
-        <recordTriggerType>Create</recordTriggerType>
-        <triggerType>RecordAfterSave</triggerType>
-    </start>
-    <status>Active</status>
-    <formulas>
-        <name>UniqueKeyFormula</name>
-        <dataType>String</dataType>
-        <expression>{!$Record.Course__c} &amp; "_" &amp; {!$Record.Student__c}</expression>
-    </formulas>
     <recordUpdates>
         <name>Update_UniqueKey</name>
         <label>Update UniqueKey</label>
-        <locationX>176</locationX>
-        <locationY>278</locationY>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
         <filterLogic>and</filterLogic>
         <filters>
             <field>Id</field>
@@ -53,4 +43,15 @@
         </inputAssignments>
         <object>Enrollment__c</object>
     </recordUpdates>
+    <start>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Update_UniqueKey</targetReference>
+        </connector>
+        <object>Enrollment__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
 </Flow>
