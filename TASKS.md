@@ -12,7 +12,7 @@ Quick-scan index of all tasks. One row per task; details live in `tasks/<id>_<sl
 | [006](tasks/006_student-permission-set.md) | Create Course Student permission set | done |
 | [007](tasks/007_course-public-group-trigger.md) | Apex trigger: create/delete public group with Course | done |
 | [008](tasks/008_enrollment-group-membership-trigger.md) | Apex trigger: manage group membership on Enrollment | done |
-| [009](tasks/009_experience-site.md) | Create Experience Site (Build Your Own) | open |
+| [009](tasks/009_experience-site.md) | Create Experience Site (Build Your Own) | done |
 | [010](tasks/010_calendar-experience-site-home.md) | Add course calendar to Experience Site home page | open |
 | [011](tasks/011_join-course-screen-flow.md) | Build screen flow for joining a course | open |
 | [012](tasks/012_join-course-flow-page.md) | Add Join a Course page to Experience Site | open |

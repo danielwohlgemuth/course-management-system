@@ -1,6 +1,6 @@
 # 009 Create Experience Site (Build Your Own)
 
-**Status:** open
+**Status:** done
 
 ## What
 
@@ -8,12 +8,12 @@ Create a Salesforce Experience Site using the "Build Your Own" template to serve
 
 ## Acceptance criteria
 
-- [ ] Experience Site created with "Build Your Own" template
-- [ ] Site is activated and accessible via its URL
-- [ ] `CourseInstructor` permission set assigned to the site
-- [ ] `CourseStudent` permission set assigned to the site
-- [ ] Basic navigation configured (Home, Course Calendar, Join a Course, My Courses)
-- [ ] Guest user access is disabled (login required)
+- [x] Experience Site created with "Build Your Own" template
+- [x] Site is activated and accessible via its URL
+- [x] `CourseInstructor` permission set assigned to the site
+- [x] `CourseStudent` permission set assigned to the site
+- [x] Basic navigation configured (Home, Course Calendar, Join a Course, My Courses)
+- [x] Guest user access is disabled (login required)
 
 ## Notes
 
@@ -21,4 +21,4 @@ Navigation items for Join a Course (task 012) and My Courses (task 013) pages ar
 
 ## Related migrations
 
-- `migrations/YYYY-MM-DD_experience-site.md` (add once written)
+- `migrations/2026-06-03_experience-site.md`
