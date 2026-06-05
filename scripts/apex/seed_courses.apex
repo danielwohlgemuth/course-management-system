@@ -7,8 +7,8 @@ List<Course__c> courses = new List<Course__c>{
     new Course__c(Course_Name__c = 'Biology 101',                Instructor__c = 'Dr. Priya Nair'),
     new Course__c(Course_Name__c = 'Creative Writing',           Instructor__c = 'Ms. Sandra Voss'),
     new Course__c(Course_Name__c = 'Introduction to Programming', Instructor__c = 'Mr. Carlos Rivera'),
-    new Course__c(Course_Name__c = 'Art & Design Fundamentals',  Instructor__c = 'Ms. Yuki Tanaka'),
-    new Course__c(Course_Name__c = 'Physical Education',         Instructor__c = 'Coach Dan Fischer')
+    new Course__c(Course_Name__c = 'Art & Design Fundamentals',  Instructor__c = 'Ms. Sandra Voss'),
+    new Course__c(Course_Name__c = 'Physical Education',         Instructor__c = 'Dr. Priya Nair')
 };
 insert courses;
 
