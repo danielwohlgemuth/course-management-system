@@ -1,6 +1,6 @@
 # 002 Add Instructor User lookup field to Course
 
-**Status:** open
+**Status:** done
 
 ## What
 
@@ -8,12 +8,12 @@ Add a new `Instructor_User__c` Lookup(User) field to `Course__c` alongside the e
 
 ## Acceptance criteria
 
-- [ ] `Instructor_User__c` Lookup(User) field created on `Course__c` with label "Instructor"
-- [ ] Field is not required
-- [ ] Migration script matches `Instructor__c` text values to User records by name or email and populates `Instructor_User__c`
-- [ ] Unmatched values are logged for manual review
-- [ ] Original `Instructor__c` text field is left untouched
-- [ ] Change deployed and all existing tests pass
+- [x] `Instructor_User__c` Lookup(User) field created on `Course__c` with label "Instructor"
+- [x] Field is not required
+- [x] Migration script matches `Instructor__c` text values to User records by name or email and populates `Instructor_User__c`
+- [x] Unmatched values are logged for manual review
+- [x] Original `Instructor__c` text field is left untouched
+- [x] Change deployed and all existing tests pass
 
 ## Notes
 
@@ -21,4 +21,4 @@ Both fields intentionally coexist after this task. Task 014 handles removing the
 
 ## Related migrations
 
-- `migrations/YYYY-MM-DD_instructor-user-lookup.md` (add once written)
+- `migrations/2026-06-10_instructor-user-lookup.md`
