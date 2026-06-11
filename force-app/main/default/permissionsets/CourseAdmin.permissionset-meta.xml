@@ -7,11 +7,6 @@
     <description>Full access to all course-related objects for course administrators</description>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Course__c.Instructor__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Course__c.Instructor_User__c</field>
         <readable>true</readable>
     </fieldPermissions>

@@ -2,7 +2,7 @@
 private class CourseHandlerTest {
     @isTest
     static void testInsertCreatesGroupAndShare() {
-        Course__c course = new Course__c(Course_Name__c = 'Test Course');
+        Course__c course = new Course__c(Course_Name__c = 'Test Course', Instructor_User__c = UserInfo.getUserId());
 
         Test.startTest();
         insert course;
@@ -27,7 +27,7 @@ private class CourseHandlerTest {
 
     @isTest
     static void testDeleteRemovesGroup() {
-        Course__c course = new Course__c(Course_Name__c = 'Delete Test Course');
+        Course__c course = new Course__c(Course_Name__c = 'Delete Test Course', Instructor_User__c = UserInfo.getUserId());
         insert course;
 
         course = [SELECT Id, Public_Group_Id__c FROM Course__c WHERE Id = :course.Id];
@@ -46,7 +46,7 @@ private class CourseHandlerTest {
     static void testBulkInsert() {
         List<Course__c> courses = new List<Course__c>();
         for (Integer i = 0; i < 10; i++) {
-            courses.add(new Course__c(Course_Name__c = 'Bulk Course ' + i));
+            courses.add(new Course__c(Course_Name__c = 'Bulk Course ' + i, Instructor_User__c = UserInfo.getUserId()));
         }
 
         Test.startTest();
@@ -66,7 +66,7 @@ private class CourseHandlerTest {
     @isTest
     static void testDeleteWithNullGroupIdIsNoOp() {
         // Defensive: onBeforeDelete should not throw when Public_Group_Id__c is null
-        Course__c course = new Course__c(Course_Name__c = 'Null Group Course');
+        Course__c course = new Course__c(Course_Name__c = 'Null Group Course', Instructor_User__c = UserInfo.getUserId());
         insert course;
 
         Course__c stub = new Course__c(Id = course.Id, Public_Group_Id__c = null);

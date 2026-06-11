@@ -3,8 +3,9 @@ private class CourseCalendarControllerTest {
 
     @TestSetup
     static void makeData() {
-        Course__c c1 = new Course__c(Course_Name__c = 'Algebra', Instructor__c = 'Smith');
-        Course__c c2 = new Course__c(Course_Name__c = 'Biology', Instructor__c = 'Jones');
+        Id userId = UserInfo.getUserId();
+        Course__c c1 = new Course__c(Course_Name__c = 'Algebra', Instructor_User__c = userId);
+        Course__c c2 = new Course__c(Course_Name__c = 'Biology', Instructor_User__c = userId);
         insert new List<Course__c>{ c1, c2 };
         insert new List<TimeSlot__c>{
             new TimeSlot__c(Course__c = c1.Id, Day_of_Week__c = 'Monday',

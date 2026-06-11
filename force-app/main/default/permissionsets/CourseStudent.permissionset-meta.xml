@@ -3,11 +3,6 @@
     <description>Access for course students: read Course and TimeSlot records shared with them, create and read their own Enrollments</description>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Course__c.Instructor__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Course__c.Instructor_User__c</field>
         <readable>true</readable>
     </fieldPermissions>

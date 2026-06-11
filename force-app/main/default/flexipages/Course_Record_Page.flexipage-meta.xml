@@ -31,8 +31,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Instructor__c</fieldItem>
-                <identifier>RecordInstructor_cField</identifier>
+                <fieldItem>Record.Instructor_User__c</fieldItem>
+                <identifier>RecordInstructor_User_cField_header</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-33b44ac7-556c-4ef3-9e9a-6cedca4ebfb6</name>
@@ -75,16 +75,6 @@
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>none</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Instructor__c</fieldItem>
-                <identifier>RecordInstructor_cField2</identifier>
-            </fieldInstance>
-        </itemInstances>
         <itemInstances>
             <fieldInstance>
                 <fieldInstanceProperties>

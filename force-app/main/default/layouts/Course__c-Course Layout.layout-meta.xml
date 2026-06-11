@@ -17,8 +17,8 @@
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Instructor__c</field>
+                <behavior>Required</behavior>
+                <field>Instructor_User__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

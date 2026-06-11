@@ -170,7 +170,7 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
                 key: slot.Id,
                 recordId: slot.Course__c,
                 courseName: slot.Course__r.Course_Name__c,
-                instructor: slot.Course__r.Instructor__c,
+                instructor: slot.Course__r.Instructor_User__r?.Name,
                 timeLabel: `${formatTime(slot.Start_Time__c)} – ${formatTime(slot.End_Time__c)}`,
                 color,
                 swatchStyle: `background-color:${color};`,

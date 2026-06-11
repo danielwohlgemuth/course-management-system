@@ -25,10 +25,11 @@ private class EnrollmentHandlerTest {
             insert student;
         }
 
+        Id userId = UserInfo.getUserId();
         List<Course__c> courses = new List<Course__c>();
-        courses.add(new Course__c(Course_Name__c = 'Enrollment Handler Test Course'));
+        courses.add(new Course__c(Course_Name__c = 'Enrollment Handler Test Course', Instructor_User__c = userId));
         for (Integer i = 0; i < 10; i++) {
-            courses.add(new Course__c(Course_Name__c = 'Bulk Enrollment Course ' + i));
+            courses.add(new Course__c(Course_Name__c = 'Bulk Enrollment Course ' + i, Instructor_User__c = userId));
         }
         insert courses;
 

@@ -15,7 +15,7 @@ const MOCK_SLOTS = [
         Course__r: {
             Name: 'CRS-0001',
             Course_Name__c: 'Algebra I',
-            Instructor__c: 'Smith',
+            Instructor_User__r: { Name: 'Smith' },
         },
     },
 ];
