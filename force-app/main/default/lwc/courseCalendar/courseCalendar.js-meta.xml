@@ -5,6 +5,7 @@
     <targets>
         <target>lightning__AppPage</target>
         <target>lightning__HomePage</target>
+        <target>lightningCommunity__Default</target>
     </targets>
     <masterLabel>Course Calendar</masterLabel>
     <description>Weekly calendar view of all course time slots</description>

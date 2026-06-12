@@ -20,12 +20,9 @@
           },
           "children" : [ {
             "children" : [ {
-              "attributes" : {
-                "imageInfos" : "",
-                "richTextValue" : "<div style=\"display: flex; justify-content: center; align-items: center; margin: 50px 0; flex-direction: column; text-align: center;\"><div style=\"background-image: url(assets/img/desert.svg) !important; background-size: cover; background-position: center; height: 300px; width: 100%; max-width: 600px; min-width: 300px;\"></div><h1 class=\"slds-text-heading_medium slds-p-bottom_x-small\">Start Building Your Page</h1> <div>Drag and drop a component into the content slots.</div></div>"
-              },
-              "definition" : "community_builder:htmlEditor",
-              "id" : "be058ab7-818d-4e54-86d0-0f8450d64146",
+              "attributes" : {},
+              "definition" : "c:courseCalendar",
+              "id" : "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
               "type" : "component"
             } ],
             "id" : "746d3b80-be91-4b92-ac21-d9166ed06fc1",

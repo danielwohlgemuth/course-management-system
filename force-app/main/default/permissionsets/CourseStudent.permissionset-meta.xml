@@ -21,6 +21,10 @@
         <field>Enrollment__c.UniqueKey__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <classAccesses>
+        <apexClass>CourseCalendarController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Course Student</label>
     <objectPermissions>

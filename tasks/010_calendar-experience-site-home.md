@@ -1,6 +1,6 @@
 # 010 Add course calendar to Experience Site home page
 
-**Status:** open
+**Status:** done
 
 ## What
 
