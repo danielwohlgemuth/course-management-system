@@ -88,24 +88,26 @@ If a script keeps failing because a selector doesn't match, don't iterate blindl
    sf org open --url-only --path /lightning/o/Course__c/list
    ```
 
-2. **Launch codegen** with that URL:
+2. **Plan the steps** you will perform in the browser before launching — write them out so you can execute them quickly without hesitation once codegen is running. Codegen records every interaction, so wandering or correcting mistakes produces noisy output.
+
+3. **Launch codegen** with that URL:
    ```bash
    npx playwright codegen --output scripts/record/<feature-name>-codegen.js "<url from step 1>"
    ```
    A Chromium window opens already logged in. A code panel alongside it records every click and fill as Playwright selectors.
 
-3. **Perform the flow manually** in the browser window — navigate, click, fill fields, save. The code panel updates in real time.
+4. **Perform the flow manually** in the browser window — navigate, click, fill fields, save. The code panel updates in real time.
 
-4. **Close the browser** when done. The generated code is saved to `scripts/record/<feature-name>-codegen.js`.
+5. **Close the browser** when done. The generated code is saved to `scripts/record/<feature-name>-codegen.js`.
 
-5. **Transfer the working selectors** into the final `record()`-based script, replacing any selectors that were failing. Key differences to handle:
+6. **Transfer the working selectors** into the final `record()`-based script, replacing any selectors that were failing. Key differences to handle:
    - `getByLabel` / `getByText` selectors from codegen sometimes only work in headed mode. For headless, prefer `article.filter({ hasText: /^SectionName/ }).getByRole('button', { name: 'New' })` for related-list buttons (see `create-time-slot.js`).
    - Inline lookup dropdowns: `page.getByText('Option Text').click()` is usually all that's needed.
 
-6. **Delete any test data** created during the codegen session before running the final recording:
+7. **Delete any test data** created during the codegen session before running the final recording:
    ```bash
    sf data query --query "SELECT Id FROM MyObject__c ORDER BY CreatedDate DESC LIMIT 3"
    sf data delete record --sobject MyObject__c --record-id <id>
    ```
 
-7. **Run the clean recording** script to produce the final `.webm`.
+8. **Run the clean recording** script to produce the final `.webm`.

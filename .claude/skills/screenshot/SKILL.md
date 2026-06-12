@@ -77,3 +77,35 @@ Screenshots are saved to `playwright/screenshots/<datetime>_<feature-name>.png`.
 - Lightning Object Manager pages (e.g. Validation Rules, Fields) are full Lightning pages — no iframe needed.
 - Flow Builder takes several seconds to render its canvas. Wait at least 7 s after navigation before snapping.
 - Existing scripts in `scripts/screenshot/` cover: permission sets list, course list, enrollment related list.
+
+## When stuck on selectors — use Playwright Codegen
+
+If a script keeps failing because a selector doesn't match, don't iterate blindly. Use `playwright codegen` to discover the right selectors by performing the flow manually in a headed browser:
+
+### Steps
+
+1. **Get an authenticated URL** for the starting page:
+   ```bash
+   sf org open --url-only --path /lightning/o/Course__c/list
+   ```
+
+2. **Plan the steps** you will perform in the browser before launching — write them out so you can execute them quickly without hesitation once codegen is running. Codegen records every interaction, so wandering or correcting mistakes produces noisy output.
+
+3. **Launch codegen** with that URL:
+   ```bash
+   npx playwright codegen --output scripts/screenshot/<feature-name>-codegen.js "<url from step 1>"
+   ```
+   A Chromium window opens already logged in. A code panel alongside it records every click and fill as Playwright selectors.
+
+4. **Perform the flow manually** in the browser window — navigate to the page you want to screenshot. The code panel updates in real time.
+
+5. **Close the browser** when done. The generated code is saved to `scripts/screenshot/<feature-name>-codegen.js`.
+
+6. **Transfer the working selectors** into the final screenshot script, replacing any selectors that were failing. Key differences to handle:
+   - `getByLabel` / `getByText` selectors from codegen sometimes only work in headed mode. For headless, prefer attribute-based or role-based selectors.
+   - Inline lookup dropdowns: `page.getByText('Option Text').click()` is usually all that's needed.
+
+7. **Delete the codegen file** once the working selectors have been transferred:
+   ```bash
+   rm scripts/screenshot/<feature-name>-codegen.js
+   ```
