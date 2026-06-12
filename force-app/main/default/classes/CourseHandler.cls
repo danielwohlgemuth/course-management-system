@@ -17,9 +17,61 @@ public without sharing class CourseHandler {
                 AccessLevel = 'Read',
                 RowCause = Schema.Course__Share.RowCause.Manual
             ));
+            // Share with the instructor so they can see and edit their course.
+            // Skip when instructor is the record owner — they already have full access.
+            if (newCourses[i].Instructor_User__c != null &&
+                newCourses[i].Instructor_User__c != newCourses[i].OwnerId) {
+                shares.add(new Course__Share(
+                    ParentId = newCourses[i].Id,
+                    UserOrGroupId = newCourses[i].Instructor_User__c,
+                    AccessLevel = 'Edit',
+                    RowCause = Schema.Course__Share.RowCause.Manual
+                ));
+            }
         }
         update toUpdate;
         insert shares;
+    }
+
+    public static void onAfterUpdate(List<Course__c> newCourses, Map<Id, Course__c> oldMap) {
+        Map<Id, Id> oldInstructorByCourse = new Map<Id, Id>();
+        List<Course__Share> newShares = new List<Course__Share>();
+
+        for (Course__c course : newCourses) {
+            Course__c old = oldMap.get(course.Id);
+            if (course.Instructor_User__c == old.Instructor_User__c) continue;
+
+            if (old.Instructor_User__c != null && old.Instructor_User__c != old.OwnerId) {
+                oldInstructorByCourse.put(course.Id, old.Instructor_User__c);
+            }
+            if (course.Instructor_User__c != null && course.Instructor_User__c != course.OwnerId) {
+                newShares.add(new Course__Share(
+                    ParentId = course.Id,
+                    UserOrGroupId = course.Instructor_User__c,
+                    AccessLevel = 'Edit',
+                    RowCause = Schema.Course__Share.RowCause.Manual
+                ));
+            }
+        }
+
+        if (!oldInstructorByCourse.isEmpty()) {
+            Set<Id> oldInstructorIds = new Set<Id>(oldInstructorByCourse.values());
+            List<Course__Share> toDelete = new List<Course__Share>();
+            for (Course__Share cs : [
+                SELECT Id, ParentId, UserOrGroupId
+                FROM Course__Share
+                WHERE ParentId IN :oldInstructorByCourse.keySet()
+                  AND UserOrGroupId IN :oldInstructorIds
+                  AND RowCause = 'Manual'
+            ]) {
+                if (oldInstructorByCourse.get(cs.ParentId) == cs.UserOrGroupId) {
+                    toDelete.add(cs);
+                }
+            }
+            if (!toDelete.isEmpty()) delete toDelete;
+        }
+
+        if (!newShares.isEmpty()) insert newShares;
     }
 
     public static void onBeforeDelete(List<Course__c> oldCourses) {
