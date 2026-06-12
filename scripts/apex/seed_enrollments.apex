@@ -8,7 +8,7 @@ for (Course__c c : [SELECT Id, Course_Name__c FROM Course__c WHERE Course_Name__
 }
 
 Map<String, Id> studentIds = new Map<String, Id>();
-for (User u : [SELECT Id, Name FROM User WHERE Name IN ('Alice Chen', 'Ben Torres', 'Chloe Kim', 'David Patel', 'Emma Fischer')]) {
+for (User u : [SELECT Id, Name FROM User WHERE Name IN ('Alice Chen', 'Ben Torres', 'Chloe Kim')]) {
     studentIds.put(u.Name, u.Id);
 }
 
@@ -26,17 +26,7 @@ List<Enrollment__c> enrollments = new List<Enrollment__c>{
     // Chloe: Algebra, Creative Writing, Physical Education
     new Enrollment__c(Course__c = courseIds.get('Introduction to Algebra'),     Student__c = studentIds.get('Chloe Kim')),
     new Enrollment__c(Course__c = courseIds.get('Creative Writing'),            Student__c = studentIds.get('Chloe Kim')),
-    new Enrollment__c(Course__c = courseIds.get('Physical Education'),          Student__c = studentIds.get('Chloe Kim')),
-
-    // David: World History, Biology, Creative Writing
-    new Enrollment__c(Course__c = courseIds.get('World History'),               Student__c = studentIds.get('David Patel')),
-    new Enrollment__c(Course__c = courseIds.get('Biology 101'),                 Student__c = studentIds.get('David Patel')),
-    new Enrollment__c(Course__c = courseIds.get('Creative Writing'),            Student__c = studentIds.get('David Patel')),
-
-    // Emma: Algebra, Programming, Art & Design
-    new Enrollment__c(Course__c = courseIds.get('Introduction to Algebra'),     Student__c = studentIds.get('Emma Fischer')),
-    new Enrollment__c(Course__c = courseIds.get('Introduction to Programming'), Student__c = studentIds.get('Emma Fischer')),
-    new Enrollment__c(Course__c = courseIds.get('Art & Design Fundamentals'),   Student__c = studentIds.get('Emma Fischer'))
+    new Enrollment__c(Course__c = courseIds.get('Physical Education'),          Student__c = studentIds.get('Chloe Kim'))
 };
 insert enrollments;
 

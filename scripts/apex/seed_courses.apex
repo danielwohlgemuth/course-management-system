@@ -1,19 +1,21 @@
 // Creates representative Course__c and TimeSlot__c records.
-// Run via: SFDX: Execute Anonymous Apex with Editor Contents
+// Run via: sf apex run --file scripts/apex/seed_courses.apex
 
 Map<String, Id> instructorIds = new Map<String, Id>();
-for (User u : [SELECT Id, Name FROM User WHERE Name IN ('Elena Marsh', 'James Okafor', 'Priya Nair', 'Sandra Voss', 'Carlos Rivera')]) {
+for (User u : [SELECT Id, Name FROM User WHERE Name IN ('Elena Marsh', 'James Okafor')]) {
     instructorIds.put(u.Name, u.Id);
 }
 
+// Elena: Algebra, Biology 101, Programming, Physical Education (4 courses)
+// James: World History, Creative Writing, Art & Design (3 courses)
 List<Course__c> courses = new List<Course__c>{
     new Course__c(Course_Name__c = 'Introduction to Algebra',     Instructor_User__c = instructorIds.get('Elena Marsh')),
     new Course__c(Course_Name__c = 'World History',               Instructor_User__c = instructorIds.get('James Okafor')),
-    new Course__c(Course_Name__c = 'Biology 101',                 Instructor_User__c = instructorIds.get('Priya Nair')),
-    new Course__c(Course_Name__c = 'Creative Writing',            Instructor_User__c = instructorIds.get('Sandra Voss')),
-    new Course__c(Course_Name__c = 'Introduction to Programming', Instructor_User__c = instructorIds.get('Carlos Rivera')),
-    new Course__c(Course_Name__c = 'Art & Design Fundamentals',   Instructor_User__c = instructorIds.get('Sandra Voss')),
-    new Course__c(Course_Name__c = 'Physical Education',          Instructor_User__c = instructorIds.get('Priya Nair'))
+    new Course__c(Course_Name__c = 'Biology 101',                 Instructor_User__c = instructorIds.get('Elena Marsh')),
+    new Course__c(Course_Name__c = 'Creative Writing',            Instructor_User__c = instructorIds.get('James Okafor')),
+    new Course__c(Course_Name__c = 'Introduction to Programming', Instructor_User__c = instructorIds.get('Elena Marsh')),
+    new Course__c(Course_Name__c = 'Art & Design Fundamentals',   Instructor_User__c = instructorIds.get('James Okafor')),
+    new Course__c(Course_Name__c = 'Physical Education',          Instructor_User__c = instructorIds.get('Elena Marsh'))
 };
 insert courses;
 

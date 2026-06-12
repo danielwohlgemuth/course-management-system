@@ -1,4 +1,4 @@
-// Creates Customer Community Plus Users for all 5 course instructors.
+// Creates Customer Community Plus Users for 2 course instructors.
 // Run via: sf apex run --file scripts/apex/create_instructors.apex
 //
 // Next step: assign the CourseInstructor permission set by running:
@@ -7,10 +7,10 @@
 Account acct = new Account(Name = 'Course Management');
 insert acct;
 
-List<String> firstNames = new List<String>{'Elena',      'James',       'Priya',     'Sandra',     'Carlos'};
-List<String> lastNames  = new List<String>{'Marsh',      'Okafor',      'Nair',       'Voss',       'Rivera'};
-List<String> aliases    = new List<String>{'emarsh',     'jokafor',     'pnair',      'svoss',      'crivera'};
-List<String> nicknames  = new List<String>{'ElenaMarsh', 'JamesOkafor', 'PriyaNair',  'SandraVoss', 'CarlosRivera'};
+List<String> firstNames = new List<String>{'Elena',      'James'};
+List<String> lastNames  = new List<String>{'Marsh',      'Okafor'};
+List<String> aliases    = new List<String>{'emarsh',     'jokafor'};
+List<String> nicknames  = new List<String>{'ElenaMarsh', 'JamesOkafor'};
 
 List<Contact> contacts = new List<Contact>();
 for (Integer i = 0; i < firstNames.size(); i++) {

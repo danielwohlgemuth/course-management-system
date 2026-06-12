@@ -1,7 +1,7 @@
-// Assigns the CourseStudent permission set to all Customer Community Users.
+// Assigns the CourseStudent permission set to all Customer Community Plus Users.
 // Run via: sf apex run --file scripts/apex/assign_student_permission_set.apex
 
-Id profileId = [SELECT Id FROM Profile WHERE Name = 'Customer Community User' LIMIT 1].Id;
+Id profileId = [SELECT Id FROM Profile WHERE Name = 'Customer Community Plus User' LIMIT 1].Id;
 Id psId      = [SELECT Id FROM PermissionSet WHERE Name = 'CourseStudent' LIMIT 1].Id;
 
 List<User> students = [SELECT Id FROM User WHERE ProfileId = :profileId AND IsActive = true];

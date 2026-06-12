@@ -1,4 +1,4 @@
-// Creates Customer Community Users for all 5 course students.
+// Creates Customer Community Plus Users for 3 course students.
 // Run via: sf apex run --file scripts/apex/create_students.apex
 //
 // Next step: assign the CourseStudent permission set by running:
@@ -13,10 +13,10 @@ if (accts.isEmpty()) {
     acct = accts[0];
 }
 
-List<String> firstNames = new List<String>{'Alice',     'Ben',        'Chloe',   'David',      'Emma'};
-List<String> lastNames  = new List<String>{'Chen',      'Torres',     'Kim',     'Patel',      'Fischer'};
-List<String> aliases    = new List<String>{'achen',     'btorres',    'ckim',    'dpatel',     'efischer'};
-List<String> nicknames  = new List<String>{'AliceChen', 'BenTorres',  'ChloeKim','DavidPatel', 'EmmaFischer'};
+List<String> firstNames = new List<String>{'Alice',     'Ben',       'Chloe'};
+List<String> lastNames  = new List<String>{'Chen',      'Torres',    'Kim'};
+List<String> aliases    = new List<String>{'achen',     'btorres',   'ckim'};
+List<String> nicknames  = new List<String>{'AliceChen', 'BenTorres', 'ChloeKim'};
 
 List<Contact> contacts = new List<Contact>();
 for (Integer i = 0; i < firstNames.size(); i++) {
@@ -29,7 +29,7 @@ for (Integer i = 0; i < firstNames.size(); i++) {
 }
 insert contacts;
 
-Id profileId = [SELECT Id FROM Profile WHERE Name = 'Customer Community User' LIMIT 1].Id;
+Id profileId = [SELECT Id FROM Profile WHERE Name = 'Customer Community Plus User' LIMIT 1].Id;
 
 List<User> users = new List<User>();
 for (Integer i = 0; i < firstNames.size(); i++) {
