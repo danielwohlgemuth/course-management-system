@@ -4,7 +4,7 @@
 // Next step: assign the CourseInstructor permission set by running:
 //   sf apex run --file scripts/apex/assign_instructor_permission_set.apex
 
-Account acct = new Account(Name = 'Course Management Instructors');
+Account acct = new Account(Name = 'Course Management');
 insert acct;
 
 List<String> firstNames = new List<String>{'Elena',      'James',       'Priya',     'Sandra',     'Carlos'};
