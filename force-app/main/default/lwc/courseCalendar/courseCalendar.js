@@ -80,7 +80,7 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
         const recordId = event.currentTarget.dataset.recordId;
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',
-            attributes: { recordId, actionName: 'view' }
+            attributes: { recordId, objectApiName: 'Course__c', actionName: 'view' }
         });
     }
 
@@ -110,7 +110,7 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
         this.activeOverlapSlots = null;
         this[NavigationMixin.Navigate]({
             type: 'standard__recordPage',
-            attributes: { recordId, actionName: 'view' }
+            attributes: { recordId, objectApiName: 'Course__c', actionName: 'view' }
         });
     }
 
