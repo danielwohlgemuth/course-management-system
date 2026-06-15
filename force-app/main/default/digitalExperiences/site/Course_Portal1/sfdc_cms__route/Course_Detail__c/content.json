@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Course Detail",
+  "contentBody" : {
+    "activeViewId" : "Course_Detail",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "detail-Course__c",
+    "urlPrefix" : "course"
+  },
+  "urlName" : "course-detail"
+}

@@ -1,0 +1,134 @@
+{
+  "type" : "sfdc_cms__view",
+  "title" : "Course List",
+  "contentBody" : {
+    "component" : {
+      "children" : [ {
+        "children" : [ {
+          "attributes" : {
+            "backgroundImageConfig" : "",
+            "backgroundImageOverlay" : "rgba(0,0,0,0)",
+            "componentSpacerSize" : "",
+            "layoutDirectionDesktop" : "row",
+            "layoutDirectionMobile" : "column",
+            "layoutDirectionTablet" : "column",
+            "maxContentWidth" : "",
+            "sectionColumnGutterWidth" : "",
+            "sectionConfig" : "{\"UUID\":\"87089980-28f0-40c6-8edf-4c6a4a7260a1\",\"columns\":[{\"UUID\":\"225b9f0f-d554-4aa2-8feb-5ddd57cc36c8\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionMinHeight" : "",
+            "sectionVerticalAlign" : "flex-start"
+          },
+          "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "cardBorderColor" : "#E5E5E5",
+                "cardBorderWeight" : "1",
+                "cardHoverColor" : "#F3F3F3",
+                "cardPadding" : "{\"top\":\"16px\",\"right\":\"16px\",\"bottom\":\"16px\",\"left\":\"16px\"}",
+                "cardSpaceBetweenItems" : "16",
+                "cardTextStyle" : "{\"headingTag\":\"p\",\"textStyle\":\"body-regular\"}",
+                "cellPadding" : "{\"top\":\"16px\",\"right\":\"16px\",\"bottom\":\"16px\",\"left\":\"16px\"}",
+                "columnHeaderBackgroundColor" : "#F3F3F3",
+                "dividerBorderColor" : "#E5E5E5",
+                "dividerBorderWeight" : "1",
+                "headerBorderColor" : "#E5E5E5",
+                "headerBorderWeight" : "1",
+                "headerSectionLineSeparator" : "",
+                "recordListData" : "{!Item.recordListData}",
+                "recordListLayoutType" : "TableView",
+                "rowHoverColor" : "#F3F3F3",
+                "showCardLabel" : false,
+                "showHeader" : "true",
+                "showListViewPicker" : "true",
+                "showObjectIcon" : true,
+                "showPagination" : true,
+                "showSearch" : true,
+                "showStatus" : true,
+                "showTitle" : true,
+                "statusSectionLineSeparator" : "",
+                "statusTextDecoration" : "{}",
+                "statusTextDisplayInfo" : "{\"headingTag\":\"p\",\"textStyle\":\"body-small\"}",
+                "tableBorderColor" : "#E5E5E5",
+                "tableBorderWeight" : "1",
+                "tableTextStyle" : "{\"headingTag\":\"p\",\"textStyle\":\"body-regular\"}",
+                "titleSectionLineSeparator" : "",
+                "titleTextDecoration" : "{\"bold\":true}",
+                "titleTextDisplayInfo" : "{\"headingTag\":\"h3\",\"textStyle\":\"heading-medium\"}"
+              },
+              "children" : [ {
+                "children" : [ {
+                  "attributes" : {
+                    "paginatorAttributes" : "{\"nested\":{\"componentName\":\"dxp_content_layout:paginatorStandard\",\"attributes\":{\"prevButtonLabel\":\"Previous\",\"nextButtonLabel\":\"Next\",\"nextButtonTextDecoration\":\"{}\",\"prevButtonTextDecoration\":\"{}\",\"nextButtonStyle\":\"secondary\",\"prevButtonStyle\":\"secondary\",\"size\":\"standard\",\"width\":\"standard\",\"verticalPadding\":\"none\",\"horizontalAlignment\":\"center\",\"disableAutoHidden\": false}}}",
+                    "variant" : "standard"
+                  },
+                  "children" : [ {
+                    "children" : [ {
+                      "attributes" : { },
+                      "definition" : "dxp_page_layout:placeHolder",
+                      "id" : "749b54c4-5b67-47a1-b0a8-d58309aaf80a",
+                      "type" : "component"
+                    } ],
+                    "id" : "d2d0f238-1fa0-4b90-8a8b-fdddaab2755d",
+                    "name" : "placeholder",
+                    "title" : "placeholder",
+                    "type" : "region"
+                  } ],
+                  "definition" : "dxp_content_layout:paginator2",
+                  "id" : "8e3a7692-99e2-4d8e-9577-27ecdce71cfe",
+                  "type" : "component"
+                } ],
+                "id" : "b4f8999f-d135-430d-8844-8fe37d0b3ea5",
+                "name" : "pagination",
+                "title" : "pagination",
+                "type" : "region"
+              } ],
+              "definition" : "dxp_content_layout:recordListLayout",
+              "id" : "3f0d1d0a-b1a9-4590-a9b2-ac5717b11aa7",
+              "type" : "component",
+              "dataProviders" : [ {
+                "definition" : "sfdc_cms__recordListLayoutDataProvider",
+                "sfdcExpressionKey" : "Item",
+                "attributes" : {
+                  "listViewApiName" : "All_Courses",
+                  "objectApiName" : "Course__c",
+                  "pageSize" : 10
+                }
+              } ]
+            } ],
+            "id" : "225b9f0f-d554-4aa2-8feb-5ddd57cc36c8",
+            "name" : "col1",
+            "title" : "Column 1",
+            "type" : "region"
+          } ],
+          "definition" : "community_layout:section",
+          "id" : "87089980-28f0-40c6-8edf-4c6a4a7260a1",
+          "type" : "component"
+        } ],
+        "id" : "7221467c-74e9-4442-b0fc-d6eca0e1fedf",
+        "name" : "content",
+        "title" : "Content",
+        "type" : "region"
+      }, {
+        "children" : [ {
+          "attributes" : {
+            "recordId" : "{!recordId}"
+          },
+          "definition" : "community_builder:seoAssistant",
+          "id" : "7b6f1908-1560-428f-916f-1294b598bc45",
+          "type" : "component"
+        } ],
+        "id" : "31537930-2da4-4f48-bd90-a526309ec610",
+        "name" : "sfdcHiddenRegion",
+        "title" : "sfdcHiddenRegion",
+        "type" : "region"
+      } ],
+      "definition" : "community_layout:sldsFlexibleLayout",
+      "id" : "bce98290-3ba3-4668-a134-9d529948d0b1",
+      "type" : "component"
+    },
+    "dataProviders" : [ ],
+    "themeLayoutType" : "Inner",
+    "viewType" : "list-Course__c"
+  },
+  "urlName" : "course-list"
+}

@@ -1,6 +1,6 @@
 {
   "type" : "sfdc_cms__view",
-  "title" : "Home",
+  "title" : "Time Slot Detail",
   "contentBody" : {
     "component" : {
       "children" : [ {
@@ -9,35 +9,26 @@
             "backgroundImageConfig" : "",
             "backgroundImageOverlay" : "rgba(0,0,0,0)",
             "componentSpacerSize" : "",
-            "dxpStyle" : { },
             "layoutDirectionDesktop" : "row",
             "layoutDirectionMobile" : "column",
             "layoutDirectionTablet" : "column",
             "maxContentWidth" : "",
             "sectionColumnGutterWidth" : "",
-            "sectionConfig" : "{\"UUID\":\"4444e62a-0753-44ec-8e65-cfe498335343\",\"columns\":[{\"UUID\":\"746d3b80-be91-4b92-ac21-d9166ed06fc1\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+            "sectionConfig" : "{\"UUID\":\"698e9ddb-9f93-409b-a32b-edfc4aa5f153\",\"columns\":[{\"UUID\":\"b4ea38d6-2716-48c2-9228-b0dd537c5fe5\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
             "sectionMinHeight" : "",
             "sectionVerticalAlign" : "flex-start"
           },
           "children" : [ {
-            "children" : [ {
-              "attributes" : {
-                "dxpStyle" : { }
-              },
-              "definition" : "c:courseCalendar",
-              "id" : "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-              "type" : "component"
-            } ],
-            "id" : "746d3b80-be91-4b92-ac21-d9166ed06fc1",
+            "id" : "b4ea38d6-2716-48c2-9228-b0dd537c5fe5",
             "name" : "col1",
             "title" : "Column 1",
             "type" : "region"
           } ],
           "definition" : "community_layout:section",
-          "id" : "4444e62a-0753-44ec-8e65-cfe498335343",
+          "id" : "698e9ddb-9f93-409b-a32b-edfc4aa5f153",
           "type" : "component"
         } ],
-        "id" : "040e115a-a785-4912-aa9f-3b7274c5dd29",
+        "id" : "00288596-2fa3-41b1-a858-de7f6540fa34",
         "name" : "content",
         "title" : "Content",
         "type" : "region"
@@ -46,26 +37,25 @@
           "attributes" : {
             "customHeadTags" : "",
             "description" : "",
-            "dxpStyle" : { },
-            "pageTitle" : "Home",
+            "pageTitle" : "{!Record._Object}: {!Record._Title}",
             "recordId" : "{!recordId}"
           },
           "definition" : "community_builder:seoAssistant",
-          "id" : "dcc17df0-b336-479f-b275-fd4edcc571be",
+          "id" : "c9821632-f702-450f-9115-3db19d793e68",
           "type" : "component"
         } ],
-        "id" : "257f74b2-8fea-45dc-a46e-bfbd2b7a064f",
+        "id" : "e5339820-41dc-48f2-befc-4534be24f67b",
         "name" : "sfdcHiddenRegion",
         "title" : "sfdcHiddenRegion",
         "type" : "region"
       } ],
       "definition" : "community_layout:sldsFlexibleLayout",
-      "id" : "bd01e901-4823-4b7d-b08f-f4ff99f4b3ee",
+      "id" : "19e886c0-6ebc-43b0-8309-fec25bb44a6e",
       "type" : "component"
     },
     "dataProviders" : [ ],
     "themeLayoutType" : "Inner",
-    "viewType" : "home"
+    "viewType" : "detail-TimeSlot__c"
   },
-  "urlName" : "home"
+  "urlName" : "time-slot-detail"
 }

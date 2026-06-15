@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Join a Course",
+  "contentBody" : {
+    "activeViewId" : "Join_a_Course",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-join-a-course",
+    "urlPrefix" : "join-a-course"
+  },
+  "urlName" : "join-a-course"
+}

@@ -7,14 +7,14 @@
         <label>Join a Course</label>
         <position>1</position>
         <publiclyAvailable>false</publiclyAvailable>
-        <target>/</target>
+        <target>/join-a-course</target>
         <type>InternalLink</type>
     </navigationMenuItem>
     <navigationMenuItem>
         <label>My Courses</label>
         <position>2</position>
         <publiclyAvailable>false</publiclyAvailable>
-        <target>/</target>
+        <target>/course/Course__c/All_Courses</target>
         <type>InternalLink</type>
     </navigationMenuItem>
 </NavigationMenu>

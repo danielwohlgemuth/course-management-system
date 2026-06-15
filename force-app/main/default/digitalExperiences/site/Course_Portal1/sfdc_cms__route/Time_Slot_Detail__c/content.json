@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "Time Slot Detail",
+  "contentBody" : {
+    "activeViewId" : "Time_Slot_Detail",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "detail-TimeSlot__c",
+    "urlPrefix" : "timeslot"
+  },
+  "urlName" : "time-slot-detail"
+}

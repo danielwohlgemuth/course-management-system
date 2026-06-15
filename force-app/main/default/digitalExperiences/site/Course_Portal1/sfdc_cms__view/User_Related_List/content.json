@@ -1,6 +1,6 @@
 {
   "type" : "sfdc_cms__view",
-  "title" : "Home",
+  "title" : "User Related List",
   "contentBody" : {
     "component" : {
       "children" : [ {
@@ -9,63 +9,50 @@
             "backgroundImageConfig" : "",
             "backgroundImageOverlay" : "rgba(0,0,0,0)",
             "componentSpacerSize" : "",
-            "dxpStyle" : { },
             "layoutDirectionDesktop" : "row",
             "layoutDirectionMobile" : "column",
             "layoutDirectionTablet" : "column",
             "maxContentWidth" : "",
             "sectionColumnGutterWidth" : "",
-            "sectionConfig" : "{\"UUID\":\"4444e62a-0753-44ec-8e65-cfe498335343\",\"columns\":[{\"UUID\":\"746d3b80-be91-4b92-ac21-d9166ed06fc1\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":null}]}",
+            "sectionConfig" : "{\"UUID\":\"da751d02-19b7-4f0a-aaf0-966efd4f1f89\",\"columns\":[{\"UUID\":\"954d845e-563c-4047-b8b7-c0da34c30bfa\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
             "sectionMinHeight" : "",
             "sectionVerticalAlign" : "flex-start"
           },
           "children" : [ {
-            "children" : [ {
-              "attributes" : {
-                "dxpStyle" : { }
-              },
-              "definition" : "c:courseCalendar",
-              "id" : "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-              "type" : "component"
-            } ],
-            "id" : "746d3b80-be91-4b92-ac21-d9166ed06fc1",
+            "id" : "954d845e-563c-4047-b8b7-c0da34c30bfa",
             "name" : "col1",
             "title" : "Column 1",
             "type" : "region"
           } ],
           "definition" : "community_layout:section",
-          "id" : "4444e62a-0753-44ec-8e65-cfe498335343",
+          "id" : "da751d02-19b7-4f0a-aaf0-966efd4f1f89",
           "type" : "component"
         } ],
-        "id" : "040e115a-a785-4912-aa9f-3b7274c5dd29",
+        "id" : "fb83acee-a270-4cc0-882d-93a569b7ecb5",
         "name" : "content",
         "title" : "Content",
         "type" : "region"
       }, {
         "children" : [ {
           "attributes" : {
-            "customHeadTags" : "",
-            "description" : "",
-            "dxpStyle" : { },
-            "pageTitle" : "Home",
             "recordId" : "{!recordId}"
           },
           "definition" : "community_builder:seoAssistant",
-          "id" : "dcc17df0-b336-479f-b275-fd4edcc571be",
+          "id" : "a80e1176-49d8-4f1b-bce5-00321f15f298",
           "type" : "component"
         } ],
-        "id" : "257f74b2-8fea-45dc-a46e-bfbd2b7a064f",
+        "id" : "7eac11ef-5315-4492-96d2-7ce4153a408b",
         "name" : "sfdcHiddenRegion",
         "title" : "sfdcHiddenRegion",
         "type" : "region"
       } ],
       "definition" : "community_layout:sldsFlexibleLayout",
-      "id" : "bd01e901-4823-4b7d-b08f-f4ff99f4b3ee",
+      "id" : "5e109617-115e-46fa-819d-0636074f8b58",
       "type" : "component"
     },
     "dataProviders" : [ ],
     "themeLayoutType" : "Inner",
-    "viewType" : "home"
+    "viewType" : "relatedlist-005"
   },
-  "urlName" : "home"
+  "urlName" : "user-related-list"
 }

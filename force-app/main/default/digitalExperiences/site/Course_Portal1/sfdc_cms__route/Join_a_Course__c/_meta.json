@@ -1,0 +1,5 @@
+{
+  "apiName" : "Join_a_Course__c",
+  "type" : "sfdc_cms__route",
+  "path" : "routes"
+}
