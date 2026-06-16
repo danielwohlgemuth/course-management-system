@@ -1,6 +1,6 @@
 # 011 Build screen flow for joining a course
 
-**Status:** open
+**Status:** done
 
 ## What
 
@@ -8,13 +8,13 @@ Create a Screen Flow that runs in system context so it can query and display all
 
 ## Acceptance criteria
 
-- [ ] Screen flow created and set to run in system context
-- [ ] First screen displays all `Course__c` records (course number, name, instructor)
-- [ ] Student can select one course to join
-- [ ] Flow creates an `Enrollment__c` record with `Course__c` and `Student__c` set to the selected course and the running user
-- [ ] Flow shows a confirmation message on success
-- [ ] Flow handles the case where the student is already enrolled (duplicate) gracefully with an error message
-- [ ] Flow is activated
+- [x] Screen flow created and set to run in system context
+- [x] First screen displays all `Course__c` records (course number, name, instructor)
+- [x] Student can select one course to join
+- [x] Flow creates an `Enrollment__c` record with `Course__c` and `Student__c` set to the selected course and the running user
+- [x] Flow shows a confirmation message on success
+- [x] Flow handles the case where the student is already enrolled (duplicate) gracefully with an error message
+- [x] Flow is activated
 
 ## Notes
 
