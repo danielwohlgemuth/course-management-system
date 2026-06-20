@@ -9,6 +9,7 @@
             "backgroundImageConfig" : "",
             "backgroundImageOverlay" : "rgba(0,0,0,0)",
             "componentSpacerSize" : "",
+            "dxpStyle" : { },
             "layoutDirectionDesktop" : "row",
             "layoutDirectionMobile" : "column",
             "layoutDirectionTablet" : "column",
@@ -31,6 +32,7 @@
                 "columnHeaderBackgroundColor" : "#F3F3F3",
                 "dividerBorderColor" : "#E5E5E5",
                 "dividerBorderWeight" : "1",
+                "dxpStyle" : { },
                 "headerBorderColor" : "#E5E5E5",
                 "headerBorderWeight" : "1",
                 "headerSectionLineSeparator" : "",
@@ -58,12 +60,15 @@
               "children" : [ {
                 "children" : [ {
                   "attributes" : {
+                    "dxpStyle" : { },
                     "paginatorAttributes" : "{\"nested\":{\"componentName\":\"dxp_content_layout:paginatorStandard\",\"attributes\":{\"prevButtonLabel\":\"Previous\",\"nextButtonLabel\":\"Next\",\"nextButtonTextDecoration\":\"{}\",\"prevButtonTextDecoration\":\"{}\",\"nextButtonStyle\":\"secondary\",\"prevButtonStyle\":\"secondary\",\"size\":\"standard\",\"width\":\"standard\",\"verticalPadding\":\"none\",\"horizontalAlignment\":\"center\",\"disableAutoHidden\": false}}}",
                     "variant" : "standard"
                   },
                   "children" : [ {
                     "children" : [ {
-                      "attributes" : { },
+                      "attributes" : {
+                        "dxpStyle" : { }
+                      },
                       "definition" : "dxp_page_layout:placeHolder",
                       "id" : "749b54c4-5b67-47a1-b0a8-d58309aaf80a",
                       "type" : "component"
@@ -111,6 +116,7 @@
       }, {
         "children" : [ {
           "attributes" : {
+            "dxpStyle" : { },
             "recordId" : "{!recordId}"
           },
           "definition" : "community_builder:seoAssistant",

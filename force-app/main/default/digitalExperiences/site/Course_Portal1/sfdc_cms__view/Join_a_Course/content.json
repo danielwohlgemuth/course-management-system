@@ -9,6 +9,7 @@
             "backgroundImageConfig" : "",
             "backgroundImageOverlay" : "rgba(0,0,0,0)",
             "componentSpacerSize" : "",
+            "dxpStyle" : { },
             "layoutDirectionDesktop" : "row",
             "layoutDirectionMobile" : "column",
             "layoutDirectionTablet" : "column",
@@ -19,6 +20,14 @@
             "sectionVerticalAlign" : "flex-start"
           },
           "children" : [ {
+            "children" : [ {
+              "attributes" : {
+                "flowName" : "{\"flowName\":\"Join_a_Course\",\"flowLabel\":\"Join a Course\"}"
+              },
+              "definition" : "dxp_flow:flow",
+              "id" : "6216df5c-a2d3-405e-b94c-19a0b0235652",
+              "type" : "component"
+            } ],
             "id" : "d2b32731-b884-4421-b6fc-6379244dbbff",
             "name" : "col1",
             "title" : "Column 1",
@@ -37,6 +46,7 @@
           "attributes" : {
             "customHeadTags" : "",
             "description" : "",
+            "dxpStyle" : { },
             "pageTitle" : "Join a Course",
             "recordId" : "{!recordId}"
           },

@@ -2,42 +2,165 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>66.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>Assign_Available_Course</name>
+        <label>Add to Available Courses</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>availableCourses</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>Loop_Filter_Available_Courses</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Filter_Available_Courses</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Current_Course_Id</name>
+        <label>Store Current Course ID</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>currentCourseId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Loop_Filter_Available_Courses.Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Assign_Reset_IsEnrolled</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Reset_IsEnrolled</name>
+        <label>Reset Enrolled Flag</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>isEnrolledInCourse</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Check_Enrollment</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Set_IsEnrolled</name>
+        <label>Set Enrolled Flag</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>isEnrolledInCourse</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Loop_Check_Enrollment</targetReference>
+        </connector>
+    </assignments>
     <decisions>
-        <name>Decision_Already_Enrolled</name>
-        <label>Already Enrolled?</label>
+        <name>Decision_Add_Course</name>
+        <label>Add Course to Available?</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <defaultConnector>
-            <targetReference>Create_Enrollment</targetReference>
+            <targetReference>Assign_Available_Course</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Not Enrolled</defaultConnectorLabel>
         <rules>
-            <name>Rule_Is_Already_Enrolled</name>
+            <name>Rule_Skip_Enrolled_Course</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>existingEnrollment.Id</leftValueReference>
-                <operator>IsNull</operator>
+                <leftValueReference>isEnrolledInCourse</leftValueReference>
+                <operator>EqualTo</operator>
                 <rightValue>
-                    <booleanValue>false</booleanValue>
+                    <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Screen_Already_Enrolled</targetReference>
+                <targetReference>Loop_Filter_Available_Courses</targetReference>
             </connector>
             <label>Already Enrolled</label>
         </rules>
     </decisions>
-    <description>Allows a student to browse all available courses and self-enroll. Runs in system context so all courses are visible regardless of the running user&apos;s sharing access.</description>
-    <dynamicChoiceSets>
-        <name>allCourses</name>
-        <dataType>String</dataType>
-        <displayField>Course_Name__c</displayField>
-        <object>Course__c</object>
-        <sortField>Name</sortField>
-        <sortOrder>Asc</sortOrder>
-        <valueField>Id</valueField>
-    </dynamicChoiceSets>
+    <decisions>
+        <name>Decision_Enrollment_Matches</name>
+        <label>Enrollment Matches This Course?</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>Loop_Check_Enrollment</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No Match</defaultConnectorLabel>
+        <rules>
+            <name>Rule_Match_Found</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Loop_Check_Enrollment.Course__c</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>currentCourseId</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Set_IsEnrolled</targetReference>
+            </connector>
+            <label>Match</label>
+        </rules>
+    </decisions>
+    <description>Allows a student to browse available courses and self-enroll in one or more. Runs in system context so all courses are visible regardless of the running user&apos;s sharing access. Only shows courses the student is not already enrolled in.</description>
+    <environments>Default</environments>
     <label>Join a Course</label>
+    <loops>
+        <name>Loop_Check_Enrollment</name>
+        <label>Check Each Enrollment</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>myEnrollments</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Decision_Enrollment_Matches</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Decision_Add_Course</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Loop_Create_Enrollments</name>
+        <label>Create Enrollments for Selected Courses</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>selectedCourses</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Create_Enrollment</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Screen_Success</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>Loop_Filter_Available_Courses</name>
+        <label>Filter Available Courses</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <collectionReference>allCourses</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Assign_Current_Course_Id</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>Screen_Select_Course</targetReference>
+        </noMoreValuesConnector>
+    </loops>
     <processMetadataValues>
         <name>BuilderType</name>
         <value>
@@ -57,7 +180,7 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Screen_Success</targetReference>
+            <targetReference>Loop_Create_Enrollments</targetReference>
         </connector>
         <faultConnector>
             <targetReference>Screen_Enrollment_Error</targetReference>
@@ -65,7 +188,7 @@
         <inputAssignments>
             <field>Course__c</field>
             <value>
-                <elementReference>courseChoice</elementReference>
+                <elementReference>Loop_Create_Enrollments.Id</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -77,22 +200,32 @@
         <object>Enrollment__c</object>
     </recordCreates>
     <recordLookups>
-        <name>Get_Existing_Enrollment</name>
-        <label>Get Existing Enrollment</label>
+        <name>Get_All_Courses</name>
+        <label>Get All Courses</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
-            <targetReference>Decision_Already_Enrolled</targetReference>
+            <targetReference>Loop_Filter_Available_Courses</targetReference>
+        </connector>
+        <object>Course__c</object>
+        <outputReference>allCourses</outputReference>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Name</queriedFields>
+        <queriedFields>Course_Name__c</queriedFields>
+        <sortField>Name</sortField>
+        <sortOrder>Asc</sortOrder>
+    </recordLookups>
+    <recordLookups>
+        <name>Get_My_Enrollments</name>
+        <label>Get My Enrollments</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_All_Courses</targetReference>
         </connector>
         <filterLogic>and</filterLogic>
-        <filters>
-            <field>Course__c</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>courseChoice</elementReference>
-            </value>
-        </filters>
         <filters>
             <field>Student__c</field>
             <operator>EqualTo</operator>
@@ -101,34 +234,11 @@
             </value>
         </filters>
         <object>Enrollment__c</object>
-        <outputReference>existingEnrollment</outputReference>
+        <outputReference>myEnrollments</outputReference>
         <queriedFields>Id</queriedFields>
+        <queriedFields>Course__c</queriedFields>
     </recordLookups>
     <runInMode>SystemModeWithoutSharing</runInMode>
-    <screens>
-        <name>Screen_Already_Enrolled</name>
-        <label>Already Enrolled</label>
-        <locationX>0</locationX>
-        <locationY>0</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <fields>
-            <name>msg_already_enrolled</name>
-            <fieldText>&lt;p&gt;You are already enrolled in this course. Please select a different course, or contact your instructor if you believe this is an error.&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-            <styleProperties>
-                <verticalAlignment>
-                    <stringValue>top</stringValue>
-                </verticalAlignment>
-                <width>
-                    <stringValue>12</stringValue>
-                </width>
-            </styleProperties>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
     <screens>
         <name>Screen_Enrollment_Error</name>
         <label>Enrollment Error</label>
@@ -139,7 +249,7 @@
         <allowPause>false</allowPause>
         <fields>
             <name>msg_enrollment_error</name>
-            <fieldText>&lt;p&gt;Unable to complete your enrollment. You may already be enrolled in this course or a system error occurred. Please try again or contact your administrator.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;Unable to complete your enrollment. A system error occurred. Please try again or contact your administrator.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -155,21 +265,85 @@
     </screens>
     <screens>
         <name>Screen_Select_Course</name>
-        <label>Select a Course to Join</label>
+        <label>Select Courses to Join</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Get_Existing_Enrollment</targetReference>
+            <targetReference>Loop_Create_Enrollments</targetReference>
         </connector>
         <fields>
-            <name>courseChoice</name>
-            <choiceReferences>allCourses</choiceReferences>
-            <dataType>String</dataType>
-            <fieldType>RadioButtons</fieldType>
+            <name>courseDatatable</name>
+            <dataTypeMappings>
+                <typeName>T</typeName>
+                <typeValue>Course__c</typeValue>
+            </dataTypeMappings>
+            <extensionName>flowruntime:datatable</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Available Courses</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>selectionMode</name>
+                <value>
+                    <stringValue>MULTI_SELECT</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>minRowSelection</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>shouldDisplayLabel</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>tableData</name>
+                <value>
+                    <elementReference>availableCourses</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>keyField</name>
+                <value>
+                    <complexValue>{&quot;dataType&quot;:&quot;SObject&quot;,&quot;objectType&quot;:&quot;Course__c&quot;,&quot;fieldReferences&quot;:[&quot;Id&quot;],&quot;elementReference&quot;:&quot;availableCourses&quot;}</complexValue>
+                    <complexValueType>ComplexObjectFieldDetails</complexValueType>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>isShowSearchBar</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>columns</name>
+                <value>
+                    <stringValue>[{&quot;apiName&quot;:&quot;Name&quot;,&quot;guid&quot;:&quot;column-6b64&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Course Number&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:0,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Course Number&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Course_Name__c&quot;,&quot;guid&quot;:&quot;column-b3ec&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Course Name&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:1,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Course Name&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Instructor_User__c&quot;,&quot;guid&quot;:&quot;column-334f&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Instructor&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:2,&quot;sortable&quot;:false,&quot;type&quot;:&quot;customReferenceLabel&quot;,&quot;referenceLabelConfigs&quot;:{&quot;User&quot;:{&quot;keyPrefix&quot;:&quot;005&quot;,&quot;nameFieldApiName&quot;:&quot;Name&quot;,&quot;nameFieldLabel&quot;:&quot;Full Name&quot;}},&quot;linkToRecord&quot;:true,&quot;label&quot;:&quot;Instructor&quot;}]</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>columnReferences</name>
+                <value>
+                    <complexValue>{&quot;dataType&quot;:&quot;SObject&quot;,&quot;objectType&quot;:&quot;Course__c&quot;,&quot;fieldReferences&quot;:[&quot;Name&quot;,&quot;Course_Name__c&quot;,&quot;Instructor_User__c&quot;],&quot;elementReference&quot;:&quot;availableCourses&quot;}</complexValue>
+                    <complexValueType>ComplexObjectFieldDetails</complexValueType>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>selectedCourses</assignToReference>
+                <name>selectedRows</name>
+            </outputParameters>
             <styleProperties>
                 <verticalAlignment>
                     <stringValue>top</stringValue>
@@ -192,7 +366,7 @@
         <allowPause>false</allowPause>
         <fields>
             <name>msg_success</name>
-            <fieldText>&lt;p&gt;You have successfully enrolled in the course. You now have read access to the course materials.&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p&gt;You have successfully enrolled in the selected course(s). You now have read access to the course materials.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -210,16 +384,54 @@
         <locationX>0</locationX>
         <locationY>0</locationY>
         <connector>
-            <targetReference>Screen_Select_Course</targetReference>
+            <targetReference>Get_My_Enrollments</targetReference>
         </connector>
     </start>
     <status>Active</status>
     <variables>
-        <name>existingEnrollment</name>
+        <name>allCourses</name>
         <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Course__c</objectType>
+    </variables>
+    <variables>
+        <name>availableCourses</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Course__c</objectType>
+    </variables>
+    <variables>
+        <name>currentCourseId</name>
+        <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>isEnrolledInCourse</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>myEnrollments</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
         <objectType>Enrollment__c</objectType>
+    </variables>
+    <variables>
+        <name>selectedCourses</name>
+        <dataType>SObject</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Course__c</objectType>
     </variables>
 </Flow>

@@ -1,6 +1,6 @@
 # 012 Add Join a Course page to Experience Site
 
-**Status:** open
+**Status:** done
 
 ## What
 
