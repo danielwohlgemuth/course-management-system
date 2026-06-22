@@ -1,6 +1,6 @@
 # 017 Optimize Join a Course flow with NOT IN filter
 
-**Status:** open
+**Status:** done
 
 ## What
 
