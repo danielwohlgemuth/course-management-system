@@ -6,6 +6,13 @@ description: Create a GitHub release for a change (task, bug fix, or enhancement
 
 Releases cover any meaningful change — a completed task, a bug fix, or an ad-hoc enhancement. Each release gets a `release-<id>` tag, a title and notes (pulled from the task file if one exists, or provided inline), and any relevant recordings or screenshots attached as assets.
 
+## Release note guidelines
+
+Write the release title and description for a non-technical audience — someone using the system, not building it. Focus on what changed from the user's perspective and why it matters. Avoid implementation details, technical terminology, file names, object names, class names, field names, or anything internal to the codebase.
+
+Good: "Instructors can now see a list of enrolled students directly on the course page."
+Avoid: "Added EnrolledStudents LWC component to Course__c record page using getRelatedListRecords."
+
 ## Steps
 
 ### 1. Identify the release
