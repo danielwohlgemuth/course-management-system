@@ -1,6 +1,6 @@
 # 013 Add My Courses list view page to Experience Site
 
-**Status:** open
+**Status:** done
 
 ## What
 

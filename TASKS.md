@@ -16,7 +16,7 @@ Quick-scan index of all tasks. One row per task; details live in `tasks/<id>_<sl
 | [010](tasks/010_calendar-experience-site-home.md) | Add course calendar to Experience Site home page | done |
 | [011](tasks/011_join-course-screen-flow.md) | Build screen flow for joining a course | done |
 | [012](tasks/012_join-course-flow-page.md) | Add Join a Course page to Experience Site | done |
-| [013](tasks/013_my-courses-list-view-page.md) | Add My Courses list view page to Experience Site | open |
+| [013](tasks/013_my-courses-list-view-page.md) | Add My Courses list view page to Experience Site | done |
 | [017](tasks/017_join-course-flow-not-in-filter.md) | Optimize Join a Course flow with NOT IN enrollment filter | open |
 | [018](tasks/018_join-course-instructor-name.md) | Fix instructor name not showing in Join a Course datatable | open |
 | [019](tasks/019_error-logging-framework.md) | Set up error logging framework (Flow / Apex / LWC) | open |

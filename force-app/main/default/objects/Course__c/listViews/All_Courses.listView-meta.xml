@@ -8,5 +8,6 @@
     <label>All Courses</label>
     <sharedTo>
         <allInternalUsers></allInternalUsers>
+        <allCustomerPortalUsers></allCustomerPortalUsers>
     </sharedTo>
 </ListView>
