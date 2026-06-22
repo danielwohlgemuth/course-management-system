@@ -152,7 +152,7 @@
         <label>Filter Available Courses</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <collectionReference>allCourses</collectionReference>
+        <collectionReference>Get_All_Courses</collectionReference>
         <iterationOrder>Asc</iterationOrder>
         <nextValueConnector>
             <targetReference>Assign_Current_Course_Id</targetReference>
@@ -208,13 +208,11 @@
         <connector>
             <targetReference>Loop_Filter_Available_Courses</targetReference>
         </connector>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
         <object>Course__c</object>
-        <outputReference>allCourses</outputReference>
-        <queriedFields>Id</queriedFields>
-        <queriedFields>Name</queriedFields>
-        <queriedFields>Course_Name__c</queriedFields>
         <sortField>Name</sortField>
         <sortOrder>Asc</sortOrder>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
     <recordLookups>
         <name>Get_My_Enrollments</name>
@@ -328,13 +326,13 @@
             <inputParameters>
                 <name>columns</name>
                 <value>
-                    <stringValue>[{&quot;apiName&quot;:&quot;Name&quot;,&quot;guid&quot;:&quot;column-6b64&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Course Number&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:0,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Course Number&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Course_Name__c&quot;,&quot;guid&quot;:&quot;column-b3ec&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Course Name&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:1,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Course Name&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Instructor_User__c&quot;,&quot;guid&quot;:&quot;column-334f&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Instructor&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:2,&quot;sortable&quot;:false,&quot;type&quot;:&quot;customReferenceLabel&quot;,&quot;referenceLabelConfigs&quot;:{&quot;User&quot;:{&quot;keyPrefix&quot;:&quot;005&quot;,&quot;nameFieldApiName&quot;:&quot;Name&quot;,&quot;nameFieldLabel&quot;:&quot;Full Name&quot;}},&quot;linkToRecord&quot;:true,&quot;label&quot;:&quot;Instructor&quot;}]</stringValue>
+                    <stringValue>[{&quot;apiName&quot;:&quot;Name&quot;,&quot;guid&quot;:&quot;column-6b64&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Course Number&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:0,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Course Number&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Course_Name__c&quot;,&quot;guid&quot;:&quot;column-b3ec&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Course Name&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:1,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Course Name&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Instructor_Name__c&quot;,&quot;guid&quot;:&quot;column-334f&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Instructor&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:2,&quot;sortable&quot;:false,&quot;type&quot;:&quot;text&quot;,&quot;label&quot;:&quot;Instructor&quot;}]</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>columnReferences</name>
                 <value>
-                    <complexValue>{&quot;dataType&quot;:&quot;SObject&quot;,&quot;objectType&quot;:&quot;Course__c&quot;,&quot;fieldReferences&quot;:[&quot;Name&quot;,&quot;Course_Name__c&quot;,&quot;Instructor_User__c&quot;],&quot;elementReference&quot;:&quot;availableCourses&quot;}</complexValue>
+                    <complexValue>{&quot;dataType&quot;:&quot;SObject&quot;,&quot;objectType&quot;:&quot;Course__c&quot;,&quot;fieldReferences&quot;:[&quot;Name&quot;,&quot;Course_Name__c&quot;,&quot;Instructor_Name__c&quot;],&quot;elementReference&quot;:&quot;availableCourses&quot;}</complexValue>
                     <complexValueType>ComplexObjectFieldDetails</complexValueType>
                 </value>
             </inputParameters>
@@ -388,14 +386,6 @@
         </connector>
     </start>
     <status>Active</status>
-    <variables>
-        <name>allCourses</name>
-        <dataType>SObject</dataType>
-        <isCollection>true</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <objectType>Course__c</objectType>
-    </variables>
     <variables>
         <name>availableCourses</name>
         <dataType>SObject</dataType>

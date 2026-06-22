@@ -1,6 +1,6 @@
 # 018 Fix instructor name not showing in Join a Course datatable
 
-**Status:** open
+**Status:** done
 
 ## What
 
@@ -8,9 +8,9 @@ The `Screen_Select_Course` datatable in the `Join_a_Course` flow includes an `In
 
 ## Acceptance criteria
 
-- [ ] `Get_All_Courses` record lookup includes `Instructor_User__c` in its `queriedFields`
-- [ ] The instructor column in the datatable displays the instructor's full name in the Experience Site
-- [ ] No regressions to course number or course name columns
+- [x] `Get_All_Courses` record lookup includes `Instructor_User__c` in its `queriedFields`
+- [x] The instructor column in the datatable displays the instructor's full name in the Experience Site
+- [x] No regressions to course number or course name columns
 
 ## Notes
 
