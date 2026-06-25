@@ -43,3 +43,17 @@ Students can browse available courses and enroll by selecting one or more from t
 Enrolled students see their current courses in the My Courses page.
 
 ![My Courses page showing enrolled courses](/assets/my-courses.png)
+
+## Admin Analytics
+
+### Enrollment Dashboard
+
+The Enrollment Dashboard shows enrollment counts per course grouped by instructor as a stacked bar chart, with supporting tables breaking down counts by instructor and by student.
+
+![Enrollment Dashboard with stacked bar chart and tables](/assets/enrollment-dashboard.png)
+
+### Enrollment by Instructor Report
+
+The summary report groups enrollments first by instructor, then by course, showing a record count per course with subtotals per instructor.
+
+![Enrollment by Instructor summary report](/assets/enrollment-report.png)
