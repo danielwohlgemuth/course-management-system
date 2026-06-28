@@ -17,13 +17,14 @@ Quick-scan index of all tasks. One row per task; details live in `tasks/<id>_<sl
 | [011](tasks/011_join-course-screen-flow.md) | Build screen flow for joining a course | done |
 | [012](tasks/012_join-course-flow-page.md) | Add Join a Course page to Experience Site | done |
 | [013](tasks/013_my-courses-list-view-page.md) | Add My Courses list view page to Experience Site | done |
+| [014](tasks/014_instructor-field-cleanup.md) | Remove legacy Instructor text field and make lookup required | done |
+| [015](tasks/015_enrollment-related-list-course-page.md) | Add Enrollment related list to Course record page | done |
+| [016](tasks/016_enrollment-uniquekey-flow-and-validation.md) | Enrollment UniqueKey flow and validation rules | done |
 | [017](tasks/017_join-course-flow-not-in-filter.md) | Optimize Join a Course flow with NOT IN enrollment filter | done |
 | [018](tasks/018_join-course-instructor-name.md) | Fix instructor name not showing in Join a Course datatable | done |
 | [019](tasks/019_error-logging-framework.md) | Set up error logging framework (Flow / Apex / LWC) | done |
 | [020](tasks/020_enrollment-dashboard.md) | Enrollment dashboard: students per course grouped by instructor | done |
-| [014](tasks/014_instructor-field-cleanup.md) | Remove legacy Instructor text field and make lookup required | done |
-| [015](tasks/015_enrollment-related-list-course-page.md) | Add Enrollment related list to Course record page | done |
-| [016](tasks/016_enrollment-uniquekey-flow-and-validation.md) | Enrollment UniqueKey flow and validation rules | done |
+| [021](tasks/021_semester-identifier.md) | Add semester identifier to config metadata and Course object | open |
 
 ## Statuses
 
