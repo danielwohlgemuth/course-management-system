@@ -1,6 +1,6 @@
 # 019 Set up error logging framework
 
-**Status:** open
+**Status:** done
 
 ## What
 
@@ -22,4 +22,4 @@ Keep the `log()` API simple: `ErrorLogService.log(String sourceType, String sour
 
 ## Related migrations
 
-- `migrations/YYYY-MM-DD_error-log-object.md` (add once written)
+- `migrations/2026-06-28_error-log-object.md`

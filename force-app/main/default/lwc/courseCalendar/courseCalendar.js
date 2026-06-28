@@ -5,6 +5,7 @@ import TIMESLOT_OBJECT from '@salesforce/schema/TimeSlot__c';
 import DAY_OF_WEEK_FIELD from '@salesforce/schema/TimeSlot__c.Day_of_Week__c';
 import getTimeSlots from '@salesforce/apex/CourseCalendarController.getTimeSlots';
 import getConfig from '@salesforce/apex/CourseCalendarController.getConfig';
+import { logError } from 'c/errorLogger';
 
 function msToHours(ms) {
     return ms / 3_600_000;
@@ -44,6 +45,7 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
             this._rebuildIfReady();
         } else if (error) {
             this.error = error;
+            logError('courseCalendar', 'wiredPicklistValues: ' + JSON.stringify(error), '');
         }
     }
 
@@ -57,6 +59,7 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
         } else if (error) {
             this.error = error;
             this.calendarDays = [];
+            logError('courseCalendar', 'wiredSlots: ' + JSON.stringify(error), '');
         }
     }
 
@@ -73,6 +76,7 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
             this._rebuildIfReady();
         } else if (error) {
             this.error = error;
+            logError('courseCalendar', 'wiredConfig: ' + JSON.stringify(error), '');
         }
     }
 

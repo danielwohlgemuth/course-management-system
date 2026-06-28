@@ -92,6 +92,35 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
+    <actionCalls>
+        <name>Log_Enrollment_Error</name>
+        <label>Log Enrollment Error</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <actionName>ErrorLogService</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Screen_Enrollment_Error</targetReference>
+        </connector>
+        <inputParameters>
+            <name>sourceName</name>
+            <value>
+                <stringValue>Join_a_Course</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>message</name>
+            <value>
+                <elementReference>$Flow.FaultMessage</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>stackTrace</name>
+            <value>
+                <stringValue></stringValue>
+            </value>
+        </inputParameters>
+    </actionCalls>
     <recordCreates>
         <name>Create_Enrollments</name>
         <label>Create Enrollments</label>
@@ -101,7 +130,7 @@
             <targetReference>Screen_Success</targetReference>
         </connector>
         <faultConnector>
-            <targetReference>Screen_Enrollment_Error</targetReference>
+            <targetReference>Log_Enrollment_Error</targetReference>
         </faultConnector>
         <inputReference>newEnrollments</inputReference>
     </recordCreates>
