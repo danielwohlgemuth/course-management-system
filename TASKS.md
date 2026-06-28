@@ -25,6 +25,7 @@ Quick-scan index of all tasks. One row per task; details live in `tasks/<id>_<sl
 | [019](tasks/019_error-logging-framework.md) | Set up error logging framework (Flow / Apex / LWC) | done |
 | [020](tasks/020_enrollment-dashboard.md) | Enrollment dashboard: students per course grouped by instructor | done |
 | [021](tasks/021_semester-identifier.md) | Add semester identifier to config metadata and Course object | open |
+| [022](tasks/022_app-tabs-error-log-dashboard.md) | Add Error Log and Dashboard tabs to Course Manager app | open |
 
 ## Statuses
 
