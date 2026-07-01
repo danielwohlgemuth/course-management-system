@@ -13,6 +13,11 @@ Write the release title and description for a non-technical audience — someone
 Good: "Instructors can now see a list of enrolled students directly on the course page."
 Avoid: "Added EnrolledStudents LWC component to Course__c record page using getRelatedListRecords."
 
+Good: "Courses now show which semester they belong to, and you can filter your course list down to just the current semester."
+Avoid: "Add a `Semester__c` text field to `CourseCalendarConfig__mdt` to store the current semester identifier (format: `2026 S1`). Add an `Is_Current_Semester__c` formula checkbox on `Course__c` that evaluates to true when the course's semester matches the config value."
+
+The task file's **What** section is written for developers, so `scripts/release.js` pulling it verbatim usually produces notes like the second "Avoid" example above — don't ship that as-is. Rewrite it in plain language and pass the result via `--notes` (see step 3).
+
 ## Steps
 
 ### 1. Identify the release
@@ -66,6 +71,11 @@ node scripts/release.js 16 --title "Fix overlapping time slot edge case"
 node scripts/release.js 15 \
   playwright/recordings/2026-05-29T10-00-00_enrollment-related-list.webm \
   playwright/screenshots/enrollment-related-list.png
+
+# Overriding the notes because the task's "What" section is too technical
+node scripts/release.js 21 \
+  --notes "Courses now show which semester they belong to, and you can filter your course list down to just the current semester." \
+  playwright/screenshots/2026-07-01T01-11-35_semester-field-record-view.png
 ```
 
 The script will:
@@ -73,6 +83,8 @@ The script will:
 2. Create and push an annotated git tag `release-<id>` (e.g. `release-015`)
 3. Call `gh release create` with the title, notes, and any asset files
 4. Print the release URL on success
+
+Before running the script, read the task's **What** section and rewrite it per the guidelines above; pass the rewritten version with `--notes` rather than letting the script use the raw task text.
 
 ### 4. Report the result
 
