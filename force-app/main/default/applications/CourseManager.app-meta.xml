@@ -28,5 +28,7 @@
     <navType>Standard</navType>
     <tabs>standard-home</tabs>
     <tabs>Course__c</tabs>
+    <tabs>standard-Dashboard</tabs>
+    <tabs>Error_Log__c</tabs>
     <uiType>Lightning</uiType>
 </CustomApplication>
