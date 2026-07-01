@@ -1,6 +1,6 @@
 # 021 Semester identifier
 
-**Status:** open
+**Status:** done
 
 ## What
 
@@ -8,13 +8,13 @@ Add a `Semester__c` text field to `CourseCalendarConfig__mdt` to store the curre
 
 ## Acceptance criteria
 
-- [ ] `Semester__c` field added to `CourseCalendarConfig__mdt` (Text, length 10)
-- [ ] `CourseCalendarConfig.Default` record updated with value `2026 S1`
-- [ ] `Semester__c` field added to `Course__c` (Text, length 10, not required)
-- [ ] `Is_Current_Semester__c` formula checkbox added to `Course__c` with formula: `Semester__c = $CustomMetadata.CourseCalendarConfig__mdt.Default.Semester__c`
-- [ ] New `Current_Semester_Courses` list view added to `Course__c` with label "Current Semester's Courses", columns `Name`, `Course_Name__c`, `Instructor_User__c`, `Semester__c`, filter `Is_Current_Semester__c = true`, and set as the default list view
-- [ ] `CourseCalendarController.getConfig()` selects `Semester__c` so the calendar LWC can access the current semester label
-- [ ] Migration file written covering deploy steps, backfill instructions for existing Course records (populate `Semester__c`), and rollback
+- [x] `Semester__c` field added to `CourseCalendarConfig__mdt` (Text, length 10)
+- [x] `CourseCalendarConfig.Default` record updated with value `2026 S1`
+- [x] `Semester__c` field added to `Course__c` (Text, length 10, not required)
+- [x] `Is_Current_Semester__c` formula checkbox added to `Course__c` with formula: `Semester__c = $CustomMetadata.CourseCalendarConfig__mdt.Default.Semester__c`
+- [x] New `Current_Semester_Courses` list view added to `Course__c` with label "Current Semester's Courses", columns `Name`, `Course_Name__c`, `Instructor_User__c`, `Semester__c`, filter `Is_Current_Semester__c = true`, and set as the default list view (org has no deployable metadata for a shared default list view — this is a manual per-user pin step documented in the migration)
+- [x] `CourseCalendarController.getConfig()` selects `Semester__c` so the calendar LWC can access the current semester label
+- [x] Migration file written covering deploy steps, backfill instructions for existing Course records (populate `Semester__c`), and rollback
 
 ## Notes
 
@@ -24,4 +24,4 @@ Add a `Semester__c` text field to `CourseCalendarConfig__mdt` to store the curre
 
 ## Related migrations
 
-- `migrations/YYYY-MM-DD_semester-identifier.md` (add once written)
+- `migrations/2026-06-30_semester-identifier.md`

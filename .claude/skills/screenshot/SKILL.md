@@ -109,3 +109,25 @@ If a script keeps failing because a selector doesn't match, don't iterate blindl
    ```bash
    rm scripts/screenshot/<feature-name>-codegen.js
    ```
+
+## When codegen isn't available — use a headless debug script
+
+In headless/CLI-only environments (no display for `playwright codegen`), discover selectors by driving the same authenticated session and dumping the DOM instead of screenshotting it.
+
+Create `scripts/screenshot/debug/<feature-name>.js`: reuse the same session-boot and navigation steps as the real screenshot script, but instead of taking a screenshot, query and log the elements you need selectors for, e.g.:
+
+```js
+const buttons = await page.locator('button').all();
+for (const b of buttons) {
+  const title = await b.getAttribute('title');
+  const aria = await b.getAttribute('aria-label');
+  const text = (await b.innerText().catch(() => '')).trim();
+  if (title || aria || text) console.log(JSON.stringify({ title, aria, text }));
+}
+```
+
+Because it lives one directory deeper than `scripts/screenshot/`, its import path is `'../../../tests/helpers/salesforce.js'` (not `'../../...'`).
+
+Run it with `node scripts/screenshot/debug/<feature-name>.js` and read the logged output to find reliable selectors (e.g. `title="Edit Semester"` for a Lightning inline-edit pencil icon). Transfer the working selector into the real screenshot script.
+
+Unlike codegen files, keep scripts in `scripts/screenshot/debug/` around (don't delete after use) — the `debug/` subfolder marks them as troubleshooting aids that document how a selector was found, useful if the UI changes later and the screenshot script needs re-diagnosing.

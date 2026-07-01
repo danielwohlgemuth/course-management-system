@@ -94,7 +94,7 @@
                 "definition" : "sfdc_cms__recordListLayoutDataProvider",
                 "sfdcExpressionKey" : "Item",
                 "attributes" : {
-                  "listViewApiName" : "All_Courses",
+                  "listViewApiName" : "Current_Semester_Courses",
                   "objectApiName" : "Course__c",
                   "pageSize" : 10
                 }

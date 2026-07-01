@@ -14,7 +14,7 @@
         <label>My Courses</label>
         <position>2</position>
         <publiclyAvailable>false</publiclyAvailable>
-        <target>/course/Course__c/All_Courses</target>
+        <target>/course/Course__c/Current_Semester_Courses</target>
         <type>InternalLink</type>
     </navigationMenuItem>
 </NavigationMenu>

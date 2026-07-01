@@ -13,7 +13,7 @@ public with sharing class CourseCalendarController {
     @AuraEnabled(cacheable=true)
     public static CourseCalendarConfig__mdt getConfig() {
         return [
-            SELECT Grid_Start_Hour__c, Grid_End_Hour__c, Palette__c, Height_Pixels__c
+            SELECT Grid_Start_Hour__c, Grid_End_Hour__c, Palette__c, Height_Pixels__c, Semester__c
             FROM CourseCalendarConfig__mdt
             WHERE DeveloperName = 'Default'
             LIMIT 1
