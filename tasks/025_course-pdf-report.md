@@ -1,6 +1,6 @@
 # 025 Downloadable PDF report of a course
 
-**Status:** open
+**Status:** done
 
 ## What
 
@@ -8,17 +8,28 @@ Add a button on the Course record page, visible to Admins and Instructors, that 
 
 ## Acceptance criteria
 
-- [ ] Visualforce page (`renderAs="pdf"`) that renders course number, name, semester, and a list of students (pulled from Enrollment records for the course)
-- [ ] Apex controller for the Visualforce page that queries the Course and its related Enrollments/students
-- [ ] Button or link on the Course record page (e.g. Lightning action or quick action) that opens the Visualforce PDF page for the current record
-- [ ] Button/action is visible only to users with the Course Admin or Course Instructor permission set
-- [ ] PDF renders correctly for a course with zero, one, and many enrolled students
+- [x] Visualforce page (`renderAs="pdf"`) that renders course number, name, semester, and a list of students (pulled from Enrollment records for the course)
+- [x] Apex controller for the Visualforce page that queries the Course and its related Enrollments/students
+- [x] Button or link on the Course record page (e.g. Lightning action or quick action) that opens the Visualforce PDF page for the current record
+- [x] Button/action is visible only to users with the Course Admin or Course Instructor permission set
+- [x] PDF renders correctly for a course with zero, one, and many enrolled students
 
 ## Notes
 
 - Follow the "Use `sf` CLI to scaffold new files" principle where applicable; Visualforce pages/controllers may need to be hand-written since `sf` has no generator for them.
 - Reuse the existing Enrollment junction object (see [003](003_enrollment-junction-object.md)) to source the student list.
 - No schema changes anticipated, so no migration file is expected unless a new field is needed for the report.
+
+### Implementation notes
+
+- `CoursePdfReport` (Visualforce, `renderAs="pdf"`) + `CoursePdfReportController` (standard controller extension) render the course number (`Name`), `Course_Name__c`, `Semester__c`, and enrolled students queried from `Enrollment__c`.
+- Added a `Download_PDF_Report` quick action (type `VisualforcePage`) on `Course__c`. It's wired into the Lightning highlights panel by adding it to the `actionNames` list on the `record_flexipage:dynamicHighlights` component in `Course_Record_Page.flexipage-meta.xml` — the page layout's quick action list is *not* read by this component, only the FlexiPage's own `actionNames` property is.
+- Visibility is enforced via access, not a separate UI filter: `CoursePdfReportController` (Apex class access) and `CoursePdfReport` (Visualforce page access) are only granted to the `CourseAdmin` and `CourseInstructor` permission sets, not `CourseStudent`. Salesforce quick actions automatically hide themselves from users who lack access to the underlying page/class.
+- Clicking the action opens it as a modal (standard behavior for `VisualforcePage` quick actions); the `renderAs="pdf"` response triggers a normal browser download rather than rendering inline in the modal iframe.
+- The Course Detail page in the `Course_Portal` LWR Experience Cloud site doesn't support LWC quick actions or the Aura highlights-panel action — Salesforce docs and the Actions Bar component's action picker only offer standard Edit/Create/Update actions there. Instead, `courseDownloadPdfReport` (LWC, targets `lightningCommunity__Default`/`lightningCommunity__Page`) is a plain button dropped directly onto the Course Detail page in Experience Builder; its `recordId` is bound via `default="{!recordId}"` in the `targetConfig`.
+- The component opens `/sfsites/c/apex/CoursePdfReport?id={recordId}` — `/sfsites/c` is the Experience Cloud proxy prefix required for Visualforce pages to resolve correctly under a site's custom domain; a bare `/apex/...` path returns "Invalid Page".
+- Reuses the same `CoursePdfReportController`/`CoursePdfReport` page and permission-set-gated access as the internal Lightning quick action, so visibility rules aren't duplicated.
+- After changing anything on this page in Experience Builder, the site must be published (`sf community publish --name "Course Portal"`) — Builder edits are a draft until then and won't appear for real site users.
 
 ## Related migrations
 

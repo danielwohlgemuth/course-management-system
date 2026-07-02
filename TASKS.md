@@ -28,7 +28,7 @@ Quick-scan index of all tasks. One row per task; details live in `tasks/<id>_<sl
 | [022](tasks/022_app-tabs-error-log-dashboard.md) | Add Error Log and Dashboard tabs to Course Manager app | done |
 | [023](tasks/023_classroom-picklist-field.md) | Add Classroom picklist field to Course object | open |
 | [024](tasks/024_course-planning.md) | Course planning feature (availability + schedule generation) | open |
-| [025](tasks/025_course-pdf-report.md) | Downloadable PDF report of a course (Visualforce) | open |
+| [025](tasks/025_course-pdf-report.md) | Downloadable PDF report of a course (Visualforce) | done |
 
 ## Statuses
 

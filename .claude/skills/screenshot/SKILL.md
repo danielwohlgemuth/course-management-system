@@ -77,6 +77,7 @@ Screenshots are saved to `playwright/screenshots/<datetime>_<feature-name>.png`.
 - Lightning Object Manager pages (e.g. Validation Rules, Fields) are full Lightning pages — no iframe needed.
 - Flow Builder takes several seconds to render its canvas. Wait at least 7 s after navigation before snapping.
 - Existing scripts in `scripts/screenshot/` cover: permission sets list, course list, enrollment related list.
+- Never delete screenshots (or other captured artifacts like downloaded PDFs) from `playwright/screenshots/`, even ones from a failed or partial run — they stay as evidence. If a run fails partway through, just re-run the script; it writes a fresh `${datetime}`-prefixed file each time rather than overwriting.
 
 ## When stuck on selectors — use Playwright Codegen
 

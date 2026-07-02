@@ -1,0 +1,39 @@
+<apex:page standardController="Course__c" extensions="CoursePdfReportController" renderAs="pdf" showHeader="false" applyBodyTag="false" applyHtmlTag="false">
+<html>
+<head>
+    <style>
+        body { font-family: Arial, sans-serif; font-size: 12pt; color: #222; }
+        h1 { font-size: 18pt; margin-bottom: 4px; }
+        .field-label { font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 6px 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Course Report</h1>
+    <p><span class="field-label">Course Number:</span> {!course.Name}</p>
+    <p><span class="field-label">Course Name:</span> {!course.Course_Name__c}</p>
+    <p><span class="field-label">Semester:</span> {!course.Semester__c}</p>
+
+    <h2>Enrolled Students ({!enrollments.size})</h2>
+
+    <apex:outputPanel rendered="{!enrollments.size == 0}">
+        <p>No students are enrolled in this course.</p>
+    </apex:outputPanel>
+
+    <apex:outputPanel rendered="{!enrollments.size > 0}">
+        <table>
+            <thead>
+                <tr><th>Student Name</th></tr>
+            </thead>
+            <tbody>
+                <apex:repeat value="{!enrollments}" var="enrollment">
+                    <tr><td>{!enrollment.Student__r.Name}</td></tr>
+                </apex:repeat>
+            </tbody>
+        </table>
+    </apex:outputPanel>
+</body>
+</html>
+</apex:page>
