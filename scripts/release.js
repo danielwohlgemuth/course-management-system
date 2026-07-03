@@ -10,8 +10,9 @@
  */
 
 import { execSync } from 'child_process';
-import { readdirSync, readFileSync, existsSync } from 'fs';
-import { join } from 'path';
+import { readdirSync, readFileSync, writeFileSync, existsSync } from 'fs';
+import { join, basename, extname } from 'path';
+import { tmpdir } from 'os';
 
 const argv = process.argv.slice(2);
 
@@ -89,10 +90,30 @@ execSync(`git tag -a ${tag} -m "${title.replace(/"/g, '\\"')}"`, { stdio: 'inher
 console.log(`Pushing tag ${tag}...`);
 execSync(`git push origin ${tag}`, { stdio: 'inherit' });
 
-// Build the gh release create command
+// Embed PNG screenshots inline via their predictable release download URL.
+// GitHub attaches assets under a fixed path — https://github.com/OWNER/REPO/releases/download/TAG/FILENAME —
+// so the markdown can reference them before the release exists.
+const pngAssets = assets.filter(a => extname(a).toLowerCase() === '.png');
+if (pngAssets.length) {
+  const repoSlug = execSync('gh repo view --json nameWithOwner -q .nameWithOwner', { stdio: ['pipe', 'pipe', 'inherit'] }).toString().trim();
+  const imageLines = pngAssets.map(a => {
+    const filename = basename(a);
+    const alt = filename
+      .replace(/^\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}_/, '')
+      .replace(/\.[^.]+$/, '')
+      .replace(/[-_]+/g, ' ')
+      .replace(/\b\w/g, c => c.toUpperCase());
+    return `![${alt}](https://github.com/${repoSlug}/releases/download/${tag}/${filename})`;
+  });
+  notes = `${notes}\n\n${imageLines.join('\n\n')}`;
+}
+
+// Build the gh release create command. Notes go through a temp file so
+// markdown images and other special characters don't need shell escaping.
 const assetArgs = assets.map(a => `"${a}"`).join(' ');
-const notesEscaped = notes.replace(/'/g, "'\\''");
-const ghCmd = `gh release create ${tag} --title "${title.replace(/"/g, '\\"')}" --notes '${notesEscaped}'${assets.length ? ` ${assetArgs}` : ''}`;
+const notesFile = join(tmpdir(), `release-${paddedId}-notes.md`);
+writeFileSync(notesFile, notes);
+const ghCmd = `gh release create ${tag} --title "${title.replace(/"/g, '\\"')}" --notes-file "${notesFile}"${assets.length ? ` ${assetArgs}` : ''}`;
 
 console.log('\nCreating GitHub release...');
 const output = execSync(ghCmd, { stdio: ['inherit', 'pipe', 'inherit'] }).toString().trim();

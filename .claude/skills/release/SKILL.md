@@ -81,8 +81,9 @@ node scripts/release.js 21 \
 The script will:
 1. Read `tasks/<id>_<slug>.md` for the title and **What** body
 2. Create and push an annotated git tag `release-<id>` (e.g. `release-015`)
-3. Call `gh release create` with the title, notes, and any asset files
-4. Print the release URL on success
+3. For each `.png` asset, append a markdown image line to the notes referencing its predictable release download URL — `https://github.com/OWNER/REPO/releases/download/TAG/FILENAME` — so screenshots render inline in the release body. `.webm` recordings and other file types are still attached as plain assets, not embedded.
+4. Call `gh release create` with the title, the (possibly image-embedded) notes, and any asset files
+5. Print the release URL on success
 
 Before running the script, read the task's **What** section and rewrite it per the guidelines above; pass the rewritten version with `--notes` rather than letting the script use the raw task text.
 
