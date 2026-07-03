@@ -4,8 +4,10 @@ private class CourseCalendarControllerTest {
     @TestSetup
     static void makeData() {
         Id userId = UserInfo.getUserId();
-        Course__c c1 = new Course__c(Course_Name__c = 'Algebra', Instructor_User__c = userId);
-        Course__c c2 = new Course__c(Course_Name__c = 'Biology', Instructor_User__c = userId);
+        Course__c c1 = new Course__c(Course_Name__c = 'Algebra', Instructor_User__c = userId,
+                                     Semester__c = '2026 S1', Classroom__c = 'Room 101');
+        Course__c c2 = new Course__c(Course_Name__c = 'Biology', Instructor_User__c = userId,
+                                     Classroom__c = 'Room 102');
         insert new List<Course__c>{ c1, c2 };
         insert new List<TimeSlot__c>{
             new TimeSlot__c(Course__c = c1.Id, Day_of_Week__c = 'Monday',
@@ -21,20 +23,34 @@ private class CourseCalendarControllerTest {
     }
 
     @IsTest
-    static void getTimeSlots_returnsAllSlotsWithCourseData() {
+    static void getTimeSlotsWithoutSemesterTest() {
         Test.startTest();
-        List<TimeSlot__c> slots = CourseCalendarController.getTimeSlots();
+        List<TimeSlot__c> slots = CourseCalendarController.getTimeSlots(null);
         Test.stopTest();
 
         Assert.isNotNull(slots, 'Expected non-null list');
-        Assert.areEqual(3, slots.size(), 'Expected 3 time slots');
+        Assert.areEqual(3, slots.size(), 'Expected all 3 time slots when no semester filter is applied');
         for (TimeSlot__c s : slots) {
             Assert.isNotNull(s.Course__r.Course_Name__c, 'Course Name should be populated');
         }
     }
 
     @IsTest
-    static void getConfig_returnsDefaultRecord() {
+    static void getTimeSlotsWithSemesterTest() {
+        Test.startTest();
+        List<TimeSlot__c> slots = CourseCalendarController.getTimeSlots('2026 S1');
+        Test.stopTest();
+
+        Assert.isNotNull(slots, 'Expected non-null list');
+        Assert.areEqual(2, slots.size(), 'Expected only the 2 slots for the 2026 S1 course');
+        for (TimeSlot__c s : slots) {
+            Assert.areEqual('2026 S1', s.Course__r.Semester__c, 'Slots should belong to the filtered semester');
+            Assert.isNotNull(s.Course__r.Classroom__c, 'Classroom should be populated on the queried course');
+        }
+    }
+
+    @IsTest
+    static void getConfigTest() {
         Test.startTest();
         CourseCalendarConfig__mdt config = CourseCalendarController.getConfig();
         Test.stopTest();

@@ -4,6 +4,8 @@ import getTimeSlotsAdapter from '@salesforce/apex/CourseCalendarController.getTi
 import getConfigAdapter from '@salesforce/apex/CourseCalendarController.getConfig';
 import { getObjectInfo, getPicklistValues } from 'lightning/uiObjectInfoApi';
 
+jest.mock('c/errorLogger', () => ({ logError: jest.fn() }), { virtual: true });
+
 // Salesforce Time fields arrive as milliseconds since midnight
 const MOCK_SLOTS = [
     {
@@ -16,6 +18,8 @@ const MOCK_SLOTS = [
             Name: 'CRS-0001',
             Course_Name__c: 'Algebra I',
             Instructor_User__r: { Name: 'Smith' },
+            Semester__c: '2026 S1',
+            Classroom__c: 'Room 101',
         },
     },
 ];
@@ -25,6 +29,7 @@ const MOCK_CONFIG = {
     Grid_End_Hour__c: 18,
     Palette__c: '#3498db,#2ecc71,#e74c3c',
     Height_Pixels__c: 800,
+    Semester__c: '2026 S1',
 };
 
 const MOCK_OBJECT_INFO = {
@@ -74,6 +79,40 @@ describe('c-course-calendar', () => {
         expect(cards.length).toBe(1);
         expect(cards[0].querySelector('.slot-course').textContent).toBe('Algebra I');
         expect(cards[0].querySelector('.slot-instructor').textContent).toBe('Smith');
+    });
+
+    it('renders the four filter comboboxes', async () => {
+        const el = await setupCalendar();
+        const combos = el.shadowRoot.querySelectorAll('lightning-combobox.filter-control');
+        expect(combos.length).toBe(4);
+        const labels = Array.from(combos).map((c) => c.label);
+        expect(labels).toEqual(['Semester', 'Instructor', 'Course', 'Classroom']);
+    });
+
+    it('derives instructor/course/classroom options from the loaded slots', async () => {
+        const el = await setupCalendar();
+        const combos = el.shadowRoot.querySelectorAll('lightning-combobox.filter-control');
+        const [, instructor, course, classroom] = combos;
+        expect(instructor.options).toEqual([
+            { label: 'All', value: '' },
+            { label: 'Smith', value: 'Smith' },
+        ]);
+        expect(course.options).toEqual([
+            { label: 'All', value: '' },
+            { label: 'Algebra I', value: 'Algebra I' },
+        ]);
+        expect(classroom.options).toEqual([
+            { label: 'All', value: '' },
+            { label: 'Room 101', value: 'Room 101' },
+        ]);
+    });
+
+    it('filters slots client-side when an instructor is selected', async () => {
+        const el = await setupCalendar();
+        const instructor = el.shadowRoot.querySelectorAll('lightning-combobox.filter-control')[1];
+        instructor.dispatchEvent(new CustomEvent('change', { detail: { value: 'Nobody' } }));
+        await Promise.resolve();
+        expect(el.shadowRoot.querySelectorAll('.slot-card').length).toBe(0);
     });
 
     it('shows an error message when wire returns an error', async () => {

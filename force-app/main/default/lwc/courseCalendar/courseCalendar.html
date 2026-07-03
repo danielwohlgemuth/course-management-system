@@ -1,4 +1,30 @@
 <template>
+    <div class="calendar-filters">
+        <lightning-combobox
+            class="filter-control"
+            label="Semester"
+            value={selectedSemester}
+            options={semesterOptions}
+            onchange={handleSemesterChange}></lightning-combobox>
+        <lightning-combobox
+            class="filter-control"
+            label="Instructor"
+            value={selectedInstructor}
+            options={instructorOptions}
+            onchange={handleInstructorChange}></lightning-combobox>
+        <lightning-combobox
+            class="filter-control"
+            label="Course"
+            value={selectedCourse}
+            options={courseOptions}
+            onchange={handleCourseChange}></lightning-combobox>
+        <lightning-combobox
+            class="filter-control"
+            label="Classroom"
+            value={selectedClassroom}
+            options={classroomOptions}
+            onchange={handleClassroomChange}></lightning-combobox>
+    </div>
     <div class="calendar-container" onclick={handleContainerClick}>
         <div class="calendar-header">
             <div class="time-axis-spacer"></div>

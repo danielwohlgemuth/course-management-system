@@ -3,6 +3,8 @@ import { NavigationMixin } from 'lightning/navigation';
 import { getObjectInfo, getPicklistValues } from 'lightning/uiObjectInfoApi';
 import TIMESLOT_OBJECT from '@salesforce/schema/TimeSlot__c';
 import DAY_OF_WEEK_FIELD from '@salesforce/schema/TimeSlot__c.Day_of_Week__c';
+import COURSE_OBJECT from '@salesforce/schema/Course__c';
+import SEMESTER_FIELD from '@salesforce/schema/Course__c.Semester__c';
 import getTimeSlots from '@salesforce/apex/CourseCalendarController.getTimeSlots';
 import getConfig from '@salesforce/apex/CourseCalendarController.getConfig';
 import { logError } from 'c/errorLogger';
@@ -27,13 +29,22 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
     error = undefined;
     activeOverlapSlots = null;
     popoverStyle = '';
+    selectedSemester = '';
+    selectedInstructor = '';
+    selectedCourse = '';
+    selectedClassroom = '';
+    semesterOptions = [{ label: 'All', value: '' }];
     _slots = undefined;
     _days = undefined;
     _config = undefined;
+    _semesterInitialized = false;
     _overlapMap = new Map();
 
     @wire(getObjectInfo, { objectApiName: TIMESLOT_OBJECT })
     _objectInfo;
+
+    @wire(getObjectInfo, { objectApiName: COURSE_OBJECT })
+    _courseInfo;
 
     @wire(getPicklistValues, {
         recordTypeId: '$_objectInfo.data.defaultRecordTypeId',
@@ -49,7 +60,23 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
         }
     }
 
-    @wire(getTimeSlots)
+    @wire(getPicklistValues, {
+        recordTypeId: '$_courseInfo.data.defaultRecordTypeId',
+        fieldApiName: SEMESTER_FIELD
+    })
+    wiredSemesterValues({ data, error }) {
+        if (data) {
+            this.semesterOptions = [
+                { label: 'All', value: '' },
+                ...data.values.map(v => ({ value: v.value, label: v.label }))
+            ];
+        } else if (error) {
+            this.error = error;
+            logError('courseCalendar', 'wiredSemesterValues: ' + JSON.stringify(error), '');
+        }
+    }
+
+    @wire(getTimeSlots, { semester: '$selectedSemester' })
     wiredSlots({ data, error }) {
         if (data) {
             if (!Array.isArray(data)) return;
@@ -73,6 +100,10 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
                 palette: (data.Palette__c || '').split(',').map(c => c.trim()).filter(Boolean),
                 heightPixels: data.Height_Pixels__c
             };
+            if (!this._semesterInitialized) {
+                this._semesterInitialized = true;
+                this.selectedSemester = data.Semester__c || '';
+            }
             this._rebuildIfReady();
         } else if (error) {
             this.error = error;
@@ -108,6 +139,28 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
         this.activeOverlapSlots = null;
     }
 
+    handleSemesterChange(event) {
+        this.selectedInstructor = '';
+        this.selectedCourse = '';
+        this.selectedClassroom = '';
+        this.selectedSemester = event.detail.value;
+    }
+
+    handleInstructorChange(event) {
+        this.selectedInstructor = event.detail.value;
+        this._rebuildIfReady();
+    }
+
+    handleCourseChange(event) {
+        this.selectedCourse = event.detail.value;
+        this._rebuildIfReady();
+    }
+
+    handleClassroomChange(event) {
+        this.selectedClassroom = event.detail.value;
+        this._rebuildIfReady();
+    }
+
     handlePopoverItemClick(event) {
         event.stopPropagation();
         const recordId = event.currentTarget.dataset.recordId;
@@ -120,8 +173,51 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
 
     _rebuildIfReady() {
         if (this._slots && this._days && this._config) {
-            this.calendarDays = this._buildCalendar(this._slots, this._days);
+            this.calendarDays = this._buildCalendar(this._applyFilters(this._slots), this._days);
         }
+    }
+
+    _applyFilters(slots) {
+        return slots.filter(slot => {
+            const course = slot.Course__r || {};
+            if (this.selectedInstructor &&
+                course.Instructor_User__r?.Name !== this.selectedInstructor) {
+                return false;
+            }
+            if (this.selectedCourse &&
+                course.Course_Name__c !== this.selectedCourse) {
+                return false;
+            }
+            if (this.selectedClassroom &&
+                course.Classroom__c !== this.selectedClassroom) {
+                return false;
+            }
+            return true;
+        });
+    }
+
+    _distinctOptions(accessor) {
+        const values = new Set();
+        for (const slot of this._slots || []) {
+            const value = accessor(slot.Course__r || {});
+            if (value) values.add(value);
+        }
+        return [
+            { label: 'All', value: '' },
+            ...[...values].sort().map(v => ({ label: v, value: v }))
+        ];
+    }
+
+    get instructorOptions() {
+        return this._distinctOptions(c => c.Instructor_User__r?.Name);
+    }
+
+    get courseOptions() {
+        return this._distinctOptions(c => c.Course_Name__c);
+    }
+
+    get classroomOptions() {
+        return this._distinctOptions(c => c.Classroom__c);
     }
 
     get calendarBodyStyle() {

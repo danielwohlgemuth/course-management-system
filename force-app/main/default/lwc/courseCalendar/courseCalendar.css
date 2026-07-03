@@ -2,6 +2,18 @@
     font-family: var(--lwc-fontFamily, sans-serif);
 }
 
+.calendar-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 8px 4px 16px;
+}
+
+.filter-control {
+    min-width: 160px;
+    flex: 1 1 160px;
+}
+
 .calendar-header {
     display: grid;
     grid-template-columns: 60px repeat(7, 1fr);
