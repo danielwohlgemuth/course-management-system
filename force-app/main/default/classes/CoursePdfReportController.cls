@@ -6,7 +6,7 @@ public with sharing class CoursePdfReportController {
         Id courseId = stdController.getId();
 
         course = [
-            SELECT Id, Name, Course_Name__c, Semester__c
+            SELECT Id, Name, Course_Name__c, Semester__c, Classroom__c
             FROM Course__c
             WHERE Id = :courseId
             WITH USER_MODE

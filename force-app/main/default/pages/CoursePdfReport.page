@@ -15,6 +15,7 @@
     <p><span class="field-label">Course Number:</span> {!course.Name}</p>
     <p><span class="field-label">Course Name:</span> {!course.Course_Name__c}</p>
     <p><span class="field-label">Semester:</span> {!course.Semester__c}</p>
+    <p><span class="field-label">Classroom:</span> {!course.Classroom__c}</p>
 
     <h2>Enrolled Students ({!enrollments.size})</h2>
 

@@ -9,13 +9,13 @@ for (User u : [SELECT Id, Name FROM User WHERE Name IN ('Elena Marsh', 'James Ok
 // Elena: Algebra, Biology 101, Programming, Physical Education (4 courses)
 // James: World History, Creative Writing, Art & Design (3 courses)
 List<Course__c> courses = new List<Course__c>{
-    new Course__c(Course_Name__c = 'Introduction to Algebra',     Instructor_User__c = instructorIds.get('Elena Marsh')),
-    new Course__c(Course_Name__c = 'World History',               Instructor_User__c = instructorIds.get('James Okafor')),
-    new Course__c(Course_Name__c = 'Biology 101',                 Instructor_User__c = instructorIds.get('Elena Marsh')),
-    new Course__c(Course_Name__c = 'Creative Writing',            Instructor_User__c = instructorIds.get('James Okafor')),
-    new Course__c(Course_Name__c = 'Introduction to Programming', Instructor_User__c = instructorIds.get('Elena Marsh')),
-    new Course__c(Course_Name__c = 'Art & Design Fundamentals',   Instructor_User__c = instructorIds.get('James Okafor')),
-    new Course__c(Course_Name__c = 'Physical Education',          Instructor_User__c = instructorIds.get('Elena Marsh'))
+    new Course__c(Course_Name__c = 'Introduction to Algebra',     Instructor_User__c = instructorIds.get('Elena Marsh'),  Classroom__c = 'Room 101'),
+    new Course__c(Course_Name__c = 'World History',               Instructor_User__c = instructorIds.get('James Okafor'), Classroom__c = 'Room 102'),
+    new Course__c(Course_Name__c = 'Biology 101',                 Instructor_User__c = instructorIds.get('Elena Marsh'),  Classroom__c = 'Room 103'),
+    new Course__c(Course_Name__c = 'Creative Writing',            Instructor_User__c = instructorIds.get('James Okafor'), Classroom__c = 'Room 104'),
+    new Course__c(Course_Name__c = 'Introduction to Programming', Instructor_User__c = instructorIds.get('Elena Marsh'),  Classroom__c = 'Room 101'),
+    new Course__c(Course_Name__c = 'Art & Design Fundamentals',   Instructor_User__c = instructorIds.get('James Okafor'), Classroom__c = 'Room 102'),
+    new Course__c(Course_Name__c = 'Physical Education',          Instructor_User__c = instructorIds.get('Elena Marsh'),  Classroom__c = 'Room 103')
 };
 insert courses;
 

@@ -103,6 +103,16 @@
                 <identifier>RecordSemester_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Classroom__c</fieldItem>
+                <identifier>RecordClassroom_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-7a811575-9886-4446-8dc7-9b40624a7252</name>
         <type>Facet</type>
     </flexiPageRegions>
