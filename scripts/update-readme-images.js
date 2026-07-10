@@ -36,6 +36,15 @@ const INDIRECT_SCRIPTS = [
       { suffix: 'enrollment-report.png', dest: 'enrollment-report.png' },
     ],
   },
+  {
+    // Locks the seeded plans — re-run scripts/apex/seed_course_plans.apex before re-running.
+    script: 'course-planning.js',
+    outputs: [
+      { suffix: 'course-plan-draft.png', dest: 'course-plan-draft.png' },
+      { suffix: 'course-plan-schedule.png', dest: 'course-plan-schedule.png' },
+      { suffix: 'course-plan-error.png', dest: 'course-plan-error.png' },
+    ],
+  },
 ];
 
 function run(script) {

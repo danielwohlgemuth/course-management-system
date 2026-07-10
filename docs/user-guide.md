@@ -1,7 +1,7 @@
 ---
 title: User Guide
 description: How to manage courses and view the weekly schedule calendar
-last_updated: 2026-05-22
+last_updated: 2026-07-08
 ---
 
 # User Guide
@@ -72,7 +72,41 @@ A course record displays:
 
 ---
 
-## Creating a Course
+## Planning a Course (Instructors)
+
+Instructors don't create courses directly — courses are generated from a **course plan**. See [Course Planning](course-planning.md) for the full feature guide.
+
+1. Go to the **Course Plans** tab and click **New**.
+2. Fill in the plan:
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| Course Name | Yes | Title the generated course will carry |
+| Classroom | Yes | Room the classes will be held in |
+| Classes per Week | Yes | How many sessions to schedule each week |
+| Duration per Class (Minutes) | Yes | Length of each session |
+| Semester | Yes | Semester the course belongs to |
+
+3. In the **Availability Windows** related list, click **New** for each weekly window you are available (day of week + start/end time). Windows are editable only while the plan is in **Draft**.
+4. Click **Lock plan** in the **Schedule** card. The system assigns a concrete day and time to every weekly class, drawing only from your declared availability and avoiding other courses in the same classroom, then generates the course and its time slots.
+
+![Draft course plan](../assets/course-plan-draft.png)
+
+- **Success:** the schedule appears, with a link to the generated course.
+
+  ![Generated schedule](../assets/course-plan-schedule.png)
+
+- **No valid schedule:** the plan stays locked with an error explaining why (e.g. not enough availability for the requested classes). Unlock it, adjust the windows, and lock again.
+
+  ![Scheduling error](../assets/course-plan-error.png)
+
+**Unlocking:** click **Unlock plan** to revert to Draft and make changes. This deletes the generated course, its schedule, and any student enrollments — a confirmation dialog warns you first.
+
+---
+
+## Creating a Course (Administrators)
+
+> Instructors can no longer create or edit courses directly — use [Planning a Course](#planning-a-course-instructors) instead.
 
 1. Go to the **Courses** tab and click **New**.
 2. Fill in the fields:
@@ -88,9 +122,9 @@ A course record displays:
 
 ---
 
-## Adding Time Slots
+## Adding Time Slots (Administrators)
 
-A time slot represents one recurring session per week (e.g. every Monday 9:00–10:30 AM). Add as many slots as the course needs.
+A time slot represents one recurring session per week (e.g. every Monday 9:00–10:30 AM). Add as many slots as the course needs. For courses generated from a course plan, time slots are created automatically — edit the plan (unlock, adjust, re-lock) rather than the slots.
 
 1. Open the course record.
 2. In the **Time Slots** related list, click **New**.

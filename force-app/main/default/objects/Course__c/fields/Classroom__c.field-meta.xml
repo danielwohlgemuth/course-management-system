@@ -8,28 +8,6 @@
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
-        <valueSetDefinition>
-            <sorted>false</sorted>
-            <value>
-                <fullName>Room 101</fullName>
-                <default>false</default>
-                <label>Room 101</label>
-            </value>
-            <value>
-                <fullName>Room 102</fullName>
-                <default>false</default>
-                <label>Room 102</label>
-            </value>
-            <value>
-                <fullName>Room 103</fullName>
-                <default>false</default>
-                <label>Room 103</label>
-            </value>
-            <value>
-                <fullName>Room 104</fullName>
-                <default>false</default>
-                <label>Room 104</label>
-            </value>
-        </valueSetDefinition>
+        <valueSetName>Classroom</valueSetName>
     </valueSet>
 </CustomField>

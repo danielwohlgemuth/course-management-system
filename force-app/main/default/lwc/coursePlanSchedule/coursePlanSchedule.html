@@ -1,0 +1,94 @@
+<template>
+  <lightning-card title="Schedule" icon-name="standard:date_time">
+    <div class="slds-var-p-horizontal_medium slds-var-p-bottom_small">
+      <template lwc:if={isDraft}>
+        <p class="slds-var-m-bottom_small">
+          This plan is a draft. Add availability windows below, then lock the
+          plan to generate the course and its weekly schedule.
+        </p>
+        <lightning-button
+          variant="brand"
+          label="Lock plan"
+          onclick={handleLock}
+          disabled={working}
+        ></lightning-button>
+      </template>
+
+      <template lwc:elseif={isScheduled}>
+        <p class="slds-var-m-bottom_small">
+          This plan is locked and its course has been generated. Unlock the plan
+          to change it — this deletes the generated course and its schedule.
+        </p>
+        <table
+          class="slds-table slds-table_bordered slds-table_cell-buffer slds-var-m-bottom_small"
+          data-id="schedule-table"
+        >
+          <thead>
+            <tr class="slds-line-height_reset">
+              <th scope="col">Day</th>
+              <th scope="col">Start</th>
+              <th scope="col">End</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template for:each={sessions} for:item="session">
+              <tr key={session.id}>
+                <td>{session.day}</td>
+                <td>{session.startLabel}</td>
+                <td>{session.endLabel}</td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+        <lightning-button
+          label="View generated course"
+          onclick={handleViewCourse}
+          class="slds-var-m-right_small"
+        ></lightning-button>
+        <lightning-button
+          variant="destructive-text"
+          label="Unlock plan"
+          onclick={handleUnlock}
+          disabled={working}
+        ></lightning-button>
+      </template>
+
+      <template lwc:elseif={isLockedWithError}>
+        <div
+          class="slds-scoped-notification slds-media slds-media_center slds-theme_error slds-var-m-bottom_small"
+          role="alert"
+        >
+          <div class="slds-media__figure">
+            <lightning-icon
+              icon-name="utility:error"
+              variant="inverse"
+              size="small"
+            ></lightning-icon>
+          </div>
+          <div class="slds-media__body">
+            <p>{schedulingError}</p>
+          </div>
+        </div>
+        <p class="slds-var-m-bottom_small">
+          The plan is locked but no schedule could be generated. Unlock it,
+          adjust the availability windows, and lock it again.
+        </p>
+        <lightning-button
+          variant="destructive-text"
+          label="Unlock plan"
+          onclick={handleUnlock}
+          disabled={working}
+        ></lightning-button>
+      </template>
+
+      <template lwc:if={actionError}>
+        <p
+          class="slds-text-color_error slds-var-m-top_small"
+          data-id="action-error"
+        >
+          {actionError}
+        </p>
+      </template>
+    </div>
+  </lightning-card>
+</template>

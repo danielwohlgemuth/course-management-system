@@ -4,7 +4,8 @@
   "features": ["EnableSetPasswordInApi", "Communities"],
   "settings": {
     "communitiesSettings":{
-      "enableNetworksEnabled": true
+      "enableNetworksEnabled": true,
+      "enableOotbProfExtUserOpsEnable": true
     },
     "lightningExperienceSettings": {
       "enableS1DesktopEnabled": true

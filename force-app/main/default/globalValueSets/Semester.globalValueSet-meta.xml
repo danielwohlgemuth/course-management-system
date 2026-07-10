@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>2026 S1</fullName>
+        <default>false</default>
+        <label>2026 S1</label>
+    </customValue>
+    <description>Semester identifiers shared by Course and Course Plan.</description>
+    <masterLabel>Semester</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>
