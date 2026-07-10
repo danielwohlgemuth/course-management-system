@@ -1,10 +1,17 @@
 // Creates Customer Community Plus Users for 2 course instructors.
 // Run via: sf apex run --file scripts/apex/create_instructors.apex
 //
+// The account is created with IsPartner = true so it doesn't need the
+// "Enable Partner Account" action clicked manually in the UI. If that field
+// gets rejected in some org (e.g. missing "Manage Partner Accounts" access
+// or Partner feature not enabled), remove `IsPartner = true` here and
+// instead open the Course Management account and click
+// Enable Partner Account from the page actions after insert.
+//
 // Next step: assign the CourseInstructor permission set by running:
 //   sf apex run --file scripts/apex/assign_instructor_permission_set.apex
 
-Account acct = new Account(Name = 'Course Management');
+Account acct = new Account(Name = 'Course Management', IsPartner = true);
 insert acct;
 
 List<String> firstNames = new List<String>{'Elena',      'James'};

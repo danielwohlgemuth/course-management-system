@@ -59,6 +59,35 @@ Open it in a browser:
 sf org open
 ```
 
+## 5. Set up the Experience Site
+
+Experience Sites and their bundles cannot be created purely via metadata deploy — the initial site must be created through Setup UI. The metadata in this repo captures the configuration of an already-created site and is used to keep it in sync.
+
+1. Deploy all metadata except the Experience Site types first:
+   ```bash
+   sf project deploy start --source-dir force-app/main/default --ignore-conflicts
+   ```
+
+2. In Setup → Digital Experiences → All Sites, click **New**, choose **Build Your Own (LWR)**, set:
+   - Name: `Course Portal`
+   - URL: `courses` (Salesforce appends `vforcesite` automatically, giving `coursesvforcesite`)
+
+3. Deploy the site metadata to overlay configuration and activate the site:
+   ```bash
+   sf project deploy start \
+     --source-dir force-app/main/default/networks \
+     --source-dir force-app/main/default/sites \
+     --source-dir force-app/main/default/digitalExperiences \
+     --source-dir force-app/main/default/navigationMenus \
+     --ignore-conflicts
+   ```
+   The Network metadata's `<status>Live</status>` activates the site as part of this deploy, so no separate manual activation step is needed.
+
+4. Publish the site so the deployed configuration is visible to users: open Experience Builder for `Course Portal` (Setup → Digital Experiences → All Sites → Builder) and click **Publish**, or via the CLI:
+   ```bash
+   sf community publish --name "Course Portal"
+   ```
+
 ## Notes
 
 - Developer Edition orgs are limited to **3 active scratch orgs** at a time (vs 40 for paid orgs).
