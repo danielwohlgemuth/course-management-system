@@ -1,6 +1,6 @@
 # 027 Reword course planning doc introduction
 
-**Status:** open
+**Status:** done
 
 ## What
 

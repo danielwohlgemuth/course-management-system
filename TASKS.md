@@ -30,7 +30,7 @@ Quick-scan index of all tasks. One row per task; details live in `tasks/<id>_<sl
 | [024](tasks/024_course-planning.md) | Course planning feature (availability + schedule generation) | done |
 | [025](tasks/025_course-pdf-report.md) | Downloadable PDF report of a course (Visualforce) | done |
 | [026](tasks/026_course-calendar-filters.md) | Add instructor/semester/course/classroom filters to Course Calendar | done |
-| [027](tasks/027_course-planning-doc-intro-reword.md) | Reword course planning doc introduction | open |
+| [027](tasks/027_course-planning-doc-intro-reword.md) | Reword course planning doc introduction | done |
 | [028](tasks/028_course-plan-test-constants-refactor.md) | Refactor hardcoded picklist/text values in course plan tests | open |
 | [029](tasks/029_course-plan-scheduler-error-labels.md) | Use custom labels for CoursePlanScheduler error messages | open |
 | [030](tasks/030_course-plan-delete-without-unlock.md) | Allow deleting a locked CoursePlan without unlocking first | open |

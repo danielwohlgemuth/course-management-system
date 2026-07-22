@@ -6,7 +6,7 @@ last_updated: 2026-07-08
 
 # Course Planning
 
-Course planning inverts how courses are created: instead of instructors assembling a course and its time slots by hand, they declare **what** they want to teach and **when** they are available, and the system computes a conflict-free weekly schedule and generates the course. Instructors no longer have create/edit/delete access on courses or time slots — locking a plan is the only way a course comes into existence for them.
+Instructors declare **what** they want to teach and **when** they are available, and the system computes a conflict-free weekly schedule and generates the course. Instructors do not have create/edit/delete access on courses or time slots — locking a plan is the only way a course comes into existence for them.
 
 ## Lifecycle
 
