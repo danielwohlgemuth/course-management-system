@@ -19,7 +19,7 @@ public inherited sharing class CoursePlanScheduler {
     'Saturday',
     'Sunday'
   };
-  public static final String ERROR_NO_AVAILABILITY_WINDOWS = 'Cannot schedule: this plan has no availability windows. Add at least one before locking.';
+  public static final String ERROR_NO_AVAILABILITY_WINDOWS = Label.CoursePlanScheduler_ErrorNoAvailabilityWindows;
 
   public class SessionSlot {
     public String dayOfWeek;
@@ -68,7 +68,7 @@ public inherited sharing class CoursePlanScheduler {
       durationMinutes == null ||
       durationMinutes < 1
     ) {
-      result.errorMessage = 'Cannot schedule: classes per week and duration per class must both be at least 1.';
+      result.errorMessage = Label.CoursePlanScheduler_ErrorInvalidInputs;
       return result;
     }
     if (windows == null || windows.isEmpty()) {
@@ -85,20 +85,20 @@ public inherited sharing class CoursePlanScheduler {
       w.endMin = toMinutes(avail.End_Time__c);
       w.sortKey = String.valueOf(avail.Id);
       if (w.endMin <= w.startMin) {
-        result.errorMessage =
-          'Availability window on ' +
-          avail.Day_of_Week__c +
-          ' has an end time that is not after its start time.';
+        result.errorMessage = String.format(
+          Label.CoursePlanScheduler_ErrorInvalidWindow,
+          new List<Object>{ avail.Day_of_Week__c }
+        );
         return result;
       }
       longestWindow = Math.max(longestWindow, w.endMin - w.startMin);
       sorted.add(w);
     }
     if (longestWindow < durationMinutes) {
-      result.errorMessage =
-        'Cannot schedule: no availability window is at least ' +
-        durationMinutes +
-        ' minutes long.';
+      result.errorMessage = String.format(
+        Label.CoursePlanScheduler_ErrorWindowTooShort,
+        new List<Object>{ durationMinutes }
+      );
       return result;
     }
     sorted.sort();
@@ -157,19 +157,19 @@ public inherited sharing class CoursePlanScheduler {
     }
 
     if (placed.size() < classesPerWeek) {
-      String message =
-        'Could only schedule ' +
-        placed.size() +
-        ' of ' +
-        classesPerWeek +
-        ' weekly classes within the declared availability.';
+      String message = String.format(
+        Label.CoursePlanScheduler_ErrorPartialSchedule,
+        new List<Object>{ placed.size(), classesPerWeek }
+      );
       if (hadConflicts) {
         message +=
-          ' Existing courses in ' +
-          classroom +
-          ' already occupy part of this availability.';
+          ' ' +
+          String.format(
+            Label.CoursePlanScheduler_ErrorExistingConflicts,
+            new List<Object>{ classroom }
+          );
       }
-      message += ' Unlock the plan and adjust the availability windows.';
+      message += ' ' + Label.CoursePlanScheduler_ErrorUnlockPlan;
       result.errorMessage = message;
       return result;
     }

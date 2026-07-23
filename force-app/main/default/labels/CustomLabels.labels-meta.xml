@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>CoursePlanScheduler_ErrorInvalidInputs</fullName>
+        <categories>Course Plan Scheduler</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >CoursePlanScheduler: classes per week or duration is missing/invalid</shortDescription>
+        <value
+    >Cannot schedule: classes per week and duration per class must both be at least 1.</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanScheduler_ErrorNoAvailabilityWindows</fullName>
+        <categories>Course Plan Scheduler</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >CoursePlanScheduler: plan has no availability windows</shortDescription>
+        <value
+    >Cannot schedule: this plan has no availability windows. Add at least one before locking.</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanScheduler_ErrorInvalidWindow</fullName>
+        <categories>Course Plan Scheduler</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >CoursePlanScheduler: window end time not after start time ({0}=day)</shortDescription>
+        <value
+    >Availability window on {0} has an end time that is not after its start time.</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanScheduler_ErrorWindowTooShort</fullName>
+        <categories>Course Plan Scheduler</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >CoursePlanScheduler: no window long enough for duration ({0}=minutes)</shortDescription>
+        <value
+    >Cannot schedule: no availability window is at least {0} minutes long.</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanScheduler_ErrorPartialSchedule</fullName>
+        <categories>Course Plan Scheduler</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >CoursePlanScheduler: partial schedule ({0}=placed, {1}=requested)</shortDescription>
+        <value
+    >Could only schedule {0} of {1} weekly classes within the declared availability.</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanScheduler_ErrorExistingConflicts</fullName>
+        <categories>Course Plan Scheduler</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >CoursePlanScheduler: existing courses consumed availability ({0}=classroom)</shortDescription>
+        <value
+    >Existing courses in {0} already occupy part of this availability.</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanScheduler_ErrorUnlockPlan</fullName>
+        <categories>Course Plan Scheduler</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >CoursePlanScheduler: instruction to unlock and adjust availability</shortDescription>
+        <value>Unlock the plan and adjust the availability windows.</value>
+    </labels>
+</CustomLabels>

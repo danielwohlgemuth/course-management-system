@@ -1,6 +1,6 @@
 # 029 Use custom labels for CoursePlanScheduler error messages
 
-**Status:** open
+**Status:** done
 
 ## What
 
@@ -8,11 +8,11 @@
 
 ## Acceptance criteria
 
-- [ ] Each distinct error message in `CoursePlanScheduler.cls` has a corresponding new Custom Label.
-- [ ] Dynamic values (e.g. required duration, weekly class count) are inserted via label placeholders (`{0}`, `{1}`, ...) and `String.format`, not string concatenation.
-- [ ] No existing/pre-existing labels are reused or repurposed — only new labels are added for this feature's messages.
-- [ ] `CoursePlanControllerTest` / `CoursePlanSchedulerTest` assertions are updated to match the label-driven text.
-- [ ] `sf apex run test --class-names CoursePlanScheduler,CoursePlanSchedulerTest --synchronous` passes.
+- [x] Each distinct error message in `CoursePlanScheduler.cls` has a corresponding new Custom Label.
+- [x] Dynamic values (e.g. required duration, weekly class count) are inserted via label placeholders (`{0}`, `{1}`, ...) and `String.format`, not string concatenation.
+- [x] No existing/pre-existing labels are reused or repurposed: only new labels are added for this feature's messages.
+- [x] `CoursePlanControllerTest` / `CoursePlanSchedulerTest` assertions are updated to match the label-driven text. (No changes were needed: existing assertions use `.contains(...)` substring checks against wording that was preserved verbatim.)
+- [x] `sf apex run test --class-names CoursePlanScheduler,CoursePlanSchedulerTest --synchronous` passes. (Run as two separate `--class-names` invocations, since `sf` only allows one class per synchronous run; `CoursePlanSchedulerTest` and `CoursePlanControllerTest` both pass.)
 
 ## Notes
 
@@ -20,4 +20,4 @@ Follow-up cleanup item from task 024.
 
 ## Related migrations
 
-- `migrations/YYYY-MM-DD_course-plan-scheduler-error-labels.md` (add once written — introduces new Custom Label metadata)
+- `migrations/2026-07-22_course-plan-scheduler-error-labels.md`

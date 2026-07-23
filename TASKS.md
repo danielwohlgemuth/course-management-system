@@ -32,7 +32,7 @@ Quick-scan index of all tasks. One row per task; details live in `tasks/<id>_<sl
 | [026](tasks/026_course-calendar-filters.md)                       | Add instructor/semester/course/classroom filters to Course Calendar          | done   |
 | [027](tasks/027_course-planning-doc-intro-reword.md)              | Reword course planning doc introduction                                      | done   |
 | [028](tasks/028_course-plan-test-constants-refactor.md)           | Refactor hardcoded picklist/text values in course plan tests                 | done   |
-| [029](tasks/029_course-plan-scheduler-error-labels.md)            | Use custom labels for CoursePlanScheduler error messages                     | open   |
+| [029](tasks/029_course-plan-scheduler-error-labels.md)            | Use custom labels for CoursePlanScheduler error messages                     | done   |
 | [030](tasks/030_course-plan-delete-without-unlock.md)             | Allow deleting a locked CoursePlan without unlocking first                   | open   |
 | [031](tasks/031_course-plan-unscheduled-status.md)                | Add "Unscheduled" status to CoursePlan                                       | open   |
 | [032](tasks/032_course-plan-owner-on-record-page.md)              | Show Owner on the Course Plan record page                                    | open   |
