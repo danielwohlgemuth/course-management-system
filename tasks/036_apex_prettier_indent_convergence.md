@@ -1,6 +1,6 @@
 # 036 Reformat remaining Apex classes to prettier's 2-space indent
 
-**Status:** open
+**Status:** done
 
 ## What
 
@@ -12,9 +12,9 @@ Reformat the rest of the Apex classes (and any Apex triggers) to 2-space indenta
 
 ## Acceptance criteria
 
-- [ ] `npx prettier --check "force-app/**/*.{cls,trigger}"` passes with no diffs.
-- [ ] The reformatting commit contains only whitespace/formatting changes (no logic changes).
-- [ ] `sf apex run test --test-level RunLocalTests --synchronous` passes after the reformat.
+- [x] `npx prettier --check "force-app/**/*.{cls,trigger}"` passes with no diffs.
+- [x] The reformatting commit contains only whitespace/formatting changes (no logic changes).
+- [x] `sf apex run test --test-level RunLocalTests --synchronous` passes after the reformat.
 
 ## Notes
 

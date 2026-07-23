@@ -39,7 +39,7 @@ Quick-scan index of all tasks. One row per task; details live in `tasks/<id>_<sl
 | [033](tasks/033_course-plan-list-view.md)                         | Add a list view for Course Plan                                              | open   |
 | [034](tasks/034_course-planning-community.md)                     | Course planning from the Experience Site                                     | open   |
 | [035](tasks/035_course-detail-community-timeslots-enrollments.md) | Show time slots, enrollments, and PDF report on community Course Detail page | open   |
-| [036](tasks/036_apex_prettier_indent_convergence.md)              | Reformat remaining Apex classes to prettier's 2-space indent                 | open   |
+| [036](tasks/036_apex_prettier_indent_convergence.md)              | Reformat remaining Apex classes to prettier's 2-space indent                 | done   |
 
 ## Statuses
 
