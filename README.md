@@ -4,7 +4,7 @@ A Salesforce-based application for managing courses, instructors, and weekly sch
 
 ## Standard Users
 
-### Home — Weekly Calendar
+### Home: Weekly Calendar
 
 The home page shows all courses in a weekly calendar view. Overlapping time slots are grouped into a stack badge; clicking it opens a popover listing each course.
 
@@ -24,7 +24,7 @@ Each course record shows the course details and its related time slots.
 
 ### Course Planning
 
-Instructors don't create courses directly — they define a **course plan** (name, classroom, classes per week, duration per class, semester) and declare their weekly availability windows. Locking the plan runs a scheduler that assigns a concrete, conflict-free time slot to each weekly class and generates the course; if no valid schedule exists, the plan stays locked with a clear error explaining why.
+Instructors don't create courses directly. Instead, they define a **course plan** (name, classroom, classes per week, duration per class, semester) and declare their weekly availability windows. Locking the plan runs a scheduler that assigns a concrete, conflict-free time slot to each weekly class and generates the course; if no valid schedule exists, the plan stays locked with a clear error explaining why.
 
 ![Draft course plan with availability windows](/assets/course-plan-draft.png)
 
