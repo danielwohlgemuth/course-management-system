@@ -21,6 +21,10 @@ const PLAN_FIELDS = [
   GENERATED_COURSE_FIELD
 ];
 
+export const STATUS_DRAFT = "Draft";
+export const STATUS_LOCKED = "Locked";
+export const UNLOCK_BUTTON_LABEL = "Unlock plan";
+
 // Salesforce Time fields arrive as milliseconds since midnight
 function formatTime(ms) {
   const totalMins = Math.floor(ms / 60_000);
@@ -58,15 +62,19 @@ export default class CoursePlanSchedule extends NavigationMixin(
   }
 
   get isDraft() {
-    return this.status === "Draft";
+    return this.status === STATUS_DRAFT;
   }
 
   get isScheduled() {
-    return this.status === "Locked" && !!this.generatedCourseId;
+    return this.status === STATUS_LOCKED && !!this.generatedCourseId;
   }
 
   get isLockedWithError() {
-    return this.status === "Locked" && !this.generatedCourseId;
+    return this.status === STATUS_LOCKED && !this.generatedCourseId;
+  }
+
+  get unlockButtonLabel() {
+    return UNLOCK_BUTTON_LABEL;
   }
 
   get sessions() {
@@ -106,7 +114,7 @@ export default class CoursePlanSchedule extends NavigationMixin(
       count > 0 ? ` and ${count} student enrollment(s)` : "";
     const confirmed = await LightningConfirm.open({
       message: `Unlocking deletes the generated course and its schedule${enrollmentWarning}. Continue?`,
-      label: "Unlock plan",
+      label: UNLOCK_BUTTON_LABEL,
       theme: "warning"
     });
     if (!confirmed) {

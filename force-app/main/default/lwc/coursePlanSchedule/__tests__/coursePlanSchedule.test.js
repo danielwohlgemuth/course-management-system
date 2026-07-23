@@ -1,5 +1,9 @@
 import { createElement } from "@lwc/engine-dom";
-import CoursePlanSchedule from "c/coursePlanSchedule";
+import CoursePlanSchedule, {
+  STATUS_DRAFT,
+  STATUS_LOCKED,
+  UNLOCK_BUTTON_LABEL
+} from "c/coursePlanSchedule";
 import { getRecord } from "lightning/uiRecordApi";
 import LightningConfirm from "lightning/confirm";
 // The project maps every @salesforce/apex/* module to one shared mock
@@ -54,7 +58,7 @@ function buildComponent() {
 
 function unlockButtonOf(element) {
   return [...element.shadowRoot.querySelectorAll("lightning-button")].find(
-    (button) => button.label === "Unlock plan"
+    (button) => button.label === UNLOCK_BUTTON_LABEL
   );
 }
 
@@ -68,7 +72,7 @@ describe("c-course-plan-schedule", () => {
 
   it("shows the lock button for a draft plan", async () => {
     const element = buildComponent();
-    getRecord.emit(planRecord("Draft", null, null));
+    getRecord.emit(planRecord(STATUS_DRAFT, null, null));
     getPlanDetails.emit({ sessions: [], enrollmentCount: 0 });
     await flushPromises();
 
@@ -82,7 +86,7 @@ describe("c-course-plan-schedule", () => {
 
   it("shows the schedule table and unlock button for a locked, scheduled plan", async () => {
     const element = buildComponent();
-    getRecord.emit(planRecord("Locked", null, COURSE_ID));
+    getRecord.emit(planRecord(STATUS_LOCKED, null, COURSE_ID));
     getPlanDetails.emit(MOCK_DETAILS);
     await flushPromises();
 
@@ -98,14 +102,18 @@ describe("c-course-plan-schedule", () => {
     const labels = [
       ...element.shadowRoot.querySelectorAll("lightning-button")
     ].map((b) => b.label);
-    expect(labels).toContain("Unlock plan");
+    expect(labels).toContain(UNLOCK_BUTTON_LABEL);
     expect(labels).toContain("View generated course");
   });
 
   it("shows the scheduling error for a locked, unscheduled plan", async () => {
     const element = buildComponent();
     getRecord.emit(
-      planRecord("Locked", "Could only schedule 1 of 3 weekly classes.", null)
+      planRecord(
+        STATUS_LOCKED,
+        "Could only schedule 1 of 3 weekly classes.",
+        null
+      )
     );
     getPlanDetails.emit({ sessions: [], enrollmentCount: 0 });
     await flushPromises();
@@ -125,7 +133,7 @@ describe("c-course-plan-schedule", () => {
       errorMessage: null
     });
     const element = buildComponent();
-    getRecord.emit(planRecord("Draft", null, null));
+    getRecord.emit(planRecord(STATUS_DRAFT, null, null));
     getPlanDetails.emit({ sessions: [], enrollmentCount: 0 });
     await flushPromises();
 
@@ -140,7 +148,7 @@ describe("c-course-plan-schedule", () => {
       .spyOn(LightningConfirm, "open")
       .mockResolvedValue(false);
     const element = buildComponent();
-    getRecord.emit(planRecord("Locked", "No availability.", null));
+    getRecord.emit(planRecord(STATUS_LOCKED, "No availability.", null));
     getPlanDetails.emit({ sessions: [], enrollmentCount: 0 });
     await flushPromises();
 
@@ -157,7 +165,7 @@ describe("c-course-plan-schedule", () => {
       .mockResolvedValue(true);
     unlockPlan.mockResolvedValue(undefined);
     const element = buildComponent();
-    getRecord.emit(planRecord("Locked", null, COURSE_ID));
+    getRecord.emit(planRecord(STATUS_LOCKED, null, COURSE_ID));
     getPlanDetails.emit(MOCK_DETAILS);
     await flushPromises();
 
