@@ -11,12 +11,19 @@ const diff = execSync("git diff --cached -U0 --", {
 });
 
 let currentFile = null;
-let hasEmDash = false;
+let currentLine = null;
+let match = null;
 
 for (const line of diff.split("\n")) {
   const fileHeaderMatch = line.match(/^\+\+\+ b\/(.+)$/);
   if (fileHeaderMatch) {
     currentFile = fileHeaderMatch[1];
+    continue;
+  }
+
+  const hunkHeaderMatch = line.match(/^@@ -\d+(?:,\d+)? \+(\d+)(?:,\d+)? @@/);
+  if (hunkHeaderMatch) {
+    currentLine = parseInt(hunkHeaderMatch[1], 10);
     continue;
   }
 
@@ -26,18 +33,21 @@ for (const line of diff.split("\n")) {
   }
 
   if (currentFile && ALLOWLIST.includes(currentFile)) {
+    currentLine++;
     continue;
   }
 
   if (line.includes(EM_DASH)) {
-    hasEmDash = true;
+    match = { file: currentFile, line: currentLine };
     break;
   }
+
+  currentLine++;
 }
 
-if (hasEmDash) {
+if (match) {
   console.error(
-    `Replace em dash (${EM_DASH}) with comma, parentheses, or colon`
+    `Replace em dash (${EM_DASH}) with comma, parentheses, or colon at ${match.file}:${match.line}`
   );
   process.exit(1);
 }
