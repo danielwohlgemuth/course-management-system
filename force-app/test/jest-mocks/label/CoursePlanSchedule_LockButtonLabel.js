@@ -1,0 +1,1 @@
+export default "Lock plan";

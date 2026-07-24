@@ -1,88 +1,125 @@
 <template>
-    <div class="calendar-filters">
-        <lightning-combobox
-            class="filter-control"
-            label="Semester"
-            value={selectedSemester}
-            options={semesterOptions}
-            onchange={handleSemesterChange}></lightning-combobox>
-        <lightning-combobox
-            class="filter-control"
-            label="Instructor"
-            value={selectedInstructor}
-            options={instructorOptions}
-            onchange={handleInstructorChange}></lightning-combobox>
-        <lightning-combobox
-            class="filter-control"
-            label="Course"
-            value={selectedCourse}
-            options={courseOptions}
-            onchange={handleCourseChange}></lightning-combobox>
-        <lightning-combobox
-            class="filter-control"
-            label="Classroom"
-            value={selectedClassroom}
-            options={classroomOptions}
-            onchange={handleClassroomChange}></lightning-combobox>
+  <div class="calendar-filters">
+    <lightning-combobox
+      class="filter-control"
+      label="Semester"
+      value={selectedSemester}
+      options={semesterOptions}
+      onchange={handleSemesterChange}
+    ></lightning-combobox>
+    <lightning-combobox
+      class="filter-control"
+      label="Instructor"
+      value={selectedInstructor}
+      options={instructorOptions}
+      onchange={handleInstructorChange}
+    ></lightning-combobox>
+    <lightning-combobox
+      class="filter-control"
+      label="Course"
+      value={selectedCourse}
+      options={courseOptions}
+      onchange={handleCourseChange}
+    ></lightning-combobox>
+    <lightning-combobox
+      class="filter-control"
+      label="Classroom"
+      value={selectedClassroom}
+      options={classroomOptions}
+      onchange={handleClassroomChange}
+    ></lightning-combobox>
+  </div>
+  <div class="calendar-container" onclick={handleContainerClick}>
+    <div class="calendar-header">
+      <div class="time-axis-spacer"></div>
+      <template for:each={calendarDays} for:item="day">
+        <div key={day.key} class="day-header">{day.label}</div>
+      </template>
     </div>
-    <div class="calendar-container" onclick={handleContainerClick}>
-        <div class="calendar-header">
-            <div class="time-axis-spacer"></div>
-            <template for:each={calendarDays} for:item="day">
-                <div key={day.key} class="day-header">{day.label}</div>
-            </template>
-        </div>
-        <div class="calendar-body" style={calendarBodyStyle}>
-            <div class="time-axis">
-                <template for:each={timeAxisLabels} for:item="tick">
-                    <span key={tick.key} class="time-tick" style={tick.style}>{tick.label}</span>
-                </template>
-            </div>
-            <template for:each={calendarDays} for:item="day">
-                <div key={day.key} class="day-column" data-has-overlap={day.hasOverlap} data-day={day.label}>
-                    <template for:each={timeAxisLabels} for:item="tick">
-                        <div key={tick.key} class="hour-line" style={tick.style}></div>
-                    </template>
-                    <template for:each={day.slots} for:item="slot">
-                        <div key={slot.key} class="slot-positioner" style={slot.wrapperStyle}>
-                            <template lwc:if={slot.isGroup}>
-                                <div class="overlap-group" data-group-key={slot.key} onclick={handleGroupClick}>
-                                    <template for:each={slot.strips} for:item="strip">
-                                        <div key={strip.key} class="overlap-strip" style={strip.style}></div>
-                                    </template>
-                                    <span class="overlap-count-badge">{slot.count}</span>
-                                </div>
-                            </template>
-                            <template lwc:if={slot.isCard}>
-                                <div class="slot-card" style={slot.cardStyle} data-record-id={slot.recordId} onclick={handleSlotClick}>
-                                    <p class="slot-course">{slot.courseName}</p>
-                                    <p class="slot-instructor">{slot.instructor}</p>
-                                    <p class="slot-time">{slot.timeLabel}</p>
-                                </div>
-                            </template>
-                        </div>
-                    </template>
+    <div class="calendar-body" style={calendarBodyStyle}>
+      <div class="time-axis">
+        <template for:each={timeAxisLabels} for:item="tick">
+          <span key={tick.key} class="time-tick" style={tick.style}
+            >{tick.label}</span
+          >
+        </template>
+      </div>
+      <template for:each={calendarDays} for:item="day">
+        <div
+          key={day.key}
+          class="day-column"
+          data-has-overlap={day.hasOverlap}
+          data-day={day.label}
+        >
+          <template for:each={timeAxisLabels} for:item="tick">
+            <div key={tick.key} class="hour-line" style={tick.style}></div>
+          </template>
+          <template for:each={day.slots} for:item="slot">
+            <div
+              key={slot.key}
+              class="slot-positioner"
+              style={slot.wrapperStyle}
+            >
+              <template lwc:if={slot.isGroup}>
+                <div
+                  class="overlap-group"
+                  data-group-key={slot.key}
+                  onclick={handleGroupClick}
+                >
+                  <template for:each={slot.strips} for:item="strip">
+                    <div
+                      key={strip.key}
+                      class="overlap-strip"
+                      style={strip.style}
+                    ></div>
+                  </template>
+                  <span class="overlap-count-badge">{slot.count}</span>
                 </div>
-            </template>
-        </div>
-        <template lwc:if={hasActivePopover}>
-            <div class="overlap-popover" style={popoverStyle}>
-                <template for:each={activeOverlapSlots} for:item="item">
-                    <div key={item.key} class="popover-item" data-record-id={item.recordId} onclick={handlePopoverItemClick}>
-                        <span class="popover-swatch" style={item.swatchStyle}></span>
-                        <div class="popover-details">
-                            <span class="popover-course">{item.courseName}</span>
-                            <span class="popover-meta">{item.instructor} · {item.timeLabel}</span>
-                        </div>
-                    </div>
-                </template>
+              </template>
+              <template lwc:if={slot.isCard}>
+                <div
+                  class="slot-card"
+                  style={slot.cardStyle}
+                  data-record-id={slot.recordId}
+                  onclick={handleSlotClick}
+                >
+                  <p class="slot-course">{slot.courseName}</p>
+                  <p class="slot-instructor">{slot.instructor}</p>
+                  <p class="slot-time">{slot.timeLabel}</p>
+                </div>
+              </template>
             </div>
-        </template>
-        <template lwc:if={isLoading}>
-            <lightning-spinner alternative-text="Loading schedule"></lightning-spinner>
-        </template>
-        <template lwc:if={hasError}>
-            <p class="error-message">Failed to load schedule. Please refresh.</p>
-        </template>
+          </template>
+        </div>
+      </template>
     </div>
+    <template lwc:if={hasActivePopover}>
+      <div class="overlap-popover" style={popoverStyle}>
+        <template for:each={activeOverlapSlots} for:item="item">
+          <div
+            key={item.key}
+            class="popover-item"
+            data-record-id={item.recordId}
+            onclick={handlePopoverItemClick}
+          >
+            <span class="popover-swatch" style={item.swatchStyle}></span>
+            <div class="popover-details">
+              <span class="popover-course">{item.courseName}</span>
+              <span class="popover-meta"
+                >{item.instructor} · {item.timeLabel}</span
+              >
+            </div>
+          </div>
+        </template>
+      </div>
+    </template>
+    <template lwc:if={isLoading}>
+      <lightning-spinner
+        alternative-text="Loading schedule"
+      ></lightning-spinner>
+    </template>
+    <template lwc:if={hasError}>
+      <p class="error-message">{errorLoadingScheduleLabel}</p>
+    </template>
+  </div>
 </template>

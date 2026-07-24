@@ -14,6 +14,13 @@ import lockPlan from "@salesforce/apex/CoursePlanController.lockPlan";
 import unlockPlan from "@salesforce/apex/CoursePlanController.unlockPlan";
 import getPlanDetails from "@salesforce/apex/CoursePlanController.getPlanDetails";
 import { logError } from "c/errorLogger";
+import DRAFT_HELP_TEXT from "@salesforce/label/c.CoursePlanSchedule_DraftHelpText";
+import SCHEDULED_HELP_TEXT from "@salesforce/label/c.CoursePlanSchedule_ScheduledHelpText";
+import LOCKED_ERROR_HELP_TEXT from "@salesforce/label/c.CoursePlanSchedule_LockedErrorHelpText";
+import LOCK_BUTTON_LABEL_VALUE from "@salesforce/label/c.CoursePlanSchedule_LockButtonLabel";
+import UNLOCK_BUTTON_LABEL_VALUE from "@salesforce/label/c.CoursePlanSchedule_UnlockButtonLabel";
+import UNLOCK_CONFIRM_MESSAGE from "@salesforce/label/c.CoursePlanSchedule_UnlockConfirmMessage";
+import UNLOCK_CONFIRM_ENROLLMENT_WARNING from "@salesforce/label/c.CoursePlanSchedule_UnlockConfirmEnrollmentWarning";
 
 const PLAN_FIELDS = [
   STATUS_FIELD,
@@ -23,7 +30,7 @@ const PLAN_FIELDS = [
 
 export const STATUS_DRAFT = "Draft";
 export const STATUS_LOCKED = "Locked";
-export const UNLOCK_BUTTON_LABEL = "Unlock plan";
+export const UNLOCK_BUTTON_LABEL = UNLOCK_BUTTON_LABEL_VALUE;
 
 // Salesforce Time fields arrive as milliseconds since midnight
 function formatTime(ms) {
@@ -31,6 +38,13 @@ function formatTime(ms) {
   const h = Math.floor(totalMins / 60);
   const m = totalMins % 60;
   return `${h % 12 || 12}:${String(m).padStart(2, "0")} ${h < 12 ? "AM" : "PM"}`;
+}
+
+function formatLabel(label, values) {
+  return values.reduce(
+    (text, value, index) => text.replace(`{${index}}`, value),
+    label
+  );
 }
 
 export default class CoursePlanSchedule extends NavigationMixin(
@@ -77,6 +91,22 @@ export default class CoursePlanSchedule extends NavigationMixin(
     return UNLOCK_BUTTON_LABEL;
   }
 
+  get lockButtonLabel() {
+    return LOCK_BUTTON_LABEL_VALUE;
+  }
+
+  get draftHelpText() {
+    return DRAFT_HELP_TEXT;
+  }
+
+  get scheduledHelpText() {
+    return SCHEDULED_HELP_TEXT;
+  }
+
+  get lockedErrorHelpText() {
+    return LOCKED_ERROR_HELP_TEXT;
+  }
+
   get sessions() {
     const details = this._detailsResult?.data;
     if (!details) {
@@ -111,9 +141,9 @@ export default class CoursePlanSchedule extends NavigationMixin(
   async handleUnlock() {
     const count = this.enrollmentCount;
     const enrollmentWarning =
-      count > 0 ? ` and ${count} student enrollment(s)` : "";
+      count > 0 ? formatLabel(UNLOCK_CONFIRM_ENROLLMENT_WARNING, [count]) : "";
     const confirmed = await LightningConfirm.open({
-      message: `Unlocking deletes the generated course and its schedule${enrollmentWarning}. Continue?`,
+      message: formatLabel(UNLOCK_CONFIRM_MESSAGE, [enrollmentWarning]),
       label: UNLOCK_BUTTON_LABEL,
       theme: "warning"
     });

@@ -12,9 +12,7 @@ public without sharing class AvailabilityHandler {
     for (Availability__c window : records) {
       CoursePlan__c plan = plans.get(window.Course_Plan__c);
       if (plan != null && plan.Status__c != 'Draft') {
-        window.addError(
-          'Availability windows can only be changed while the plan is in Draft status.'
-        );
+        window.addError(Label.AvailabilityHandler_ErrorNotDraft);
       }
     }
   }

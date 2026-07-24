@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>66.0</apiVersion>
     <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
@@ -11,7 +11,8 @@
             <assignToReference>enrolledCourseIds</assignToReference>
             <operator>Add</operator>
             <value>
-                <elementReference>Loop_Build_Course_Ids.Course__c</elementReference>
+                <elementReference
+        >Loop_Build_Course_Ids.Course__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
@@ -31,7 +32,8 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>newEnrollmentRecord.Student__c</assignToReference>
+            <assignToReference
+      >newEnrollmentRecord.Student__c</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>$User.Id</elementReference>
@@ -48,7 +50,8 @@
             <targetReference>Loop_Create_Enrollments</targetReference>
         </connector>
     </assignments>
-    <description>Allows a student to browse available courses and self-enroll in one or more. Runs in system context so all courses are visible regardless of the running user&apos;s sharing access. Only shows courses the student is not already enrolled in.</description>
+    <description
+  >Allows a student to browse available courses and self-enroll in one or more. Runs in system context so all courses are visible regardless of the running user&apos;s sharing access. Only shows courses the student is not already enrolled in.</description>
     <environments>Default</environments>
     <label>Join a Course</label>
     <loops>
@@ -117,7 +120,7 @@
         <inputParameters>
             <name>stackTrace</name>
             <value>
-                <stringValue></stringValue>
+                <stringValue />
             </value>
         </inputParameters>
     </actionCalls>
@@ -139,7 +142,8 @@
         <label>Get All Courses</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Screen_Select_Course</targetReference>
         </connector>
@@ -162,7 +166,8 @@
         <label>Get My Enrollments</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <assignNullValuesIfNoRecordsFound
+    >false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Loop_Build_Course_Ids</targetReference>
         </connector>
@@ -189,7 +194,8 @@
         <allowPause>false</allowPause>
         <fields>
             <name>msg_enrollment_error</name>
-            <fieldText>&lt;p&gt;Unable to complete your enrollment. A system error occurred. Please try again or contact your administrator.&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p&gt;{!$Label.Join_a_Course_EnrollmentError}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>
@@ -255,8 +261,10 @@
             <inputParameters>
                 <name>keyField</name>
                 <value>
-                    <complexValue>{&quot;dataType&quot;:&quot;SObject&quot;,&quot;objectType&quot;:&quot;Course__c&quot;,&quot;fieldReferences&quot;:[&quot;Id&quot;],&quot;elementReference&quot;:&quot;Get_All_Courses&quot;}</complexValue>
-                    <complexValueType>ComplexObjectFieldDetails</complexValueType>
+                    <complexValue
+          >{&quot;dataType&quot;:&quot;SObject&quot;,&quot;objectType&quot;:&quot;Course__c&quot;,&quot;fieldReferences&quot;:[&quot;Id&quot;],&quot;elementReference&quot;:&quot;Get_All_Courses&quot;}</complexValue>
+                    <complexValueType
+          >ComplexObjectFieldDetails</complexValueType>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -268,17 +276,21 @@
             <inputParameters>
                 <name>columns</name>
                 <value>
-                    <stringValue>[{&quot;apiName&quot;:&quot;Name&quot;,&quot;guid&quot;:&quot;column-6b64&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Course Number&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:0,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Course Number&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Course_Name__c&quot;,&quot;guid&quot;:&quot;column-b3ec&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Course Name&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:1,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Course Name&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Instructor_Name__c&quot;,&quot;guid&quot;:&quot;column-334f&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Instructor&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:2,&quot;sortable&quot;:false,&quot;type&quot;:&quot;text&quot;,&quot;label&quot;:&quot;Instructor&quot;}]</stringValue>
+                    <stringValue
+          >[{&quot;apiName&quot;:&quot;Name&quot;,&quot;guid&quot;:&quot;column-6b64&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Course Number&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:0,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Course Number&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Course_Name__c&quot;,&quot;guid&quot;:&quot;column-b3ec&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Course Name&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:1,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Course Name&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Instructor_Name__c&quot;,&quot;guid&quot;:&quot;column-334f&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Instructor&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:2,&quot;sortable&quot;:false,&quot;type&quot;:&quot;text&quot;,&quot;label&quot;:&quot;Instructor&quot;}]</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
                 <name>columnReferences</name>
                 <value>
-                    <complexValue>{&quot;dataType&quot;:&quot;SObject&quot;,&quot;objectType&quot;:&quot;Course__c&quot;,&quot;fieldReferences&quot;:[&quot;Name&quot;,&quot;Course_Name__c&quot;,&quot;Instructor_Name__c&quot;],&quot;elementReference&quot;:&quot;Get_All_Courses&quot;}</complexValue>
-                    <complexValueType>ComplexObjectFieldDetails</complexValueType>
+                    <complexValue
+          >{&quot;dataType&quot;:&quot;SObject&quot;,&quot;objectType&quot;:&quot;Course__c&quot;,&quot;fieldReferences&quot;:[&quot;Name&quot;,&quot;Course_Name__c&quot;,&quot;Instructor_Name__c&quot;],&quot;elementReference&quot;:&quot;Get_All_Courses&quot;}</complexValue>
+                    <complexValueType
+          >ComplexObjectFieldDetails</complexValueType>
                 </value>
             </inputParameters>
-            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <inputsOnNextNavToAssocScrn
+      >UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <outputParameters>
                 <assignToReference>selectedCourses</assignToReference>
@@ -306,7 +318,8 @@
         <allowPause>false</allowPause>
         <fields>
             <name>msg_success</name>
-            <fieldText>&lt;p&gt;You have successfully enrolled in the selected course(s). You now have read access to the course materials.&lt;/p&gt;</fieldText>
+            <fieldText
+      >&lt;p&gt;{!$Label.Join_a_Course_EnrollmentSuccess}&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <styleProperties>
                 <verticalAlignment>

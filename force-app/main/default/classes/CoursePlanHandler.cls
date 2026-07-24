@@ -3,9 +3,9 @@ public without sharing class CoursePlanHandler {
   // other path (UI, API, anonymous Apex) goes through the checks below.
   public static Boolean bypassLockEnforcement = false;
 
-  public static final String ERROR_EDIT_LOCKED_PLAN = 'This plan is locked. Use the Unlock action to make changes.';
-  public static final String ERROR_MANUAL_LOCK = 'Use the Lock Plan action to lock this plan.';
-  public static final String ERROR_SYSTEM_FIELDS_MANAGED = 'Scheduling Error and Generated Course are managed by the Lock Plan action.';
+  public static final String ERROR_EDIT_LOCKED_PLAN = Label.CoursePlanHandler_ErrorEditLockedPlan;
+  public static final String ERROR_MANUAL_LOCK = Label.CoursePlanHandler_ErrorManualLock;
+  public static final String ERROR_SYSTEM_FIELDS_MANAGED = Label.CoursePlanHandler_ErrorSystemFieldsManaged;
 
   public static void onBeforeUpdate(
     List<CoursePlan__c> newPlans,

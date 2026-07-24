@@ -9,8 +9,8 @@
 public without sharing class CoursePlanLockService {
   public static final String STATUS_DRAFT = 'Draft';
   public static final String STATUS_LOCKED = 'Locked';
-  public static final String ERROR_ALREADY_LOCKED = 'This plan is already locked.';
-  public static final String ERROR_NOT_LOCKED = 'This plan is not locked.';
+  public static final String ERROR_ALREADY_LOCKED = Label.CoursePlanLockService_ErrorAlreadyLocked;
+  public static final String ERROR_NOT_LOCKED = Label.CoursePlanLockService_ErrorNotLocked;
 
   public class CoursePlanLockException extends Exception {
   }

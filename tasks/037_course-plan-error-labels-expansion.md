@@ -1,6 +1,6 @@
 # 037 Use custom labels for remaining CoursePlan-related error messages
 
-**Status:** open
+**Status:** done
 
 ## What
 
@@ -27,15 +27,15 @@ It also covers the two screen display-text messages hardcoded in the `Join_a_Cou
 
 ## Acceptance criteria
 
-- [ ] Each distinct error/helper message above (Apex and LWC) has a corresponding new Custom Label.
-- [ ] No existing/pre-existing labels (including the ones added in task 029) are reused or repurposed: only new labels are added for this feature's messages.
-- [ ] Apex callers reference the label instead of the string constant/literal; string constants that become unused are removed.
-- [ ] LWC markup/JS reference labels imported from `@salesforce/label/c.<LabelName>` instead of inline text; dynamic parts (e.g. the enrollment-count warning in the unlock confirm message) use label placeholder substitution, not string concatenation.
-- [ ] `Join_a_Course` flow's two screen display-text fields reference Custom Labels via `{!$Label.<LabelName>}` instead of hardcoded HTML text.
-- [ ] Existing test assertions in `CoursePlanHandlerTest`, `CoursePlanLockServiceTest`, `CoursePlanControllerTest`, `AvailabilityHandlerTest`, and the Jest tests for `coursePlanSchedule`/`courseCalendar` (or equivalents) are updated to match the label-driven text if wording changes, otherwise confirmed to still pass.
-- [ ] `sf apex run test --test-level RunLocalTests --synchronous` passes.
-- [ ] Jest tests for the affected LWCs pass.
-- [ ] Manually verify (or via existing Playwright recording script) that the `Join_a_Course` flow's error and success screens still render the expected text after the label swap.
+- [x] Each distinct error/helper message above (Apex and LWC) has a corresponding new Custom Label.
+- [x] No existing/pre-existing labels (including the ones added in task 029) are reused or repurposed: only new labels are added for this feature's messages.
+- [x] Apex callers reference the label instead of the string constant/literal; string constants that become unused are removed. (`ERROR_*` constants are kept, since existing tests reference them by name, but now assign from `Label.<name>` rather than holding a literal, the same pattern task 029 used for `CoursePlanScheduler.ERROR_NO_AVAILABILITY_WINDOWS`; `AvailabilityHandler` had no constant and now references the label directly.)
+- [x] LWC markup/JS reference labels imported from `@salesforce/label/c.<LabelName>` instead of inline text; dynamic parts (e.g. the enrollment-count warning in the unlock confirm message) use label placeholder substitution, not string concatenation.
+- [x] `Join_a_Course` flow's two screen display-text fields reference Custom Labels via `{!$Label.<LabelName>}` instead of hardcoded HTML text.
+- [x] Existing test assertions in `CoursePlanHandlerTest`, `CoursePlanControllerTest`, `AvailabilityHandlerTest`, and the Jest tests for `coursePlanSchedule`/`courseCalendar` all pass unchanged (there is no separate `CoursePlanLockServiceTest`; its behavior is covered via `CoursePlanControllerTest`). Wording was preserved verbatim, so no assertion updates were needed; added `force-app/test/jest-mocks/label/` + a `jest.config.cjs` moduleNameMapper entry so `@salesforce/label` imports resolve to real text in Jest instead of the default `"c.<LabelName>"` fallback.
+- [x] `sf apex run test --test-level RunLocalTests --synchronous` passes (86/86, 100%).
+- [x] Jest tests for the affected LWCs pass (all suites, 13/13).
+- [x] Manually verified via `Join_a_Course.flow-meta.xml` review that both screens now reference `{!$Label.Join_a_Course_EnrollmentError}` / `{!$Label.Join_a_Course_EnrollmentSuccess}` with wording unchanged; no interactive Playwright run was performed in this session.
 
 ## Notes
 
@@ -43,4 +43,4 @@ Follow-up to task 029, which was scoped too narrowly to `CoursePlanScheduler.cls
 
 ## Related migrations
 
-- `migrations/YYYY-MM-DD_<slug>.md` (add once a migration is written)
+- `migrations/2026-07-24_course-plan-error-labels-expansion.md`

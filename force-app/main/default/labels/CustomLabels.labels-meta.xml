@@ -69,4 +69,166 @@
     >CoursePlanScheduler: instruction to unlock and adjust availability</shortDescription>
         <value>Unlock the plan and adjust the availability windows.</value>
     </labels>
+    <labels>
+        <fullName>CoursePlanHandler_ErrorEditLockedPlan</fullName>
+        <categories>Course Plan Handler</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >CoursePlanHandler: edit attempted on a locked plan</shortDescription>
+        <value
+    >This plan is locked. Use the Unlock action to make changes.</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanHandler_ErrorManualLock</fullName>
+        <categories>Course Plan Handler</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >CoursePlanHandler: Status manually set to Locked</shortDescription>
+        <value>Use the Lock Plan action to lock this plan.</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanHandler_ErrorSystemFieldsManaged</fullName>
+        <categories>Course Plan Handler</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >CoursePlanHandler: Scheduling Error/Generated Course edited directly</shortDescription>
+        <value
+    >Scheduling Error and Generated Course are managed by the Lock Plan action.</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanLockService_ErrorAlreadyLocked</fullName>
+        <categories>Course Plan Lock Service</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >CoursePlanLockService: lock attempted on an already-locked plan</shortDescription>
+        <value>This plan is already locked.</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanLockService_ErrorNotLocked</fullName>
+        <categories>Course Plan Lock Service</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >CoursePlanLockService: unlock attempted on a plan that is not locked</shortDescription>
+        <value>This plan is not locked.</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanController_ErrorNoAccess</fullName>
+        <categories>Course Plan Controller</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >CoursePlanController: caller cannot access the requested plan</shortDescription>
+        <value>You do not have access to this course plan.</value>
+    </labels>
+    <labels>
+        <fullName>AvailabilityHandler_ErrorNotDraft</fullName>
+        <categories>Availability Handler</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >AvailabilityHandler: availability edited/deleted while plan is not Draft</shortDescription>
+        <value
+    >Availability windows can only be changed while the plan is in Draft status.</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanSchedule_DraftHelpText</fullName>
+        <categories>Course Plan Schedule</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >coursePlanSchedule: helper text shown while the plan is a draft</shortDescription>
+        <value
+    >This plan is a draft. Add availability windows below, then lock the plan to generate the course and its weekly schedule.</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanSchedule_ScheduledHelpText</fullName>
+        <categories>Course Plan Schedule</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >coursePlanSchedule: helper text shown once the plan is locked and scheduled</shortDescription>
+        <value
+    >This plan is locked and its course has been generated. Unlock the plan to change it: this deletes the generated course and its schedule.</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanSchedule_LockedErrorHelpText</fullName>
+        <categories>Course Plan Schedule</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >coursePlanSchedule: helper text shown when locked but scheduling failed</shortDescription>
+        <value
+    >The plan is locked but no schedule could be generated. Unlock it, adjust the availability windows, and lock it again.</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanSchedule_LockButtonLabel</fullName>
+        <categories>Course Plan Schedule</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >coursePlanSchedule: Lock plan button label</shortDescription>
+        <value>Lock plan</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanSchedule_UnlockButtonLabel</fullName>
+        <categories>Course Plan Schedule</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >coursePlanSchedule: Unlock plan button label</shortDescription>
+        <value>Unlock plan</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanSchedule_UnlockConfirmMessage</fullName>
+        <categories>Course Plan Schedule</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >coursePlanSchedule: unlock confirm message ({0}=enrollment clause)</shortDescription>
+        <value
+    >Unlocking deletes the generated course and its schedule{0}. Continue?</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanSchedule_UnlockConfirmEnrollmentWarning</fullName>
+        <categories>Course Plan Schedule</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >coursePlanSchedule: enrollment-count clause for unlock confirm ({0}=count)</shortDescription>
+        <value> and {0} student enrollment(s)</value>
+    </labels>
+    <labels>
+        <fullName>CourseCalendar_ErrorLoadingSchedule</fullName>
+        <categories>Course Calendar</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >courseCalendar: schedule wire returned an error</shortDescription>
+        <value>Failed to load schedule. Please refresh.</value>
+    </labels>
+    <labels>
+        <fullName>Join_a_Course_EnrollmentError</fullName>
+        <categories>Join a Course</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Join_a_Course flow: enrollment error screen message</shortDescription>
+        <value
+    >Unable to complete your enrollment. A system error occurred. Please try again or contact your administrator.</value>
+    </labels>
+    <labels>
+        <fullName>Join_a_Course_EnrollmentSuccess</fullName>
+        <categories>Join a Course</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Join_a_Course flow: enrollment success screen message</shortDescription>
+        <value
+    >You have successfully enrolled in the selected course(s). You now have read access to the course materials.</value>
+    </labels>
 </CustomLabels>

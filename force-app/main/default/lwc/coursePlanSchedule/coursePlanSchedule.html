@@ -2,23 +2,17 @@
   <lightning-card title="Schedule" icon-name="standard:date_time">
     <div class="slds-var-p-horizontal_medium slds-var-p-bottom_small">
       <template lwc:if={isDraft}>
-        <p class="slds-var-m-bottom_small">
-          This plan is a draft. Add availability windows below, then lock the
-          plan to generate the course and its weekly schedule.
-        </p>
+        <p class="slds-var-m-bottom_small">{draftHelpText}</p>
         <lightning-button
           variant="brand"
-          label="Lock plan"
+          label={lockButtonLabel}
           onclick={handleLock}
           disabled={working}
         ></lightning-button>
       </template>
 
       <template lwc:elseif={isScheduled}>
-        <p class="slds-var-m-bottom_small">
-          This plan is locked and its course has been generated. Unlock the plan
-          to change it — this deletes the generated course and its schedule.
-        </p>
+        <p class="slds-var-m-bottom_small">{scheduledHelpText}</p>
         <table
           class="slds-table slds-table_bordered slds-table_cell-buffer slds-var-m-bottom_small"
           data-id="schedule-table"
@@ -69,10 +63,7 @@
             <p>{schedulingError}</p>
           </div>
         </div>
-        <p class="slds-var-m-bottom_small">
-          The plan is locked but no schedule could be generated. Unlock it,
-          adjust the availability windows, and lock it again.
-        </p>
+        <p class="slds-var-m-bottom_small">{lockedErrorHelpText}</p>
         <lightning-button
           variant="destructive-text"
           label={unlockButtonLabel}

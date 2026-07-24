@@ -9,5 +9,6 @@ module.exports = {
     ],
     moduleNameMapper: {
         '^@salesforce/apex/(.*)': '<rootDir>/force-app/test/jest-mocks/apex.js',
+        '^@salesforce/label/c\\.(.*)$': '<rootDir>/force-app/test/jest-mocks/label/$1.js',
     },
 };

@@ -1,5 +1,5 @@
 public with sharing class CoursePlanController {
-  public static final String ERROR_NO_ACCESS = 'You do not have access to this course plan.';
+  public static final String ERROR_NO_ACCESS = Label.CoursePlanController_ErrorNoAccess;
 
   public class LockResult {
     @AuraEnabled
