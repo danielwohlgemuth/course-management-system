@@ -2,6 +2,26 @@
 private class CoursePlanHandlerTest {
   static final String TEST_CLASSROOM = 'Room 101';
 
+  static User buildTestUser(String suffix) {
+    Profile p = [SELECT Id FROM Profile WHERE Name = 'Standard User' LIMIT 1];
+    return new User(
+      FirstName = 'Test',
+      LastName = 'Student' + suffix,
+      Email = 'test.course.plan.handler' + suffix + '@example.com',
+      Username = 'test.course.plan.handler' +
+        suffix +
+        '.' +
+        UserInfo.getOrganizationId() +
+        '@example.com',
+      Alias = 'tcph' + suffix.left(4),
+      ProfileId = p.Id,
+      TimeZoneSidKey = 'America/Los_Angeles',
+      LocaleSidKey = 'en_US',
+      EmailEncodingKey = 'UTF-8',
+      LanguageLocaleKey = 'en_US'
+    );
+  }
+
   static CoursePlan__c makeDraftPlan(String name) {
     return new CoursePlan__c(
       Course_Name__c = name,
@@ -99,18 +119,40 @@ private class CoursePlanHandlerTest {
   }
 
   @isTest
-  static void onBeforeDeleteLockedPlanBlockedTest() {
-    CoursePlan__c plan = makeLockedPlan('Locked Delete Plan');
-
-    try {
-      delete plan;
-      Assert.fail('Deleting a locked plan should be blocked');
-    } catch (DmlException e) {
-      Assert.isTrue(
-        e.getDmlMessage(0).contains(CoursePlanHandler.ERROR_DELETE_LOCKED_PLAN),
-        'Error should require unlocking first: ' + e.getDmlMessage(0)
-      );
+  static void onBeforeDeleteLockedPlanKeepsGeneratedCourseTest() {
+    User student = buildTestUser('DP');
+    System.runAs(new User(Id = UserInfo.getUserId())) {
+      insert student;
     }
+
+    CoursePlan__c plan = makeLockedPlan('Locked Delete Plan');
+    plan = [
+      SELECT Generated_Course__c
+      FROM CoursePlan__c
+      WHERE Id = :plan.Id
+    ];
+    Id courseId = plan.Generated_Course__c;
+    insert new Enrollment__c(Course__c = courseId, Student__c = student.Id);
+
+    Test.startTest();
+    delete plan;
+    Test.stopTest();
+
+    Assert.areEqual(
+      1,
+      [SELECT COUNT() FROM Course__c WHERE Id = :courseId],
+      'Generated course should survive deleting the locked plan'
+    );
+    Assert.areEqual(
+      1,
+      [SELECT COUNT() FROM TimeSlot__c WHERE Course__c = :courseId],
+      'Course time slots should survive deleting the locked plan'
+    );
+    Assert.areEqual(
+      1,
+      [SELECT COUNT() FROM Enrollment__c WHERE Course__c = :courseId],
+      'Course enrollments should survive deleting the locked plan'
+    );
   }
 
   @isTest
