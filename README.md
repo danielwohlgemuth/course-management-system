@@ -26,6 +26,10 @@ Each course record shows the course details and its related time slots.
 
 Instructors don't create courses directly. Instead, they define a **course plan** (name, classroom, classes per week, duration per class, semester) and declare their weekly availability windows. Locking the plan runs a scheduler that assigns a concrete, conflict-free time slot to each weekly class and generates the course; if no valid schedule exists, the plan stays locked with a clear error explaining why.
 
+All course plans are visible in the **All Course Plans** list view with owner, semester, classroom, and status.
+
+![All Course Plans list view](/assets/course-plans-list.png)
+
 ![Draft course plan with availability windows](/assets/course-plan-draft.png)
 
 ![Locked course plan with generated schedule](/assets/course-plan-schedule.png)

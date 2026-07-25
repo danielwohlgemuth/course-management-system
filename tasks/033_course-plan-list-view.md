@@ -1,6 +1,6 @@
 # 033 Add a list view for Course Plan
 
-**Status:** open
+**Status:** done
 
 ## What
 
@@ -8,13 +8,15 @@
 
 ## Acceptance criteria
 
-- [ ] New list view on `CoursePlan__c` showing at minimum: Name, Course Name, Owner, Semester, Classroom, Status.
-- [ ] Shared to all internal users (matching `Course__c`'s `All_Courses` list view sharing).
-- [ ] List view is reachable from the `CoursePlan__c` tab in the Course Manager app.
+- [x] New list view on `CoursePlan__c` showing at minimum: Name, Course Name, Owner, Semester, Classroom, Status.
+- [x] Shared to all internal users (matching `Course__c`'s `All_Courses` list view sharing).
+- [x] List view is reachable from the `CoursePlan__c` tab in the Course Manager app.
 
 ## Notes
 
 Follow-up cleanup item from task 024. Pairs well with task 032 (Owner on record page) since both surface who owns a plan.
+
+Owner is shown as separate `OWNER.FIRST_NAME` / `OWNER.LAST_NAME` columns rather than `OWNER.ALIAS`, since list views can't resolve `OWNER.NAME` and the alias alone isn't a readable name.
 
 ## Related migrations
 

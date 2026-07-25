@@ -36,7 +36,7 @@ Quick-scan index of all tasks. One row per task; details live in `tasks/<id>_<sl
 | [030](tasks/030_course-plan-delete-without-unlock.md)             | Allow deleting a locked CoursePlan without unlocking first                   | done   |
 | [031](tasks/031_course-plan-unscheduled-status.md)                | Add "Unscheduled" status to CoursePlan                                       | done   |
 | [032](tasks/032_course-plan-owner-on-record-page.md)              | Show Owner on the Course Plan record page                                    | done   |
-| [033](tasks/033_course-plan-list-view.md)                         | Add a list view for Course Plan                                              | open   |
+| [033](tasks/033_course-plan-list-view.md)                         | Add a list view for Course Plan                                              | done   |
 | [034](tasks/034_course-planning-community.md)                     | Course planning from the Experience Site                                     | open   |
 | [035](tasks/035_course-detail-community-timeslots-enrollments.md) | Show time slots, enrollments, and PDF report on community Course Detail page | open   |
 | [036](tasks/036_apex_prettier_indent_convergence.md)              | Reformat remaining Apex classes to prettier's 2-space indent                 | done   |
