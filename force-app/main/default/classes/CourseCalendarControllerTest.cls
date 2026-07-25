@@ -83,6 +83,64 @@ private class CourseCalendarControllerTest {
   }
 
   @IsTest
+  static void getTimeSlotsForCourseWithMultipleSlotsTest() {
+    Course__c c1 = [
+      SELECT Id
+      FROM Course__c
+      WHERE Course_Name__c = 'Algebra'
+    ];
+
+    Test.startTest();
+    List<TimeSlot__c> slots = CourseCalendarController.getTimeSlotsForCourse(
+      c1.Id
+    );
+    Test.stopTest();
+
+    Assert.areEqual(2, slots.size(), 'Expected the 2 slots for this course');
+    for (TimeSlot__c s : slots) {
+      Assert.isNotNull(s.Day_of_Week__c, 'Day of week should be populated');
+    }
+  }
+
+  @IsTest
+  static void getTimeSlotsForCourseWithOneSlotTest() {
+    Course__c c2 = [
+      SELECT Id
+      FROM Course__c
+      WHERE Course_Name__c = 'Biology'
+    ];
+
+    Test.startTest();
+    List<TimeSlot__c> slots = CourseCalendarController.getTimeSlotsForCourse(
+      c2.Id
+    );
+    Test.stopTest();
+
+    Assert.areEqual(
+      1,
+      slots.size(),
+      'Expected the single slot for this course'
+    );
+  }
+
+  @IsTest
+  static void getTimeSlotsForCourseWithNoSlotsTest() {
+    Course__c c3 = new Course__c(
+      Course_Name__c = 'Chemistry',
+      Instructor_User__c = UserInfo.getUserId()
+    );
+    insert c3;
+
+    Test.startTest();
+    List<TimeSlot__c> slots = CourseCalendarController.getTimeSlotsForCourse(
+      c3.Id
+    );
+    Test.stopTest();
+
+    Assert.isTrue(slots.isEmpty(), 'Expected no slots for this course');
+  }
+
+  @IsTest
   static void getConfigTest() {
     Test.startTest();
     CourseCalendarConfig__mdt config = CourseCalendarController.getConfig();

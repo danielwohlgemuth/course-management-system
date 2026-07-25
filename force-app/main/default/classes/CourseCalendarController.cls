@@ -39,6 +39,17 @@ public with sharing class CourseCalendarController {
   }
 
   @AuraEnabled(cacheable=true)
+  public static List<TimeSlot__c> getTimeSlotsForCourse(Id courseId) {
+    return [
+      SELECT Id, Day_of_Week__c, Start_Time__c, End_Time__c
+      FROM TimeSlot__c
+      WHERE Course__c = :courseId
+      WITH USER_MODE
+      ORDER BY Day_of_Week__c, Start_Time__c
+    ];
+  }
+
+  @AuraEnabled(cacheable=true)
   public static CourseCalendarConfig__mdt getConfig() {
     return [
       SELECT

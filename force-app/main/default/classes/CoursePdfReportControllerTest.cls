@@ -112,4 +112,63 @@ private class CoursePdfReportControllerTest {
       'Expected all enrollments to be returned'
     );
   }
+
+  @IsTest
+  static void getEnrollmentsWithNoEnrollmentsTest() {
+    Course__c course = [SELECT Id FROM Course__c LIMIT 1];
+
+    Test.startTest();
+    List<Enrollment__c> enrollments = CoursePdfReportController.getEnrollments(
+      course.Id
+    );
+    Test.stopTest();
+
+    Assert.isTrue(enrollments.isEmpty(), 'Expected no enrollments');
+  }
+
+  @IsTest
+  static void getEnrollmentsWithOneEnrollmentTest() {
+    Course__c course = [SELECT Id FROM Course__c LIMIT 1];
+    User student = [SELECT Id FROM User WHERE LastName = 'Student0' LIMIT 1];
+    insert new Enrollment__c(Course__c = course.Id, Student__c = student.Id);
+
+    Test.startTest();
+    List<Enrollment__c> enrollments = CoursePdfReportController.getEnrollments(
+      course.Id
+    );
+    Test.stopTest();
+
+    Assert.areEqual(1, enrollments.size(), 'Expected one enrollment');
+  }
+
+  @IsTest
+  static void getEnrollmentsWithManyEnrollmentsTest() {
+    Course__c course = [SELECT Id FROM Course__c LIMIT 1];
+    List<User> students = [SELECT Id FROM User WHERE LastName LIKE 'Student%'];
+
+    List<Enrollment__c> enrollmentsToInsert = new List<Enrollment__c>{
+      new Enrollment__c(
+        Course__c = course.Id,
+        Student__c = UserInfo.getUserId()
+      )
+    };
+    for (User student : students) {
+      enrollmentsToInsert.add(
+        new Enrollment__c(Course__c = course.Id, Student__c = student.Id)
+      );
+    }
+    insert enrollmentsToInsert;
+
+    Test.startTest();
+    List<Enrollment__c> enrollments = CoursePdfReportController.getEnrollments(
+      course.Id
+    );
+    Test.stopTest();
+
+    Assert.areEqual(
+      enrollmentsToInsert.size(),
+      enrollments.size(),
+      'Expected all enrollments to be returned'
+    );
+  }
 }

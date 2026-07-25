@@ -20,4 +20,15 @@ public with sharing class CoursePdfReportController {
       ORDER BY Student__r.Name
     ];
   }
+
+  @AuraEnabled(cacheable=true)
+  public static List<Enrollment__c> getEnrollments(Id courseId) {
+    return [
+      SELECT Id, Student__r.Name
+      FROM Enrollment__c
+      WHERE Course__c = :courseId
+      WITH USER_MODE
+      ORDER BY Student__r.Name
+    ];
+  }
 }

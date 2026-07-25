@@ -1,0 +1,33 @@
+<template>
+  <lightning-card title={title} icon-name="standard:contact">
+    <div class="slds-var-p-horizontal_medium slds-var-p-bottom_small">
+      <template lwc:if={error}>
+        <p class="slds-text-color_error" data-id="error-message">
+          {errorMessage}
+        </p>
+      </template>
+      <template lwc:elseif={isEmpty}>
+        <p data-id="empty-message">{emptyMessage}</p>
+      </template>
+      <template lwc:else>
+        <table
+          class="slds-table slds-table_bordered slds-table_cell-buffer"
+          data-id="enrollments-table"
+        >
+          <thead>
+            <tr class="slds-line-height_reset">
+              <th scope="col">{studentColumnHeader}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template for:each={enrollments} for:item="enrollment">
+              <tr key={enrollment.id} data-id="enrollment-row">
+                <td>{enrollment.studentName}</td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </template>
+    </div>
+  </lightning-card>
+</template>

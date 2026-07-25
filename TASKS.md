@@ -38,7 +38,7 @@ Quick-scan index of all tasks. One row per task; details live in `tasks/<id>_<sl
 | [032](tasks/032_course-plan-owner-on-record-page.md)              | Show Owner on the Course Plan record page                                    | done   |
 | [033](tasks/033_course-plan-list-view.md)                         | Add a list view for Course Plan                                              | done   |
 | [034](tasks/034_course-planning-community.md)                     | Course planning from the Experience Site                                     | done   |
-| [035](tasks/035_course-detail-community-timeslots-enrollments.md) | Show time slots, enrollments, and PDF report on community Course Detail page | open   |
+| [035](tasks/035_course-detail-community-timeslots-enrollments.md) | Show time slots, enrollments, and PDF report on community Course Detail page | done   |
 | [036](tasks/036_apex_prettier_indent_convergence.md)              | Reformat remaining Apex classes to prettier's 2-space indent                 | done   |
 | [037](tasks/037_course-plan-error-labels-expansion.md)            | Use custom labels for remaining CoursePlan-related error messages            | done   |
 | [038](tasks/038_remaining-hardcoded-ui-text.md)                   | Convert remaining hardcoded user-facing text to Custom Labels                | done   |

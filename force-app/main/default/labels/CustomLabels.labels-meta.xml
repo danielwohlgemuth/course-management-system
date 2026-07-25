@@ -680,4 +680,92 @@
     >CourseAvailabilityManager: fallback error message</shortDescription>
         <value>Something went wrong. Please try again.</value>
     </labels>
+    <labels>
+        <fullName>CourseTimeSlotsList_Title</fullName>
+        <categories>Course Time Slots List</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>courseTimeSlotsList: card title</shortDescription>
+        <value>Time Slots</value>
+    </labels>
+    <labels>
+        <fullName>CourseTimeSlotsList_DayColumnHeader</fullName>
+        <categories>Course Time Slots List</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >courseTimeSlotsList: day of week column header</shortDescription>
+        <value>Day</value>
+    </labels>
+    <labels>
+        <fullName>CourseTimeSlotsList_StartColumnHeader</fullName>
+        <categories>Course Time Slots List</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >courseTimeSlotsList: start time column header</shortDescription>
+        <value>Start Time</value>
+    </labels>
+    <labels>
+        <fullName>CourseTimeSlotsList_EndColumnHeader</fullName>
+        <categories>Course Time Slots List</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >courseTimeSlotsList: end time column header</shortDescription>
+        <value>End Time</value>
+    </labels>
+    <labels>
+        <fullName>CourseTimeSlotsList_EmptyMessage</fullName>
+        <categories>Course Time Slots List</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >courseTimeSlotsList: no time slots message</shortDescription>
+        <value>No time slots have been scheduled for this course yet.</value>
+    </labels>
+    <labels>
+        <fullName>CourseTimeSlotsList_ErrorMessage</fullName>
+        <categories>Course Time Slots List</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >courseTimeSlotsList: wire error message</shortDescription>
+        <value>Failed to load time slots. Please refresh.</value>
+    </labels>
+    <labels>
+        <fullName>CourseEnrollmentsList_Title</fullName>
+        <categories>Course Enrollments List</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>courseEnrollmentsList: card title</shortDescription>
+        <value>Enrollments</value>
+    </labels>
+    <labels>
+        <fullName>CourseEnrollmentsList_StudentColumnHeader</fullName>
+        <categories>Course Enrollments List</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >courseEnrollmentsList: student name column header</shortDescription>
+        <value>Student</value>
+    </labels>
+    <labels>
+        <fullName>CourseEnrollmentsList_EmptyMessage</fullName>
+        <categories>Course Enrollments List</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >courseEnrollmentsList: no enrollments message</shortDescription>
+        <value>No students are enrolled in this course yet.</value>
+    </labels>
+    <labels>
+        <fullName>CourseEnrollmentsList_ErrorMessage</fullName>
+        <categories>Course Enrollments List</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >courseEnrollmentsList: wire error message</shortDescription>
+        <value>Failed to load enrollments. Please refresh.</value>
+    </labels>
 </CustomLabels>
