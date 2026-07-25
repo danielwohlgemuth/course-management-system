@@ -3,6 +3,7 @@
 #
 
 **/staticresources/**
+**/digitalExperiences/**
 .localdevserver
 .sfdx
 .sf

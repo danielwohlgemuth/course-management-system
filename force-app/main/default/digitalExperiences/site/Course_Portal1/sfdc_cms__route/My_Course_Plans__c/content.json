@@ -1,0 +1,12 @@
+{
+  "type" : "sfdc_cms__route",
+  "title" : "My Course Plans",
+  "contentBody" : {
+    "activeViewId" : "My_Course_Plans",
+    "configurationTags" : [ ],
+    "pageAccess" : "UseParent",
+    "routeType" : "custom-my-course-plans",
+    "urlPrefix" : "my-course-plans"
+  },
+  "urlName" : "my-course-plans"
+}

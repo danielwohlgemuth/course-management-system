@@ -1,6 +1,6 @@
 {
   "type" : "sfdc_cms__view",
-  "title" : "Join a Course",
+  "title" : "My Course Plans",
   "contentBody" : {
     "component" : {
       "children" : [ {
@@ -9,36 +9,32 @@
             "backgroundImageConfig" : "",
             "backgroundImageOverlay" : "rgba(0,0,0,0)",
             "componentSpacerSize" : "",
-            "dxpStyle" : { },
             "layoutDirectionDesktop" : "row",
             "layoutDirectionMobile" : "column",
             "layoutDirectionTablet" : "column",
             "maxContentWidth" : "",
             "sectionColumnGutterWidth" : "",
-            "sectionConfig" : "{\"UUID\":\"f84eaad6-b46e-4af4-88f9-d42009924610\",\"columns\":[{\"UUID\":\"d2b32731-b884-4421-b6fc-6379244dbbff\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
+            "sectionConfig" : "{\"UUID\":\"a91f71d1-f997-4a75-8245-b12b8af8be82\",\"columns\":[{\"UUID\":\"394aabdf-7d2b-49f9-a473-33b02b5ad597\",\"columnName\":\"Column 1\",\"columnKey\":\"col1\",\"columnWidth\":\"12\",\"seedComponents\":[]}]}",
             "sectionMinHeight" : "",
             "sectionVerticalAlign" : "flex-start"
           },
           "children" : [ {
             "children" : [ {
-              "attributes" : {
-                "dxpStyle" : { },
-                "flowName" : "{\"flowName\":\"Join_a_Course\",\"flowLabel\":\"Join a Course\"}"
-              },
-              "definition" : "dxp_flow:flow",
-              "id" : "6216df5c-a2d3-405e-b94c-19a0b0235652",
+              "attributes" : { },
+              "definition" : "c:coursePlanManager",
+              "id" : "1c3bc402-dfc9-47d4-b084-87f13f956608",
               "type" : "component"
             } ],
-            "id" : "d2b32731-b884-4421-b6fc-6379244dbbff",
+            "id" : "394aabdf-7d2b-49f9-a473-33b02b5ad597",
             "name" : "col1",
             "title" : "Column 1",
             "type" : "region"
           } ],
           "definition" : "community_layout:section",
-          "id" : "f84eaad6-b46e-4af4-88f9-d42009924610",
+          "id" : "a91f71d1-f997-4a75-8245-b12b8af8be82",
           "type" : "component"
         } ],
-        "id" : "51451986-f69a-4ded-9f46-98b7f4d4ff67",
+        "id" : "99a229c4-3904-4e61-9d43-8dd3e1c2795f",
         "name" : "content",
         "title" : "Content",
         "type" : "region"
@@ -47,26 +43,25 @@
           "attributes" : {
             "customHeadTags" : "",
             "description" : "",
-            "dxpStyle" : { },
-            "pageTitle" : "Join a Course",
+            "pageTitle" : "My Course Plans",
             "recordId" : "{!recordId}"
           },
           "definition" : "community_builder:seoAssistant",
-          "id" : "b99d6635-2c24-4311-8d8e-a98ebda4bead",
+          "id" : "74b655a2-d8f8-41ee-95ba-f0a976188572",
           "type" : "component"
         } ],
-        "id" : "ee1cd347-a084-4f71-a4e7-762860f72877",
+        "id" : "601ba387-b86b-48d8-bc70-634e483a8032",
         "name" : "sfdcHiddenRegion",
         "title" : "sfdcHiddenRegion",
         "type" : "region"
       } ],
       "definition" : "community_layout:sldsFlexibleLayout",
-      "id" : "e99cd473-d58e-4f7d-a3fb-7bcce4fa309c",
+      "id" : "adc77028-ba3b-4b85-9aca-72b1f66e3dcb",
       "type" : "component"
     },
     "dataProviders" : [ ],
     "themeLayoutType" : "Inner",
-    "viewType" : "custom-join-a-course"
+    "viewType" : "custom-my-course-plans"
   },
-  "urlName" : "join-a-course"
+  "urlName" : "my-course-plans"
 }
