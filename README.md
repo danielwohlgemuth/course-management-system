@@ -72,6 +72,10 @@ Instructors viewing one of their courses from the community can see its weekly t
 
 ![Course Detail page in the community, showing time slots and enrollments for an instructor](/assets/course-detail-community-instructor.png)
 
+The downloaded PDF report shows the course details and enrolled students under the Course Manager branding.
+
+![Course PDF report showing course details and enrolled students](/assets/course-pdf-report.png)
+
 ## Admin Analytics
 
 ### Enrollment Dashboard
