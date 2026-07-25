@@ -35,7 +35,7 @@ Quick-scan index of all tasks. One row per task; details live in `tasks/<id>_<sl
 | [029](tasks/029_course-plan-scheduler-error-labels.md)            | Use custom labels for CoursePlanScheduler error messages                     | done   |
 | [030](tasks/030_course-plan-delete-without-unlock.md)             | Allow deleting a locked CoursePlan without unlocking first                   | done   |
 | [031](tasks/031_course-plan-unscheduled-status.md)                | Add "Unscheduled" status to CoursePlan                                       | done   |
-| [032](tasks/032_course-plan-owner-on-record-page.md)              | Show Owner on the Course Plan record page                                    | open   |
+| [032](tasks/032_course-plan-owner-on-record-page.md)              | Show Owner on the Course Plan record page                                    | done   |
 | [033](tasks/033_course-plan-list-view.md)                         | Add a list view for Course Plan                                              | open   |
 | [034](tasks/034_course-planning-community.md)                     | Course planning from the Experience Site                                     | open   |
 | [035](tasks/035_course-detail-community-timeslots-enrollments.md) | Show time slots, enrollments, and PDF report on community Course Detail page | open   |

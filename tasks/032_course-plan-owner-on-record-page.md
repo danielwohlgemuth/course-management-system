@@ -1,6 +1,6 @@
 # 032 Show Owner on the Course Plan record page
 
-**Status:** open
+**Status:** done
 
 ## What
 
@@ -8,8 +8,8 @@ The `CoursePlan__c` record page (`CoursePlan_Record_Page.flexipage-meta.xml`) do
 
 ## Acceptance criteria
 
-- [ ] `Owner` field is visible on the `CoursePlan__c` record page, in the detail fields section (alongside Semester/Status/Generated Course) or in the highlights panel — whichever reads more naturally next to the existing layout.
-- [ ] No change to who can edit/reassign ownership — this is display-only.
+- [x] `Owner` field is visible on the `CoursePlan__c` record page, in the detail fields section (alongside Semester/Status/Generated Course) or in the highlights panel, whichever reads more naturally next to the existing layout.
+- [x] No change to who can edit/reassign ownership (this is display-only).
 
 ## Notes
 
@@ -17,4 +17,4 @@ Follow-up cleanup item from task 024.
 
 ## Related migrations
 
-None — FlexiPage layout change only, no schema change.
+None: FlexiPage layout change only, no schema change.

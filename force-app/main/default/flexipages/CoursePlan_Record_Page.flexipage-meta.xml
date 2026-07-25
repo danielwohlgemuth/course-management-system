@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
         <itemInstances>
@@ -53,7 +53,8 @@
                     <name>secondaryFields</name>
                     <value>Facet-hl-secondary</value>
                 </componentInstanceProperties>
-                <componentName>record_flexipage:dynamicHighlights</componentName>
+                <componentName
+        >record_flexipage:dynamicHighlights</componentName>
                 <identifier>record_flexipage_dynamicHighlights</identifier>
             </componentInstance>
         </itemInstances>
@@ -133,6 +134,16 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Generated_Course__c</fieldItem>
                 <identifier>RecordGenerated_Course_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.OwnerId</fieldItem>
+                <identifier>RecordOwnerIdField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-col-two</name>
