@@ -2,6 +2,7 @@ import { createElement } from "@lwc/engine-dom";
 import CoursePlanSchedule, {
   STATUS_DRAFT,
   STATUS_LOCKED,
+  STATUS_UNSCHEDULED,
   UNLOCK_BUTTON_LABEL
 } from "c/coursePlanSchedule";
 import { getRecord } from "lightning/uiRecordApi";
@@ -106,11 +107,11 @@ describe("c-course-plan-schedule", () => {
     expect(labels).toContain("View generated course");
   });
 
-  it("shows the scheduling error for a locked, unscheduled plan", async () => {
+  it("shows the scheduling error for an unscheduled plan", async () => {
     const element = buildComponent();
     getRecord.emit(
       planRecord(
-        STATUS_LOCKED,
+        STATUS_UNSCHEDULED,
         "Could only schedule 1 of 3 weekly classes.",
         null
       )
@@ -148,7 +149,7 @@ describe("c-course-plan-schedule", () => {
       .spyOn(LightningConfirm, "open")
       .mockResolvedValue(false);
     const element = buildComponent();
-    getRecord.emit(planRecord(STATUS_LOCKED, "No availability.", null));
+    getRecord.emit(planRecord(STATUS_UNSCHEDULED, "No availability.", null));
     getPlanDetails.emit({ sessions: [], enrollmentCount: 0 });
     await flushPromises();
 

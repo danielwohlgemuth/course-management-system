@@ -16,7 +16,7 @@ import getPlanDetails from "@salesforce/apex/CoursePlanController.getPlanDetails
 import { logError } from "c/errorLogger";
 import DRAFT_HELP_TEXT from "@salesforce/label/c.CoursePlanSchedule_DraftHelpText";
 import SCHEDULED_HELP_TEXT from "@salesforce/label/c.CoursePlanSchedule_ScheduledHelpText";
-import LOCKED_ERROR_HELP_TEXT from "@salesforce/label/c.CoursePlanSchedule_LockedErrorHelpText";
+import UNSCHEDULED_HELP_TEXT from "@salesforce/label/c.CoursePlanSchedule_UnscheduledHelpText";
 import LOCK_BUTTON_LABEL_VALUE from "@salesforce/label/c.CoursePlanSchedule_LockButtonLabel";
 import UNLOCK_BUTTON_LABEL_VALUE from "@salesforce/label/c.CoursePlanSchedule_UnlockButtonLabel";
 import UNLOCK_CONFIRM_MESSAGE from "@salesforce/label/c.CoursePlanSchedule_UnlockConfirmMessage";
@@ -30,6 +30,7 @@ const PLAN_FIELDS = [
 
 export const STATUS_DRAFT = "Draft";
 export const STATUS_LOCKED = "Locked";
+export const STATUS_UNSCHEDULED = "Unscheduled";
 export const UNLOCK_BUTTON_LABEL = UNLOCK_BUTTON_LABEL_VALUE;
 
 // Salesforce Time fields arrive as milliseconds since midnight
@@ -83,8 +84,8 @@ export default class CoursePlanSchedule extends NavigationMixin(
     return this.status === STATUS_LOCKED && !!this.generatedCourseId;
   }
 
-  get isLockedWithError() {
-    return this.status === STATUS_LOCKED && !this.generatedCourseId;
+  get isUnscheduled() {
+    return this.status === STATUS_UNSCHEDULED;
   }
 
   get unlockButtonLabel() {
@@ -103,8 +104,8 @@ export default class CoursePlanSchedule extends NavigationMixin(
     return SCHEDULED_HELP_TEXT;
   }
 
-  get lockedErrorHelpText() {
-    return LOCKED_ERROR_HELP_TEXT;
+  get unscheduledHelpText() {
+    return UNSCHEDULED_HELP_TEXT;
   }
 
   get sessions() {

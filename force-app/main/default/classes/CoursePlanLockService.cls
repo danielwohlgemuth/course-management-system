@@ -9,6 +9,7 @@
 public without sharing class CoursePlanLockService {
   public static final String STATUS_DRAFT = 'Draft';
   public static final String STATUS_LOCKED = 'Locked';
+  public static final String STATUS_UNSCHEDULED = 'Unscheduled';
   public static final String ERROR_ALREADY_LOCKED = Label.CoursePlanLockService_ErrorAlreadyLocked;
   public static final String ERROR_NOT_LOCKED = Label.CoursePlanLockService_ErrorNotLocked;
 
@@ -100,7 +101,7 @@ public without sharing class CoursePlanLockService {
         plan.Generated_Course__c = course.Id;
         plan.Scheduling_Error__c = null;
       } else {
-        plan.Status__c = STATUS_LOCKED;
+        plan.Status__c = STATUS_UNSCHEDULED;
         plan.Generated_Course__c = null;
         plan.Scheduling_Error__c = schedule.errorMessage.abbreviate(255);
       }
@@ -118,9 +119,11 @@ public without sharing class CoursePlanLockService {
   }
 
   /**
-   * Locked -> Draft. Deletes the generated course, which cascades its
-   * TimeSlots and Enrollments (the UI warns before calling this) and cleans
-   * up the course's public group via CourseHandler's async delete.
+   * Locked/Unscheduled -> Draft. Deletes the generated course, which cascades
+   * its TimeSlots and Enrollments (the UI warns before calling this) and
+   * cleans up the course's public group via CourseHandler's async delete.
+   * An unscheduled plan has no generated course, so it just resets to Draft
+   * so the instructor can adjust availability and retry.
    */
   public static CoursePlan__c unlock(Id planId) {
     CoursePlan__c plan = [
@@ -129,7 +132,10 @@ public without sharing class CoursePlanLockService {
       WHERE Id = :planId
       FOR UPDATE
     ];
-    if (plan.Status__c != STATUS_LOCKED) {
+    if (
+      plan.Status__c != STATUS_LOCKED &&
+      plan.Status__c != STATUS_UNSCHEDULED
+    ) {
       throw new CoursePlanLockException(ERROR_NOT_LOCKED);
     }
 

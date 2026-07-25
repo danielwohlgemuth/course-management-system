@@ -47,7 +47,7 @@
         ></lightning-button>
       </template>
 
-      <template lwc:elseif={isLockedWithError}>
+      <template lwc:elseif={isUnscheduled}>
         <div
           class="slds-scoped-notification slds-media slds-media_center slds-theme_error slds-var-m-bottom_small"
           role="alert"
@@ -63,7 +63,7 @@
             <p>{schedulingError}</p>
           </div>
         </div>
-        <p class="slds-var-m-bottom_small">{lockedErrorHelpText}</p>
+        <p class="slds-var-m-bottom_small">{unscheduledHelpText}</p>
         <lightning-button
           variant="destructive-text"
           label={unlockButtonLabel}

@@ -173,9 +173,9 @@ private class CoursePlanControllerTest {
       WHERE Id = :plan.Id
     ];
     Assert.areEqual(
-      CoursePlanLockService.STATUS_LOCKED,
+      CoursePlanLockService.STATUS_UNSCHEDULED,
       plan.Status__c,
-      'Failed scheduling still locks the plan'
+      'Failed scheduling should mark the plan unscheduled'
     );
     Assert.isNull(plan.Generated_Course__c, 'No generated course on failure');
     Assert.isNotNull(
@@ -284,6 +284,36 @@ private class CoursePlanControllerTest {
       1,
       [SELECT COUNT() FROM Availability__c WHERE Course_Plan__c = :plan.Id],
       'Availability windows should survive unlock so the plan can be adjusted and re-locked'
+    );
+  }
+
+  @isTest
+  static void unlockPlanResetsUnscheduledPlanToDraftTest() {
+    CoursePlan__c plan = makePlan('Unschedulable Course', 3);
+    insert plan;
+
+    Test.startTest();
+    CoursePlanController.lockPlan(plan.Id);
+    CoursePlanController.unlockPlan(plan.Id);
+    Test.stopTest();
+
+    plan = [
+      SELECT Status__c, Generated_Course__c, Scheduling_Error__c
+      FROM CoursePlan__c
+      WHERE Id = :plan.Id
+    ];
+    Assert.areEqual(
+      CoursePlanLockService.STATUS_DRAFT,
+      plan.Status__c,
+      'Unscheduled plan should unlock back to Draft'
+    );
+    Assert.isNull(
+      plan.Generated_Course__c,
+      'No generated course to clear on an unscheduled plan'
+    );
+    Assert.isNull(
+      plan.Scheduling_Error__c,
+      'Scheduling error should be cleared on unlock'
     );
   }
 

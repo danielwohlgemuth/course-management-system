@@ -16,9 +16,15 @@ public without sharing class CoursePlanHandler {
     }
     for (CoursePlan__c plan : newPlans) {
       CoursePlan__c old = oldMap.get(plan.Id);
-      if (old.Status__c == CoursePlanLockService.STATUS_LOCKED) {
+      Boolean oldLockedOrUnscheduled =
+        old.Status__c == CoursePlanLockService.STATUS_LOCKED ||
+        old.Status__c == CoursePlanLockService.STATUS_UNSCHEDULED;
+      Boolean newLockedOrUnscheduled =
+        plan.Status__c == CoursePlanLockService.STATUS_LOCKED ||
+        plan.Status__c == CoursePlanLockService.STATUS_UNSCHEDULED;
+      if (oldLockedOrUnscheduled) {
         plan.addError(ERROR_EDIT_LOCKED_PLAN);
-      } else if (plan.Status__c == CoursePlanLockService.STATUS_LOCKED) {
+      } else if (newLockedOrUnscheduled) {
         plan.addError(ERROR_MANUAL_LOCK);
       } else if (
         plan.Scheduling_Error__c != old.Scheduling_Error__c ||

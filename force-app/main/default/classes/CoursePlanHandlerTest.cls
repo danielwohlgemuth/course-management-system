@@ -45,6 +45,14 @@ private class CoursePlanHandlerTest {
     return plan;
   }
 
+  static CoursePlan__c makeUnscheduledPlan(String name) {
+    CoursePlan__c plan = makeDraftPlan(name);
+    plan.Classes_Per_Week__c = 3;
+    insert plan; // no availability windows: scheduling cannot succeed
+    CoursePlanLockService.lock(plan.Id);
+    return plan;
+  }
+
   @isTest
   static void onBeforeUpdateLockedPlanEditBlockedTest() {
     CoursePlan__c plan = makeLockedPlan('Locked Edit Plan');
@@ -76,6 +84,59 @@ private class CoursePlanHandlerTest {
       Assert.isTrue(
         e.getDmlMessage(0).contains(CoursePlanHandler.ERROR_MANUAL_LOCK),
         'Error should point to the Lock Plan action: ' + e.getDmlMessage(0)
+      );
+    }
+  }
+
+  @isTest
+  static void onBeforeUpdateManualUnscheduledBlockedTest() {
+    CoursePlan__c plan = makeDraftPlan('Manual Unscheduled Plan');
+    insert plan;
+    plan.Status__c = CoursePlanLockService.STATUS_UNSCHEDULED;
+
+    try {
+      update plan;
+      Assert.fail(
+        'Flipping Status to Unscheduled outside the action should be blocked'
+      );
+    } catch (DmlException e) {
+      Assert.isTrue(
+        e.getDmlMessage(0).contains(CoursePlanHandler.ERROR_MANUAL_LOCK),
+        'Error should point to the Lock Plan action: ' + e.getDmlMessage(0)
+      );
+    }
+  }
+
+  @isTest
+  static void onBeforeUpdateUnscheduledPlanEditBlockedTest() {
+    CoursePlan__c plan = makeUnscheduledPlan('Unscheduled Edit Plan');
+    plan.Course_Name__c = 'Renamed';
+
+    try {
+      update plan;
+      Assert.fail('Editing an unscheduled plan should be blocked');
+    } catch (DmlException e) {
+      Assert.isTrue(
+        e.getDmlMessage(0).contains(CoursePlanHandler.ERROR_EDIT_LOCKED_PLAN),
+        'Error should say the plan is locked: ' + e.getDmlMessage(0)
+      );
+    }
+  }
+
+  @isTest
+  static void onBeforeUpdateManualUnlockFromUnscheduledBlockedTest() {
+    CoursePlan__c plan = makeUnscheduledPlan('Manual Unlock Unscheduled Plan');
+    plan.Status__c = CoursePlanLockService.STATUS_DRAFT;
+
+    try {
+      update plan;
+      Assert.fail(
+        'Flipping Status back to Draft outside the action should be blocked'
+      );
+    } catch (DmlException e) {
+      Assert.isTrue(
+        e.getDmlMessage(0).contains(CoursePlanHandler.ERROR_EDIT_LOCKED_PLAN),
+        'Error should point to the Unlock action: ' + e.getDmlMessage(0)
       );
     }
   }

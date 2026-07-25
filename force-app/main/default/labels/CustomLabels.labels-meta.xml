@@ -156,14 +156,14 @@
     >This plan is locked and its course has been generated. Unlock the plan to change it: this deletes the generated course and its schedule.</value>
     </labels>
     <labels>
-        <fullName>CoursePlanSchedule_LockedErrorHelpText</fullName>
+        <fullName>CoursePlanSchedule_UnscheduledHelpText</fullName>
         <categories>Course Plan Schedule</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription
-    >coursePlanSchedule: helper text shown when locked but scheduling failed</shortDescription>
+    >coursePlanSchedule: helper text shown when the plan is unscheduled</shortDescription>
         <value
-    >The plan is locked but no schedule could be generated. Unlock it, adjust the availability windows, and lock it again.</value>
+    >This plan could not be scheduled. Unlock it, adjust the availability windows, and lock it again.</value>
     </labels>
     <labels>
         <fullName>CoursePlanSchedule_LockButtonLabel</fullName>
