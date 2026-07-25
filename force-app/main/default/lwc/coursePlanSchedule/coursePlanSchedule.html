@@ -1,5 +1,5 @@
 <template>
-  <lightning-card title="Schedule" icon-name="standard:date_time">
+  <lightning-card title={cardTitle} icon-name="standard:date_time">
     <div class="slds-var-p-horizontal_medium slds-var-p-bottom_small">
       <template lwc:if={isDraft}>
         <p class="slds-var-m-bottom_small">{draftHelpText}</p>
@@ -19,9 +19,9 @@
         >
           <thead>
             <tr class="slds-line-height_reset">
-              <th scope="col">Day</th>
-              <th scope="col">Start</th>
-              <th scope="col">End</th>
+              <th scope="col">{dayColumnHeader}</th>
+              <th scope="col">{startColumnHeader}</th>
+              <th scope="col">{endColumnHeader}</th>
             </tr>
           </thead>
           <tbody>
@@ -35,7 +35,7 @@
           </tbody>
         </table>
         <lightning-button
-          label="View generated course"
+          label={viewCourseButtonLabel}
           onclick={handleViewCourse}
           class="slds-var-m-right_small"
         ></lightning-button>

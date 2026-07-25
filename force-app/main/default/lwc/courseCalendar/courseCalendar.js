@@ -9,6 +9,12 @@ import getTimeSlots from "@salesforce/apex/CourseCalendarController.getTimeSlots
 import getConfig from "@salesforce/apex/CourseCalendarController.getConfig";
 import { logError } from "c/errorLogger";
 import ERROR_LOADING_SCHEDULE from "@salesforce/label/c.CourseCalendar_ErrorLoadingSchedule";
+import SEMESTER_FILTER_LABEL from "@salesforce/label/c.CourseCalendar_SemesterFilterLabel";
+import INSTRUCTOR_FILTER_LABEL from "@salesforce/label/c.CourseCalendar_InstructorFilterLabel";
+import COURSE_FILTER_LABEL from "@salesforce/label/c.CourseCalendar_CourseFilterLabel";
+import CLASSROOM_FILTER_LABEL from "@salesforce/label/c.CourseCalendar_ClassroomFilterLabel";
+import LOADING_SPINNER_TEXT from "@salesforce/label/c.CourseCalendar_LoadingSpinnerText";
+import ALL_FILTER_OPTION_LABEL from "@salesforce/label/c.CourseCalendar_AllFilterOptionLabel";
 
 function msToHours(ms) {
   return ms / 3_600_000;
@@ -34,7 +40,7 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
   selectedInstructor = "";
   selectedCourse = "";
   selectedClassroom = "";
-  semesterOptions = [{ label: "All", value: "" }];
+  semesterOptions = [{ label: ALL_FILTER_OPTION_LABEL, value: "" }];
   _slots = undefined;
   _days = undefined;
   _config = undefined;
@@ -72,7 +78,7 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
   wiredSemesterValues({ data, error }) {
     if (data) {
       this.semesterOptions = [
-        { label: "All", value: "" },
+        { label: ALL_FILTER_OPTION_LABEL, value: "" },
         ...data.values.map((v) => ({ value: v.value, label: v.label }))
       ];
     } else if (error) {
@@ -226,7 +232,7 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
       if (value) values.add(value);
     }
     return [
-      { label: "All", value: "" },
+      { label: ALL_FILTER_OPTION_LABEL, value: "" },
       ...[...values].sort().map((v) => ({ label: v, value: v }))
     ];
   }
@@ -270,6 +276,26 @@ export default class CourseCalendar extends NavigationMixin(LightningElement) {
 
   get errorLoadingScheduleLabel() {
     return ERROR_LOADING_SCHEDULE;
+  }
+
+  get semesterFilterLabel() {
+    return SEMESTER_FILTER_LABEL;
+  }
+
+  get instructorFilterLabel() {
+    return INSTRUCTOR_FILTER_LABEL;
+  }
+
+  get courseFilterLabel() {
+    return COURSE_FILTER_LABEL;
+  }
+
+  get classroomFilterLabel() {
+    return CLASSROOM_FILTER_LABEL;
+  }
+
+  get loadingSpinnerText() {
+    return LOADING_SPINNER_TEXT;
   }
 
   get isLoading() {

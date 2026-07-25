@@ -186,7 +186,7 @@
     <runInMode>SystemModeWithoutSharing</runInMode>
     <screens>
         <name>Screen_Enrollment_Error</name>
-        <label>Enrollment Error</label>
+        <label>{!$Label.Join_a_Course_EnrollmentErrorScreenLabel}</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <allowBack>false</allowBack>
@@ -211,7 +211,7 @@
     </screens>
     <screens>
         <name>Screen_Select_Course</name>
-        <label>Select Courses to Join</label>
+        <label>{!$Label.Join_a_Course_SelectCoursesScreenLabel}</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <allowBack>false</allowBack>
@@ -231,7 +231,8 @@
             <inputParameters>
                 <name>label</name>
                 <value>
-                    <stringValue>Available Courses</stringValue>
+                    <stringValue
+          >{!$Label.Join_a_Course_AvailableCoursesLabel}</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -277,7 +278,7 @@
                 <name>columns</name>
                 <value>
                     <stringValue
-          >[{&quot;apiName&quot;:&quot;Name&quot;,&quot;guid&quot;:&quot;column-6b64&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Course Number&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:0,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Course Number&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Course_Name__c&quot;,&quot;guid&quot;:&quot;column-b3ec&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Course Name&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:1,&quot;sortable&quot;:false,&quot;label&quot;:&quot;Course Name&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Instructor_Name__c&quot;,&quot;guid&quot;:&quot;column-334f&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;Instructor&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:2,&quot;sortable&quot;:false,&quot;type&quot;:&quot;text&quot;,&quot;label&quot;:&quot;Instructor&quot;}]</stringValue>
+          >[{&quot;apiName&quot;:&quot;Name&quot;,&quot;guid&quot;:&quot;column-6b64&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;{!$Label.Join_a_Course_CourseNumberColumnLabel}&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:0,&quot;sortable&quot;:false,&quot;label&quot;:&quot;{!$Label.Join_a_Course_CourseNumberColumnLabel}&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Course_Name__c&quot;,&quot;guid&quot;:&quot;column-b3ec&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;{!$Label.Join_a_Course_CourseNameColumnLabel}&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:1,&quot;sortable&quot;:false,&quot;label&quot;:&quot;{!$Label.Join_a_Course_CourseNameColumnLabel}&quot;,&quot;type&quot;:&quot;text&quot;},{&quot;apiName&quot;:&quot;Instructor_Name__c&quot;,&quot;guid&quot;:&quot;column-334f&quot;,&quot;editable&quot;:false,&quot;hasCustomHeaderLabel&quot;:true,&quot;customHeaderLabel&quot;:&quot;{!$Label.Join_a_Course_InstructorColumnLabel}&quot;,&quot;wrapText&quot;:true,&quot;order&quot;:2,&quot;sortable&quot;:false,&quot;type&quot;:&quot;text&quot;,&quot;label&quot;:&quot;{!$Label.Join_a_Course_InstructorColumnLabel}&quot;}]</stringValue>
                 </value>
             </inputParameters>
             <inputParameters>
@@ -310,7 +311,7 @@
     </screens>
     <screens>
         <name>Screen_Success</name>
-        <label>Enrollment Confirmed</label>
+        <label>{!$Label.Join_a_Course_EnrollmentConfirmedScreenLabel}</label>
         <locationX>0</locationX>
         <locationY>0</locationY>
         <allowBack>false</allowBack>

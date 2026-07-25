@@ -2,28 +2,28 @@
   <div class="calendar-filters">
     <lightning-combobox
       class="filter-control"
-      label="Semester"
+      label={semesterFilterLabel}
       value={selectedSemester}
       options={semesterOptions}
       onchange={handleSemesterChange}
     ></lightning-combobox>
     <lightning-combobox
       class="filter-control"
-      label="Instructor"
+      label={instructorFilterLabel}
       value={selectedInstructor}
       options={instructorOptions}
       onchange={handleInstructorChange}
     ></lightning-combobox>
     <lightning-combobox
       class="filter-control"
-      label="Course"
+      label={courseFilterLabel}
       value={selectedCourse}
       options={courseOptions}
       onchange={handleCourseChange}
     ></lightning-combobox>
     <lightning-combobox
       class="filter-control"
-      label="Classroom"
+      label={classroomFilterLabel}
       value={selectedClassroom}
       options={classroomOptions}
       onchange={handleClassroomChange}
@@ -115,7 +115,7 @@
     </template>
     <template lwc:if={isLoading}>
       <lightning-spinner
-        alternative-text="Loading schedule"
+        alternative-text={loadingSpinnerText}
       ></lightning-spinner>
     </template>
     <template lwc:if={hasError}>

@@ -231,4 +231,183 @@
         <value
     >You have successfully enrolled in the selected course(s). You now have read access to the course materials.</value>
     </labels>
+    <labels>
+        <fullName>CoursePlanSchedule_UnexpectedErrorMessage</fullName>
+        <categories>Course Plan Schedule</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >coursePlanSchedule: generic fallback error message</shortDescription>
+        <value>An unexpected error occurred.</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanSchedule_ViewCourseButtonLabel</fullName>
+        <categories>Course Plan Schedule</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >coursePlanSchedule: View generated course button label</shortDescription>
+        <value>View generated course</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanSchedule_DayColumnHeader</fullName>
+        <categories>Course Plan Schedule</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >coursePlanSchedule: schedule table Day column header</shortDescription>
+        <value>Day</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanSchedule_StartColumnHeader</fullName>
+        <categories>Course Plan Schedule</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >coursePlanSchedule: schedule table Start column header</shortDescription>
+        <value>Start</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanSchedule_EndColumnHeader</fullName>
+        <categories>Course Plan Schedule</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >coursePlanSchedule: schedule table End column header</shortDescription>
+        <value>End</value>
+    </labels>
+    <labels>
+        <fullName>CoursePlanSchedule_CardTitle</fullName>
+        <categories>Course Plan Schedule</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >coursePlanSchedule: lightning-card title</shortDescription>
+        <value>Schedule</value>
+    </labels>
+    <labels>
+        <fullName>CourseCalendar_SemesterFilterLabel</fullName>
+        <categories>Course Calendar</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >courseCalendar: Semester combobox label</shortDescription>
+        <value>Semester</value>
+    </labels>
+    <labels>
+        <fullName>CourseCalendar_InstructorFilterLabel</fullName>
+        <categories>Course Calendar</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >courseCalendar: Instructor combobox label</shortDescription>
+        <value>Instructor</value>
+    </labels>
+    <labels>
+        <fullName>CourseCalendar_CourseFilterLabel</fullName>
+        <categories>Course Calendar</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >courseCalendar: Course combobox label</shortDescription>
+        <value>Course</value>
+    </labels>
+    <labels>
+        <fullName>CourseCalendar_ClassroomFilterLabel</fullName>
+        <categories>Course Calendar</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >courseCalendar: Classroom combobox label</shortDescription>
+        <value>Classroom</value>
+    </labels>
+    <labels>
+        <fullName>CourseCalendar_LoadingSpinnerText</fullName>
+        <categories>Course Calendar</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >courseCalendar: spinner alternative text while schedule loads</shortDescription>
+        <value>Loading schedule</value>
+    </labels>
+    <labels>
+        <fullName>CourseCalendar_AllFilterOptionLabel</fullName>
+        <categories>Course Calendar</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >courseCalendar: "All" default filter option label</shortDescription>
+        <value>All</value>
+    </labels>
+    <labels>
+        <fullName>CourseDownloadPdfReport_ButtonLabel</fullName>
+        <categories>Course Download Pdf Report</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >courseDownloadPdfReport: Download PDF Report button label</shortDescription>
+        <value>Download PDF Report</value>
+    </labels>
+    <labels>
+        <fullName>Join_a_Course_SelectCoursesScreenLabel</fullName>
+        <categories>Join a Course</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Join_a_Course flow: select courses screen label</shortDescription>
+        <value>Select Courses to Join</value>
+    </labels>
+    <labels>
+        <fullName>Join_a_Course_EnrollmentErrorScreenLabel</fullName>
+        <categories>Join a Course</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Join_a_Course flow: enrollment error screen label</shortDescription>
+        <value>Enrollment Error</value>
+    </labels>
+    <labels>
+        <fullName>Join_a_Course_EnrollmentConfirmedScreenLabel</fullName>
+        <categories>Join a Course</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Join_a_Course flow: enrollment confirmed screen label</shortDescription>
+        <value>Enrollment Confirmed</value>
+    </labels>
+    <labels>
+        <fullName>Join_a_Course_AvailableCoursesLabel</fullName>
+        <categories>Join a Course</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Join_a_Course flow: datatable label</shortDescription>
+        <value>Available Courses</value>
+    </labels>
+    <labels>
+        <fullName>Join_a_Course_CourseNumberColumnLabel</fullName>
+        <categories>Join a Course</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Join_a_Course flow: datatable Course Number column label</shortDescription>
+        <value>Course Number</value>
+    </labels>
+    <labels>
+        <fullName>Join_a_Course_CourseNameColumnLabel</fullName>
+        <categories>Join a Course</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Join_a_Course flow: datatable Course Name column label</shortDescription>
+        <value>Course Name</value>
+    </labels>
+    <labels>
+        <fullName>Join_a_Course_InstructorColumnLabel</fullName>
+        <categories>Join a Course</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription
+    >Join_a_Course flow: datatable Instructor column label</shortDescription>
+        <value>Instructor</value>
+    </labels>
 </CustomLabels>

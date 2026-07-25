@@ -21,6 +21,12 @@ import LOCK_BUTTON_LABEL_VALUE from "@salesforce/label/c.CoursePlanSchedule_Lock
 import UNLOCK_BUTTON_LABEL_VALUE from "@salesforce/label/c.CoursePlanSchedule_UnlockButtonLabel";
 import UNLOCK_CONFIRM_MESSAGE from "@salesforce/label/c.CoursePlanSchedule_UnlockConfirmMessage";
 import UNLOCK_CONFIRM_ENROLLMENT_WARNING from "@salesforce/label/c.CoursePlanSchedule_UnlockConfirmEnrollmentWarning";
+import UNEXPECTED_ERROR_MESSAGE from "@salesforce/label/c.CoursePlanSchedule_UnexpectedErrorMessage";
+import VIEW_COURSE_BUTTON_LABEL from "@salesforce/label/c.CoursePlanSchedule_ViewCourseButtonLabel";
+import DAY_COLUMN_HEADER from "@salesforce/label/c.CoursePlanSchedule_DayColumnHeader";
+import START_COLUMN_HEADER from "@salesforce/label/c.CoursePlanSchedule_StartColumnHeader";
+import END_COLUMN_HEADER from "@salesforce/label/c.CoursePlanSchedule_EndColumnHeader";
+import CARD_TITLE from "@salesforce/label/c.CoursePlanSchedule_CardTitle";
 
 const PLAN_FIELDS = [
   STATUS_FIELD,
@@ -108,6 +114,26 @@ export default class CoursePlanSchedule extends NavigationMixin(
     return UNSCHEDULED_HELP_TEXT;
   }
 
+  get cardTitle() {
+    return CARD_TITLE;
+  }
+
+  get dayColumnHeader() {
+    return DAY_COLUMN_HEADER;
+  }
+
+  get startColumnHeader() {
+    return START_COLUMN_HEADER;
+  }
+
+  get endColumnHeader() {
+    return END_COLUMN_HEADER;
+  }
+
+  get viewCourseButtonLabel() {
+    return VIEW_COURSE_BUTTON_LABEL;
+  }
+
   get sessions() {
     const details = this._detailsResult?.data;
     if (!details) {
@@ -185,8 +211,6 @@ export default class CoursePlanSchedule extends NavigationMixin(
   }
 
   extractMessage(error) {
-    return (
-      error?.body?.message || error?.message || "An unexpected error occurred."
-    );
+    return error?.body?.message || error?.message || UNEXPECTED_ERROR_MESSAGE;
   }
 }
