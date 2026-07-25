@@ -467,6 +467,66 @@ private class CoursePlanControllerTest {
   }
 
   @isTest
+  static void getMyPlansReturnsOnlyOwnedPlansTest() {
+    User owner = buildInstructor('MP');
+    User other = buildInstructor('OT');
+
+    System.runAs(other) {
+      insert makePlan('Other Instructor Plan', 1);
+    }
+
+    System.runAs(owner) {
+      insert makePlan('Biology 201', 2);
+      insert makePlan('Chemistry 101', 1);
+
+      Test.startTest();
+      List<CoursePlan__c> plans = CoursePlanController.getMyPlans();
+      Test.stopTest();
+
+      Assert.areEqual(
+        2,
+        plans.size(),
+        'Only the running user\'s own plans should be returned'
+      );
+      for (CoursePlan__c plan : plans) {
+        Assert.areNotEqual(
+          'Other Instructor Plan',
+          plan.Course_Name__c,
+          'Another instructor\'s plan must not be visible'
+        );
+      }
+    }
+  }
+
+  @isTest
+  static void getAvailabilityWindowsOrdersByWeekdayTest() {
+    CoursePlan__c plan = makePlan('Windows Course', 2);
+    insert plan;
+    insert new List<Availability__c>{
+      makeWindow(plan.Id, 'Wednesday', 9, 10),
+      makeWindow(plan.Id, 'Monday', 14, 15)
+    };
+
+    Test.startTest();
+    List<Availability__c> windows = CoursePlanController.getAvailabilityWindows(
+      plan.Id
+    );
+    Test.stopTest();
+
+    Assert.areEqual(2, windows.size(), 'Both windows should be returned');
+    Assert.areEqual(
+      'Monday',
+      windows[0].Day_of_Week__c,
+      'Windows should be ordered by weekday'
+    );
+    Assert.areEqual(
+      'Wednesday',
+      windows[1].Day_of_Week__c,
+      'Windows should be ordered by weekday'
+    );
+  }
+
+  @isTest
   static void nonOwnerCannotLockPlanTest() {
     User owner = buildInstructor('OW');
     User intruder = buildInstructor('NX');

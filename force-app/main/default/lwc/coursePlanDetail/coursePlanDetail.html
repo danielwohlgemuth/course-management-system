@@ -1,0 +1,90 @@
+<template>
+  <div class="slds-var-m-bottom_small">
+    <lightning-button
+      label={backButtonLabel}
+      icon-name="utility:back"
+      onclick={handleBack}
+    ></lightning-button>
+  </div>
+
+  <lightning-card
+    title={editSectionTitle}
+    icon-name="standard:course"
+    class="slds-var-m-bottom_medium"
+  >
+    <div class="slds-var-p-horizontal_medium slds-var-p-bottom_small">
+      <template lwc:if={isDraft}>
+        <lightning-record-edit-form
+          record-id={recordId}
+          object-api-name="CoursePlan__c"
+          onsuccess={handleSaveSuccess}
+          onerror={handleError}
+        >
+          <lightning-messages></lightning-messages>
+          <lightning-input-field
+            field-name="Course_Name__c"
+          ></lightning-input-field>
+          <lightning-input-field
+            field-name="Classroom__c"
+          ></lightning-input-field>
+          <lightning-input-field
+            field-name="Classes_Per_Week__c"
+          ></lightning-input-field>
+          <lightning-input-field
+            field-name="Class_Duration_Minutes__c"
+          ></lightning-input-field>
+          <lightning-input-field
+            field-name="Semester__c"
+          ></lightning-input-field>
+          <lightning-button
+            type="submit"
+            variant="brand"
+            label={saveButtonLabel}
+            class="slds-var-m-top_small"
+          ></lightning-button>
+        </lightning-record-edit-form>
+      </template>
+      <template lwc:else>
+        <p class="slds-var-m-bottom_small">{lockedHelpText}</p>
+        <lightning-record-view-form
+          record-id={recordId}
+          object-api-name="CoursePlan__c"
+        >
+          <lightning-output-field
+            field-name="Course_Name__c"
+          ></lightning-output-field>
+          <lightning-output-field
+            field-name="Classroom__c"
+          ></lightning-output-field>
+          <lightning-output-field
+            field-name="Classes_Per_Week__c"
+          ></lightning-output-field>
+          <lightning-output-field
+            field-name="Class_Duration_Minutes__c"
+          ></lightning-output-field>
+          <lightning-output-field
+            field-name="Semester__c"
+          ></lightning-output-field>
+        </lightning-record-view-form>
+      </template>
+
+      <template lwc:if={actionError}>
+        <p
+          class="slds-text-color_error slds-var-m-top_small"
+          data-id="action-error"
+        >
+          {actionError}
+        </p>
+      </template>
+    </div>
+  </lightning-card>
+
+  <div class="slds-var-m-bottom_medium">
+    <c-course-availability-manager
+      record-id={recordId}
+      is-draft={isDraft}
+    ></c-course-availability-manager>
+  </div>
+
+  <c-course-plan-schedule record-id={recordId}></c-course-plan-schedule>
+</template>

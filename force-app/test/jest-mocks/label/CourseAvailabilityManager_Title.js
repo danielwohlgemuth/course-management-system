@@ -1,0 +1,1 @@
+export default "Availability Windows";

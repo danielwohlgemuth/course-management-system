@@ -63,6 +63,58 @@ public with sharing class CoursePlanController {
   }
 
   @AuraEnabled(cacheable=true)
+  public static List<CoursePlan__c> getMyPlans() {
+    try {
+      return [
+        SELECT Id, Name, Course_Name__c, Classroom__c, Semester__c, Status__c
+        FROM CoursePlan__c
+        WHERE OwnerId = :UserInfo.getUserId()
+        WITH USER_MODE
+        ORDER BY CreatedDate DESC
+      ];
+    } catch (Exception e) {
+      ErrorLogService.log(
+        'Apex',
+        'CoursePlanController.getMyPlans',
+        e.getMessage(),
+        e.getStackTraceString()
+      );
+      throw auraError(e.getMessage());
+    }
+  }
+
+  @AuraEnabled(cacheable=true)
+  public static List<Availability__c> getAvailabilityWindows(Id planId) {
+    try {
+      List<Availability__c> windows = [
+        SELECT Id, Day_of_Week__c, Start_Time__c, End_Time__c
+        FROM Availability__c
+        WHERE Course_Plan__c = :planId
+        WITH USER_MODE
+        ORDER BY Start_Time__c
+      ];
+      // SOQL can't order by weekday semantics; group the time-ordered rows by day
+      List<Availability__c> ordered = new List<Availability__c>();
+      for (String day : CoursePlanScheduler.DAY_ORDER) {
+        for (Availability__c window : windows) {
+          if (window.Day_of_Week__c == day) {
+            ordered.add(window);
+          }
+        }
+      }
+      return ordered;
+    } catch (Exception e) {
+      ErrorLogService.log(
+        'Apex',
+        'CoursePlanController.getAvailabilityWindows',
+        e.getMessage(),
+        e.getStackTraceString()
+      );
+      throw auraError(e.getMessage());
+    }
+  }
+
+  @AuraEnabled(cacheable=true)
   public static PlanDetails getPlanDetails(Id planId) {
     try {
       PlanDetails details = new PlanDetails();

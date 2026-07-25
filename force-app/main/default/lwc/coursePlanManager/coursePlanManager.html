@@ -1,0 +1,109 @@
+<template>
+  <template lwc:if={showList}>
+    <lightning-card title={title} icon-name="standard:course">
+      <div class="slds-var-p-horizontal_medium slds-var-p-bottom_small">
+        <template lwc:if={hasPlans}>
+          <table
+            class="slds-table slds-table_bordered slds-table_cell-buffer slds-var-m-bottom_small"
+            data-id="plan-table"
+          >
+            <thead>
+              <tr class="slds-line-height_reset">
+                <th scope="col">{nameColumnHeader}</th>
+                <th scope="col">{courseNameColumnHeader}</th>
+                <th scope="col">{classroomColumnHeader}</th>
+                <th scope="col">{semesterColumnHeader}</th>
+                <th scope="col">{statusColumnHeader}</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <template for:each={plans} for:item="plan">
+                <tr key={plan.id}>
+                  <td>{plan.name}</td>
+                  <td>{plan.courseName}</td>
+                  <td>{plan.classroom}</td>
+                  <td>{plan.semester}</td>
+                  <td>{plan.status}</td>
+                  <td>
+                    <lightning-button
+                      label={selectButtonLabel}
+                      data-id={plan.id}
+                      onclick={handleSelect}
+                    ></lightning-button>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </template>
+        <template lwc:else>
+          <p class="slds-var-m-bottom_small">{emptyMessage}</p>
+        </template>
+
+        <template lwc:if={showCreateForm}>
+          <lightning-card title={createSectionTitle}>
+            <div class="slds-var-p-horizontal_medium slds-var-p-bottom_small">
+              <lightning-record-edit-form
+                object-api-name="CoursePlan__c"
+                onsuccess={handleCreateSuccess}
+                onerror={handleError}
+              >
+                <lightning-messages></lightning-messages>
+                <lightning-input-field
+                  field-name="Course_Name__c"
+                ></lightning-input-field>
+                <lightning-input-field
+                  field-name="Classroom__c"
+                ></lightning-input-field>
+                <lightning-input-field
+                  field-name="Classes_Per_Week__c"
+                ></lightning-input-field>
+                <lightning-input-field
+                  field-name="Class_Duration_Minutes__c"
+                ></lightning-input-field>
+                <lightning-input-field
+                  field-name="Semester__c"
+                ></lightning-input-field>
+                <lightning-button
+                  type="submit"
+                  variant="brand"
+                  label={saveButtonLabel}
+                  class="slds-var-m-top_small slds-var-m-right_x-small"
+                ></lightning-button>
+                <lightning-button
+                  label={cancelButtonLabel}
+                  onclick={handleCancelCreate}
+                  class="slds-var-m-top_small"
+                ></lightning-button>
+              </lightning-record-edit-form>
+            </div>
+          </lightning-card>
+        </template>
+        <template lwc:else>
+          <lightning-button
+            variant="brand"
+            label={newButtonLabel}
+            onclick={handleNewClick}
+          ></lightning-button>
+        </template>
+
+        <template lwc:if={actionError}>
+          <p
+            class="slds-text-color_error slds-var-m-top_small"
+            data-id="action-error"
+          >
+            {actionError}
+          </p>
+        </template>
+      </div>
+    </lightning-card>
+  </template>
+
+  <template lwc:else>
+    <c-course-plan-detail
+      record-id={selectedPlanId}
+      onback={handleBack}
+    ></c-course-plan-detail>
+  </template>
+</template>
