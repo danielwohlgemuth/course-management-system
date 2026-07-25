@@ -66,6 +66,12 @@ Instructors are community users too, and manage their course plans entirely from
 
 ![Locked course plan with generated schedule, in the community](/assets/course-plan-community-schedule.png)
 
+### Course Detail
+
+Instructors viewing one of their courses from the community can see its weekly time slots and enrolled students, and download the PDF report, without needing internal Salesforce access.
+
+![Course Detail page in the community, showing time slots and enrollments for an instructor](/assets/course-detail-community-instructor.png)
+
 ## Admin Analytics
 
 ### Enrollment Dashboard
