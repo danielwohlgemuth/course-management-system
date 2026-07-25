@@ -36,7 +36,7 @@ All course plans are visible in the **All Course Plans** list view with owner, s
 
 ## Community Users
 
-Community users access the app through an Experience Site with three pages: Home, Join a Course, and My Courses.
+Community users access the app through an Experience Site with four pages: Home, Join a Course, My Courses, and My Course Plans.
 
 ### Home
 
@@ -55,6 +55,16 @@ Students can browse available courses and enroll by selecting one or more from t
 Enrolled students see their current courses in the My Courses page.
 
 ![My Courses page showing enrolled courses](/assets/my-courses.png)
+
+### My Course Plans
+
+Instructors are community users too, and manage their course plans entirely from the site: creating a plan, adding availability windows, and locking it to generate the course and schedule (the same workflow available internally, without needing Salesforce access).
+
+![My Course Plans list page](/assets/course-plan-community-list.png)
+
+![Draft course plan with availability windows, in the community](/assets/course-plan-community-draft.png)
+
+![Locked course plan with generated schedule, in the community](/assets/course-plan-community-schedule.png)
 
 ## Admin Analytics
 
