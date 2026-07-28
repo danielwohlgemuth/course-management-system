@@ -2,6 +2,8 @@
 
 A Salesforce-based application for managing courses, instructors, and weekly schedules.
 
+[Lessons Learned with Claude](/lessons-learned-with-claude.md)
+
 ## Standard Users
 
 ### Home: Weekly Calendar
